@@ -36,8 +36,8 @@
   --accent:    #E07A4F;
   --accent-soft: #C56841;
 
-  /* dark 主题下 hero 翻转为浅色"宣纸"，墨痕用深墨色 */
-  --hero-bg:   #EFE6D2;
+  /* dark 主题下 hero 翻转为浅色"宣纸"，与浅色模式 body 同色 */
+  --hero-bg:   #f5f4ed;
   --hero-text: rgba(20, 18, 16, 0.92);
   --hero-text-soft: rgba(20, 18, 16, 0.62);
   --hero-accent: #C15F3C;
