@@ -73,14 +73,16 @@ function usePaddedIntrinsicSvgSize(svg) {
     naturalWidth = Math.ceil(paddedWidth);
   }
 
-  // 删除任何旧的像素 width/height 属性（mermaid + rehype-mermaid 都可能写）
+  // 删除任何旧的像素 width/height 属性，全部用 inline style 控制
   delete svg.properties.width;
   delete svg.properties.height;
 
-  // SVG 自适应：naturalWidth 上限，超窄不拉伸，超宽缩到容器
+  // Obsidian 风格：SVG 保持自然尺寸（不缩小），容器横向可滚
+  // narrow 图（< 容器）→ inline-block + text-align:center 自动居中
+  // wide 图（> 容器）→ 容器 overflow-x:auto 横向滚动，文字清晰不被压
   svg.properties.style = naturalWidth
-    ? `max-width: ${naturalWidth}px; width: 100%; height: auto; overflow: visible;`
-    : 'max-width: 100%; height: auto; overflow: visible;';
+    ? `width: ${naturalWidth}px; height: auto; overflow: visible; display: inline-block; vertical-align: top;`
+    : 'overflow: visible; display: inline-block;';
 }
 
 function toClassList(value) {

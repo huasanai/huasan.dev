@@ -274,13 +274,13 @@ function fmtFull(d: Date) {
     }
 
     .post-body :global(.mermaid-scroll) {
-      display: flex;
-      justify-content: center;     /* 单列窄图水平居中 */
+      display: block;
       max-width: 100%;
       margin: 1.5rem auto;
       padding: 1rem;
-      overflow-x: auto;             /* 极端情况兜底：图比容器还宽时给滚动 */
+      overflow-x: auto;             /* wide 图横向滚动，文字保持原大不被压 */
       overflow-y: hidden;
+      text-align: center;           /* narrow 图（< 容器宽）自动水平居中 */
       border: 1px solid var(--post-border-soft);
       border-radius: 8px;
       background: #fbf8f1;
@@ -302,11 +302,10 @@ function fmtFull(d: Date) {
     }
 
     .post-body :global(.mermaid-svg) {
-      display: block;
+      /* display:inline-block / vertical-align / 自然 pixel width 由 rehypeMermaidScroll 在 inline style 里写 */
+      /* 容器用 text-align:center 让 narrow 图居中；wide 图自然 overflow → 触发容器横向滚动 */
       height: auto;
-      margin: 0 auto;     /* flex 容器里再加 margin:auto 双保险居中 */
-      overflow: visible;
-      /* max-width / width 由 rehypeMermaidScroll 在 SVG style 里写，让 mermaid 真实尺寸说了算 */
+      margin: 0;
     }
 
     .post-body :global(.mermaid-svg foreignObject) {
