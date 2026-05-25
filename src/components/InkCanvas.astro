@@ -1,6 +1,8 @@
 ---
 // 鼠标轨迹书法墨痕 canvas
-// 用法：放在一个 position: relative 的容器内，canvas 会自动撑满父元素
+// - 头粗尾细：单次笔画内宽度随时间递减
+// - 3-5s 内渐隐
+// - 墨色随主题变化（深色 hero 用浅墨痕；浅色 hero 用深墨痕）
 ---
 
 <canvas class="ink-canvas" data-ink-canvas></canvas>
@@ -18,6 +20,10 @@
 
 <script>
   type Point = { x: number; y: number; t: number };
+
+  function lerp(a: number, b: number, t: number) {
+    return a + (b - a) * t;
+  }
 
   function initOne(canvas: HTMLCanvasElement) {
     const parent = canvas.parentElement;
@@ -44,8 +50,22 @@
     const ro = new ResizeObserver(resize);
     ro.observe(parent);
 
+    // 读取当前主题的墨色（写在 :root 上的 --ink-color CSS 变量）
+    function getInkColor(): string {
+      const v = getComputedStyle(document.documentElement)
+        .getPropertyValue('--ink-color')
+        .trim();
+      return v || '240, 233, 216';
+    }
+
     let last: Point | null = null;
     let isInside = false;
+    let strokeStartTime = 0;
+
+    // 头粗尾细参数
+    const MAX_WIDTH = 6;          // 起笔最粗
+    const MIN_WIDTH = 0.4;        // 收笔最细
+    const TAPER_DURATION = 1.8;   // 1.8s 内从粗衰减到细
 
     function pointerEvt(e: PointerEvent): Point {
       const rect = parent!.getBoundingClientRect();
@@ -55,6 +75,7 @@
     parent.addEventListener('pointerenter', (e) => {
       isInside = true;
       last = pointerEvt(e);
+      strokeStartTime = last.t;
     });
 
     parent.addEventListener('pointerleave', () => {
@@ -65,21 +86,21 @@
     parent.addEventListener('pointermove', (e) => {
       if (!isInside) return;
       const p = pointerEvt(e);
-      if (!last) { last = p; return; }
+      if (!last) { last = p; strokeStartTime = p.t; return; }
 
-      const dt = Math.max(p.t - last.t, 1);
-      const dist = Math.hypot(p.x - last.x, p.y - last.y);
-      const speed = dist / dt; // px / ms
-      // 慢 → 粗（落笔/顿），快 → 细（带过）
-      const width = Math.max(0.4, Math.min(4.5, 4.5 - speed * 1.4));
-      // 速度极慢时透明度略高（像饱蘸墨）
-      const alpha = Math.max(0.28, Math.min(0.7, 0.7 - speed * 0.18));
+      // 距离起笔的时间（秒）
+      const dt = (p.t - strokeStartTime) / 1000;
+      // ease-out 衰减：刚起笔粗，后段细
+      const decay = Math.max(0.08, Math.pow(Math.max(0, 1 - dt / TAPER_DURATION), 1.3));
+      const width = MIN_WIDTH + (MAX_WIDTH - MIN_WIDTH) * decay;
+      // alpha 也微微随时间衰减（湿墨 → 干墨）
+      const alpha = lerp(0.85, 0.45, Math.min(1, dt / 2.4));
 
-      ctx!.strokeStyle = `rgba(240, 233, 216, ${alpha})`;
+      ctx!.strokeStyle = `rgba(${getInkColor()}, ${alpha})`;
       ctx!.lineWidth = width;
       ctx!.beginPath();
       ctx!.moveTo(last.x, last.y);
-      // 用 quadraticCurveTo 模拟运笔曲线（用中点做控制点）
+      // 用 quadraticCurveTo + 中点控制做平滑笔触
       const mx = (last.x + p.x) / 2;
       const my = (last.y + p.y) / 2;
       ctx!.quadraticCurveTo(last.x, last.y, mx, my);
@@ -89,11 +110,12 @@
       last = p;
     });
 
-    // 渐隐：每帧把 canvas 整体 alpha 衰减一点
+    // 渐隐：每帧 destination-out 扣 alpha
+    // 0.022 → 痕迹约 3-3.5s 完全消失
     function fadeLoop() {
       ctx!.save();
       ctx!.globalCompositeOperation = 'destination-out';
-      ctx!.fillStyle = 'rgba(0, 0, 0, 0.020)';
+      ctx!.fillStyle = 'rgba(0, 0, 0, 0.024)';
       ctx!.fillRect(0, 0, w, h);
       ctx!.restore();
       requestAnimationFrame(fadeLoop);

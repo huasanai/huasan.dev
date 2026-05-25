@@ -19,6 +19,7 @@
   --hero-text: #F0E9D8;
   --hero-text-soft: rgba(240, 233, 216, 0.62);
   --hero-accent: #E07A4F;
+  --ink-color: 240, 233, 216;   /* 浅墨色：写在深色 hero 上 */
 }
 
 :root[data-theme="dark"] {
@@ -35,10 +36,12 @@
   --accent:    #E07A4F;
   --accent-soft: #C56841;
 
-  --hero-bg:   #0E0D12;
-  --hero-text: #F0E9D8;
-  --hero-text-soft: rgba(240, 233, 216, 0.65);
-  --hero-accent: #E07A4F;
+  /* dark 主题下 hero 翻转为浅色"宣纸"，墨痕用深墨色 */
+  --hero-bg:   #EFE6D2;
+  --hero-text: rgba(20, 18, 16, 0.92);
+  --hero-text-soft: rgba(20, 18, 16, 0.62);
+  --hero-accent: #C15F3C;
+  --ink-color: 20, 18, 16;       /* 深墨色：写在浅色 hero 上 */
 }
 
 * { box-sizing: border-box; }

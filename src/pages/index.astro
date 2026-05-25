@@ -37,8 +37,22 @@ const coverClasses = ['cover-1', 'cover-2', 'cover-3', 'cover-4'];
       <p class="hero-quote" id="quoteText">{CURRENT_QUOTE.text}</p>
       <p class="hero-quote-src" id="quoteSrc">— {CURRENT_QUOTE.src}</p>
     </div>
-    <div class="hero-canvas-hint" aria-hidden="true">— 划过有墨痕 —</div>
   </section>
+
+  <!-- Quote picker（owner-only：按 S 打开，Esc / 点 backdrop 关闭） -->
+  <div class="quote-picker" id="quotePicker" hidden role="dialog" aria-modal="true" aria-label="选择句子">
+    <div class="quote-picker-backdrop" data-close></div>
+    <div class="quote-picker-panel">
+      <header class="quote-picker-head">
+        <span class="mono picker-title">— select a quote —</span>
+        <button class="mono picker-close" data-close type="button">esc</button>
+      </header>
+      <ul class="quote-list" id="quoteList"></ul>
+      <footer class="quote-picker-foot mono">
+        S 关闭 · 永久更换让访客看到这句：改 <code>src/lib/quotes.ts</code> 里的 CURRENT_QUOTE
+      </footer>
+    </div>
+  </div>
 
   <div class="container">
     <section class="section">
@@ -105,20 +119,67 @@ const coverClasses = ['cover-1', 'cover-2', 'cover-3', 'cover-4'];
     </section>
   </div>
 
-  <script define:vars={{ pool: QUOTES_POOL }}>
-    let idx = -1;
+  <script define:vars={{ pool: QUOTES_POOL, current: CURRENT_QUOTE }}>
+    const picker = document.getElementById('quotePicker');
+    const list = document.getElementById('quoteList');
+    const quoteText = document.getElementById('quoteText');
+    const quoteSrc = document.getElementById('quoteSrc');
+
+    function isInputFocused() {
+      const tag = (document.activeElement?.tagName || '').toLowerCase();
+      return tag === 'input' || tag === 'textarea' || document.activeElement?.isContentEditable;
+    }
+
+    function renderList() {
+      if (!list) return;
+      const currentText = quoteText?.textContent?.trim();
+      list.innerHTML = '';
+      pool.forEach((q, i) => {
+        const li = document.createElement('li');
+        li.className = 'quote-item';
+        if (q.text === currentText) li.classList.add('active');
+        li.innerHTML = `
+          <p class="picker-quote">${q.text}</p>
+          <p class="picker-source">— ${q.src}</p>
+        `;
+        li.addEventListener('click', () => applyQuote(q));
+        list.appendChild(li);
+      });
+    }
+
+    function openPicker() {
+      if (!picker) return;
+      renderList();
+      picker.hidden = false;
+      requestAnimationFrame(() => picker.classList.add('open'));
+    }
+    function closePicker() {
+      if (!picker) return;
+      picker.classList.remove('open');
+      setTimeout(() => { picker.hidden = true; }, 180);
+    }
+    function applyQuote(q) {
+      if (quoteText) quoteText.textContent = q.text;
+      if (quoteSrc) quoteSrc.textContent = '— ' + q.src;
+      closePicker();
+    }
+
+    picker?.querySelectorAll('[data-close]').forEach((el) => {
+      el.addEventListener('click', closePicker);
+    });
+
     document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && picker && !picker.hidden) {
+        e.preventDefault();
+        closePicker();
+        return;
+      }
       if (e.key !== 's' && e.key !== 'S') return;
       if (e.ctrlKey || e.metaKey || e.altKey) return;
-      const tag = (document.activeElement?.tagName || '').toLowerCase();
-      if (tag === 'input' || tag === 'textarea' || document.activeElement?.isContentEditable) return;
+      if (isInputFocused()) return;
       e.preventDefault();
-      idx = (idx + 1) % pool.length;
-      const q = pool[idx];
-      const t = document.getElementById('quoteText');
-      const s = document.getElementById('quoteSrc');
-      if (t) t.textContent = q.text;
-      if (s) s.textContent = '— ' + q.src;
+      if (picker?.hidden) openPicker();
+      else closePicker();
     });
   </script>
 
@@ -154,19 +215,123 @@ const coverClasses = ['cover-1', 'cover-2', 'cover-3', 'cover-4'];
       margin: 0.85rem 0 0;
       letter-spacing: 0.05em;
     }
-    .hero-canvas-hint {
-      position: absolute;
-      bottom: 0.45rem;
-      right: 0.85rem;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.65rem;
-      color: var(--hero-text-soft);
-      opacity: 0.35;
-      z-index: 2;
-      pointer-events: none;
-    }
-
     main { padding-bottom: 4rem; }
+
+    /* ===== Quote picker modal ===== */
+    .quote-picker {
+      position: fixed;
+      inset: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+    }
+    .quote-picker-backdrop {
+      position: absolute;
+      inset: 0;
+      background: rgba(15, 13, 18, 0.45);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      opacity: 0;
+      transition: opacity 0.18s ease;
+    }
+    .quote-picker.open .quote-picker-backdrop { opacity: 1; }
+    .quote-picker-panel {
+      position: relative;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      box-shadow: var(--shadow-card-hover);
+      max-width: 560px;
+      width: 100%;
+      max-height: 80vh;
+      display: flex;
+      flex-direction: column;
+      transform: translateY(8px);
+      opacity: 0;
+      transition: opacity 0.18s ease, transform 0.18s ease;
+    }
+    .quote-picker.open .quote-picker-panel { transform: translateY(0); opacity: 1; }
+
+    .quote-picker-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem 1.25rem;
+      border-bottom: 1px solid var(--border-soft);
+    }
+    .picker-title {
+      font-size: 0.8rem;
+      color: var(--text-dim);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+    .picker-close {
+      font-family: 'JetBrains Mono', monospace;
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--text-dim);
+      font-size: 0.7rem;
+      padding: 0.2rem 0.55rem;
+      border-radius: 6px;
+      cursor: pointer;
+      letter-spacing: 0;
+    }
+    .picker-close:hover { color: var(--accent); border-color: var(--accent); }
+
+    .quote-list {
+      list-style: none;
+      margin: 0;
+      padding: 0.5rem;
+      overflow-y: auto;
+      flex: 1;
+    }
+    .quote-item {
+      padding: 0.9rem 1rem;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.12s ease;
+      border: 1px solid transparent;
+    }
+    .quote-item:hover {
+      background: var(--bg);
+      border-color: var(--border-soft);
+    }
+    .quote-item.active {
+      background: rgba(193, 95, 60, 0.06);
+      border-color: rgba(193, 95, 60, 0.30);
+    }
+    .picker-quote {
+      font-family: 'TsangerJinKai02', 'STKaiti', serif;
+      font-size: 1.1rem;
+      letter-spacing: 0.06em;
+      color: var(--text);
+      margin: 0 0 0.3rem;
+      line-height: 1.5;
+    }
+    .picker-source {
+      font-family: 'TsangerJinKai02', serif;
+      font-size: 0.78rem;
+      color: var(--text-dim);
+      margin: 0;
+      letter-spacing: 0.04em;
+    }
+    .quote-item.active .picker-source { color: var(--accent); }
+
+    .quote-picker-foot {
+      padding: 0.75rem 1.25rem;
+      border-top: 1px solid var(--border-soft);
+      font-size: 0.7rem;
+      color: var(--text-dim);
+      letter-spacing: 0;
+    }
+    .quote-picker-foot code {
+      background: var(--bg);
+      padding: 0.1em 0.35em;
+      font-size: 0.95em;
+      border-radius: 3px;
+    }
     .section { padding: 3rem 0 0; }
 
     .section-head {
