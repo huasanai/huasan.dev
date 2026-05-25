@@ -1,0 +1,343 @@
+---
+import Layout from '../layouts/Layout.astro';
+import InkCanvas from '../components/InkCanvas.astro';
+import { getCollection } from 'astro:content';
+import { CURRENT_QUOTE, QUOTES_POOL } from '../lib/quotes';
+
+const writing = (await getCollection('writing', ({ data }) => !data.draft))
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+  .slice(0, 4);
+
+const projects = (await getCollection('projects'))
+  .sort((a, b) => a.data.order - b.data.order)
+  .slice(0, 4);
+
+function groupByMonth<T extends { data: { pubDate: Date } }>(posts: T[]) {
+  const m = new Map<string, T[]>();
+  for (const p of posts) {
+    const key = p.data.pubDate.toLocaleString('en-US', { month: 'long', year: 'numeric' });
+    if (!m.has(key)) m.set(key, []);
+    m.get(key)!.push(p);
+  }
+  return [...m.entries()];
+}
+
+function fmtMD(d: Date) {
+  return d.toLocaleString('en-US', { month: 'short', day: '2-digit' }).toUpperCase();
+}
+
+const grouped = groupByMonth(writing);
+const coverClasses = ['cover-1', 'cover-2', 'cover-3', 'cover-4'];
+---
+
+<Layout>
+  <section class="hero-ribbon" id="hero">
+    <InkCanvas />
+    <div class="hero-inner">
+      <p class="hero-quote" id="quoteText">{CURRENT_QUOTE.text}</p>
+      <p class="hero-quote-src" id="quoteSrc">— {CURRENT_QUOTE.src}</p>
+    </div>
+    <div class="hero-canvas-hint" aria-hidden="true">— 划过有墨痕 —</div>
+  </section>
+
+  <div class="container">
+    <section class="section">
+      <header class="section-head">
+        <h2>writing</h2>
+        <a href="/writing" class="section-link">all posts →</a>
+      </header>
+
+      {
+        grouped.length === 0 ? (
+          <p class="empty">还没有文章。</p>
+        ) : (
+          grouped.map(([month, items]) => (
+            <div class="month-block">
+              <h3 class="month-label">{month}</h3>
+              <ul class="post-list">
+                {items.map((post, i) => (
+                  <li>
+                    <a href={`/writing/${post.id}`} class="post-card">
+                      <div class="post-card-body">
+                        <h3 class="post-card-title">{post.data.title}</h3>
+                        {post.data.description && (
+                          <p class="post-card-sub">{post.data.description}</p>
+                        )}
+                        <div class="post-card-meta">
+                          {fmtMD(post.data.pubDate)} · 画伞
+                        </div>
+                      </div>
+                      <div class={`post-card-cover ${coverClasses[i % 4]}`}>cover</div>
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))
+        )
+      }
+    </section>
+
+    <section class="section">
+      <header class="section-head">
+        <h2>projects</h2>
+        <a href="/projects" class="section-link">all projects →</a>
+      </header>
+      <div class="project-grid">
+        {
+          projects.map((p) => (
+            <a href={`/projects/${p.id}`} class="project-card">
+              <div class="project-card-head">
+                <span class="project-card-title">{p.data.title}</span>
+                <span class={`project-card-status status-${p.data.status}`}>
+                  {p.data.status}
+                </span>
+              </div>
+              <p class="project-card-tagline">{p.data.tagline}</p>
+              <div class="project-card-meta">
+                {p.data.year}
+                {p.data.repo && <span> · open source</span>}
+              </div>
+            </a>
+          ))
+        }
+      </div>
+    </section>
+  </div>
+
+  <script define:vars={{ pool: QUOTES_POOL }}>
+    let idx = -1;
+    document.addEventListener('keydown', (e) => {
+      if (e.key !== 's' && e.key !== 'S') return;
+      if (e.ctrlKey || e.metaKey || e.altKey) return;
+      const tag = (document.activeElement?.tagName || '').toLowerCase();
+      if (tag === 'input' || tag === 'textarea' || document.activeElement?.isContentEditable) return;
+      e.preventDefault();
+      idx = (idx + 1) % pool.length;
+      const q = pool[idx];
+      const t = document.getElementById('quoteText');
+      const s = document.getElementById('quoteSrc');
+      if (t) t.textContent = q.text;
+      if (s) s.textContent = '— ' + q.src;
+    });
+  </script>
+
+  <style>
+    .hero-ribbon {
+      background: var(--hero-bg);
+      color: var(--hero-text);
+      padding: 2rem 0 2.25rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-inner {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+      position: relative;
+      z-index: 2;
+      pointer-events: none;
+    }
+    .hero-quote {
+      font-family: 'TsangerJinKai02', 'STKaiti', 'KaiTi', serif;
+      font-size: clamp(1.4rem, 3vw, 2rem);
+      font-weight: 400;
+      letter-spacing: 0.08em;
+      color: var(--hero-text);
+      margin: 0;
+      line-height: 1.5;
+    }
+    .hero-quote-src {
+      font-family: 'TsangerJinKai02', serif;
+      font-size: 0.85rem;
+      color: var(--hero-text-soft);
+      margin: 0.85rem 0 0;
+      letter-spacing: 0.05em;
+    }
+    .hero-canvas-hint {
+      position: absolute;
+      bottom: 0.45rem;
+      right: 0.85rem;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.65rem;
+      color: var(--hero-text-soft);
+      opacity: 0.35;
+      z-index: 2;
+      pointer-events: none;
+    }
+
+    main { padding-bottom: 4rem; }
+    .section { padding: 3rem 0 0; }
+
+    .section-head {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      margin-bottom: 1.25rem;
+      padding-bottom: 0.75rem;
+      border-bottom: 1px solid var(--border-soft);
+    }
+    .section-head h2 {
+      margin: 0;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.95rem;
+      font-weight: 500;
+      color: var(--text-soft);
+      letter-spacing: 0;
+    }
+    .section-head h2::before {
+      content: '#';
+      color: var(--accent);
+      margin-right: 0.4rem;
+    }
+    .section-link {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.8rem;
+      color: var(--text-dim);
+      letter-spacing: 0;
+    }
+    .section-link:hover { color: var(--accent); }
+
+    .month-block { margin-bottom: 1.5rem; }
+    .month-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.72rem;
+      color: var(--text-dim);
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      margin: 0 0 0.85rem;
+      padding-left: 0.25rem;
+    }
+    .post-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 0.85rem;
+    }
+    .post-card {
+      display: flex;
+      gap: 1.25rem;
+      padding: 1.35rem 1.5rem;
+      background: var(--surface);
+      border: 1px solid var(--border-soft);
+      border-radius: 12px;
+      box-shadow: var(--shadow-card);
+      align-items: flex-start;
+      color: var(--text);
+      transition: transform .15s ease, box-shadow .15s ease, border-color .15s ease;
+    }
+    .post-card:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-card-hover);
+      border-color: var(--accent-soft);
+    }
+    .post-card:hover .post-card-title { color: var(--accent); }
+    .post-card-body { flex: 1; min-width: 0; }
+    .post-card-title {
+      font-size: 1.15rem;
+      font-weight: 600;
+      margin: 0 0 0.35rem;
+      line-height: 1.4;
+      color: var(--text);
+      transition: color .15s ease;
+    }
+    .post-card-sub {
+      font-size: 0.92rem;
+      color: var(--text-soft);
+      margin: 0 0 0.75rem;
+      line-height: 1.6;
+    }
+    .post-card-meta {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.72rem;
+      color: var(--text-dim);
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+    .post-card-cover {
+      flex-shrink: 0;
+      width: 140px;
+      height: 92px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.65rem;
+      color: var(--text-dim);
+      letter-spacing: 0.05em;
+      overflow: hidden;
+    }
+    .cover-1 { background: linear-gradient(135deg, #F5F0E6, #E8DFCB); }
+    .cover-2 { background: linear-gradient(135deg, #FAEDE3, #F4D9C3); }
+    .cover-3 { background: linear-gradient(135deg, #ECEFF0, #DDE3E5); }
+    .cover-4 { background: linear-gradient(135deg, #F0EBE0, #E5DCC4); }
+    :global([data-theme='dark']) .post-card-cover {
+      background: linear-gradient(135deg, #25232B, #2D2B33) !important;
+    }
+
+    .project-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 0.85rem;
+    }
+    .project-card {
+      display: block;
+      background: var(--surface);
+      border: 1px solid var(--border-soft);
+      border-radius: 12px;
+      padding: 1.25rem 1.25rem 1.1rem;
+      box-shadow: var(--shadow-card);
+      transition: all .15s ease;
+    }
+    .project-card:hover {
+      border-color: var(--accent-soft);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-card-hover);
+    }
+    .project-card-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.5rem;
+      margin-bottom: 0.5rem;
+    }
+    .project-card-title { font-weight: 600; font-size: 1rem; color: var(--text); }
+    .project-card-status {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.7rem;
+      padding: 0.15rem 0.55rem;
+      border-radius: 999px;
+      text-transform: lowercase;
+      border: 1px solid transparent;
+      letter-spacing: 0;
+    }
+    .status-active     { background: rgba(193, 95, 60, 0.10); color: var(--accent); border-color: rgba(193, 95, 60, 0.25); }
+    .status-experiment { background: rgba(120, 160, 100, 0.10); color: #5C8A4C; border-color: rgba(120, 160, 100, 0.25); }
+    .status-paused     { background: rgba(139, 136, 129, 0.10); color: var(--text-soft); border-color: rgba(139, 136, 129, 0.25); }
+    .status-archived   { background: rgba(139, 136, 129, 0.08); color: var(--text-dim); border-color: rgba(139, 136, 129, 0.15); }
+    .project-card-tagline {
+      margin: 0.5rem 0 1rem;
+      color: var(--text-soft);
+      font-size: 0.9rem;
+      line-height: 1.6;
+    }
+    .project-card-meta {
+      font-family: 'JetBrains Mono', monospace;
+      color: var(--text-dim);
+      font-size: 0.72rem;
+      letter-spacing: 0;
+    }
+
+    .empty { color: var(--text-dim); padding: 1rem 0; }
+
+    @media (max-width: 600px) {
+      .hero-ribbon { padding: 1.5rem 0 1.75rem; }
+      .hero-quote { font-size: 1.2rem; letter-spacing: 0.04em; }
+      .post-card { flex-direction: column-reverse; padding: 1.25rem; }
+      .post-card-cover { width: 100%; height: 160px; }
+    }
+  </style>
+</Layout>

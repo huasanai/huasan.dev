@@ -1,0 +1,269 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+  ogImage?: string;
+}
+
+const {
+  title = '画伞 · huasan.dev',
+  description = '画伞的个人主页：用 AI 写代码做小工具，写公众号记录过程，探索一个人也能跑通的活法。',
+  ogImage,
+} = Astro.props;
+
+const siteName = '画伞 · huasan.dev';
+const fullTitle = title === siteName ? siteName : `${title} — 画伞`;
+const currentPath = Astro.url.pathname.replace(/\/$/, '') || '/';
+
+const nav = [
+  { href: '/', label: 'home' },
+  { href: '/writing', label: 'writing' },
+  { href: '/projects', label: 'projects' },
+  { href: '/now', label: 'now' },
+  { href: '/about', label: 'about' },
+];
+
+function isActive(href: string) {
+  if (href === '/') return currentPath === '/';
+  return currentPath === href || currentPath.startsWith(href + '/');
+}
+---
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="generator" content={Astro.generator} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <!-- 中文字体：仓耳今楷 W04 -->
+    <link rel="stylesheet" href="/jinkai.css" />
+
+    <!-- 英文字体：JetBrains Mono -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap"
+    />
+
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    {ogImage && <meta property="og:image" content={ogImage} />}
+
+    <!-- 主题初始化（避免 FOUC） -->
+    <script is:inline>
+      (function () {
+        try {
+          const saved = localStorage.getItem('huasan-theme');
+          if (saved === 'dark' || saved === 'light') {
+            document.documentElement.setAttribute('data-theme', saved);
+            return;
+          }
+        } catch {}
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        document.documentElement.setAttribute('data-theme', prefersDark ? 'dark' : 'light');
+      })();
+    </script>
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container-wide nav-row">
+        <a href="/" class="brand">
+          <span class="brand-dot"></span>
+          huasan<span class="brand-dim">.dev</span>
+        </a>
+        <nav class="main-nav">
+          <ul>
+            {
+              nav.slice(1).map((item) => (
+                <li>
+                  <a
+                    href={item.href}
+                    class:list={['nav-link', { active: isActive(item.href) }]}
+                  >
+                    {item.label}
+                  </a>
+                </li>
+              ))
+            }
+            <li>
+              <button
+                class="theme-toggle"
+                aria-label="切换主题"
+                id="themeToggle"
+                type="button"
+              >
+                <svg class="icon-light" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <circle cx="12" cy="12" r="4" />
+                  <path d="M12 2v2M12 20v2M2 12h2M20 12h2M5 5l1.5 1.5M17.5 17.5L19 19M5 19l1.5-1.5M17.5 6.5L19 5" />
+                </svg>
+                <svg class="icon-dark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+                </svg>
+              </button>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <slot />
+    </main>
+
+    <footer class="site-footer">
+      <div class="container-wide footer-row">
+        <span>画伞 · INTJ · 深圳</span>
+        <span class="footer-links">
+          <a href="https://github.com/huasanai" target="_blank" rel="noopener">github</a>
+          <a href="/feed.xml">rss</a>
+        </span>
+      </div>
+    </footer>
+
+    <script>
+      const btn = document.getElementById('themeToggle');
+      btn?.addEventListener('click', () => {
+        const current = document.documentElement.getAttribute('data-theme') || 'light';
+        const next = current === 'light' ? 'dark' : 'light';
+        document.documentElement.setAttribute('data-theme', next);
+        try { localStorage.setItem('huasan-theme', next); } catch {}
+      });
+    </script>
+
+    <style>
+      .site-header {
+        border-bottom: 1px solid var(--border-soft);
+        padding: 1.1rem 0;
+        position: sticky;
+        top: 0;
+        background: color-mix(in srgb, var(--bg) 88%, transparent);
+        backdrop-filter: blur(14px);
+        -webkit-backdrop-filter: blur(14px);
+        z-index: 10;
+      }
+
+      .nav-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1.5rem;
+      }
+
+      .brand {
+        font-family: 'JetBrains Mono', monospace;
+        font-weight: 600;
+        font-size: 0.95rem;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        color: var(--text);
+      }
+
+      .brand-dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: var(--accent);
+        display: inline-block;
+      }
+
+      .brand-dim {
+        color: var(--text-dim);
+        font-weight: 400;
+      }
+
+      nav.main-nav ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        gap: 1.75rem;
+        align-items: center;
+      }
+
+      .nav-link {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 0.85rem;
+        color: var(--text-soft);
+        position: relative;
+        padding: 0.25rem 0;
+        letter-spacing: 0;
+      }
+
+      .nav-link:hover { color: var(--text); }
+
+      .nav-link.active { color: var(--accent); }
+      .nav-link.active::after {
+        content: '';
+        position: absolute;
+        left: 0; right: 0; bottom: -0.35rem;
+        height: 1.5px;
+        background: var(--accent);
+        border-radius: 1px;
+      }
+
+      .theme-toggle {
+        background: transparent;
+        border: 1px solid var(--border);
+        color: var(--text-soft);
+        width: 34px;
+        height: 34px;
+        border-radius: 8px;
+        cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        margin-left: 0.5rem;
+        transition: all 0.15s ease;
+      }
+      .theme-toggle:hover {
+        color: var(--accent);
+        border-color: var(--accent);
+      }
+      .theme-toggle svg { width: 16px; height: 16px; }
+      .theme-toggle .icon-dark { display: none; }
+      :global([data-theme='dark']) .theme-toggle .icon-light { display: none; }
+      :global([data-theme='dark']) .theme-toggle .icon-dark { display: inline; }
+
+      main { min-height: calc(100vh - 200px); }
+
+      .site-footer {
+        border-top: 1px solid var(--border-soft);
+        padding: 1.5rem 0;
+        margin-top: 3rem;
+      }
+
+      .footer-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+        flex-wrap: wrap;
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 0.8rem;
+        color: var(--text-dim);
+        letter-spacing: 0;
+      }
+
+      .footer-links a {
+        color: var(--text-soft);
+        margin-left: 0.75rem;
+      }
+      .footer-links a:hover { color: var(--accent); }
+
+      @media (max-width: 600px) {
+        .nav-row { gap: 0.75rem; }
+        nav.main-nav ul { gap: 1rem; flex-wrap: wrap; }
+        .theme-toggle { margin-left: 0; }
+      }
+    </style>
+  </body>
+</html>

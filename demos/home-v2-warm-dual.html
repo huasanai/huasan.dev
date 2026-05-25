@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="light">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>画伞 · huasan.dev — Design Demo v2 (warm dual)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Noto+Serif+SC:wght@500;600;700&family=Newsreader:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+/* ====================================================
+   THEME TOKENS
+==================================================== */
+:root[data-theme="light"] {
+  --bg:        #FAF7F0;   /* 暖米黄底 */
+  --bg-soft:   #F3EFE4;
+  --surface:   #FFFFFF;
+  --border:    #E5DDC8;
+  --border-soft: #EFE7D2;
+  --text:      #1F1E1B;
+  --text-soft: #4A4843;
+  --text-dim:  #8B8881;
+  --accent:    #C15F3C;   /* 深 burnt orange（比 v1 深一档） */
+  --accent-soft: #A04F30;
+
+  /* Hero ribbon：浅色页面上的深色 hero 块 */
+  --hero-bg:   #1F1B17;   /* 暖深棕 */
+  --hero-text: #F0E9D8;
+  --hero-text-soft: #B5AC9C;
+  --hero-accent: #E07A4F; /* hero 上的橙稍亮一点 */
+}
+
+:root[data-theme="dark"] {
+  --bg:        #1A1714;   /* 暖深棕底，不是纯黑 */
+  --bg-soft:   #221E1A;
+  --surface:   #25201C;
+  --border:    #3A332C;
+  --border-soft: #2D2823;
+  --text:      #EBE4D5;
+  --text-soft: #B5AC9C;
+  --text-dim:  #7A7368;
+  --accent:    #E07A4F;
+  --accent-soft: #C56841;
+
+  --hero-bg:   #14110F;   /* 比页面更深一点 */
+  --hero-text: #F0E9D8;
+  --hero-text-soft: #B5AC9C;
+  --hero-accent: #E07A4F;
+}
+
+/* ====================================================
+   BASE
+==================================================== */
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Hiragino Sans GB', sans-serif;
+  font-size: 16px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  transition: background 0.25s ease, color 0.25s ease;
+}
+
+a { color: var(--text); text-decoration: none; transition: color .15s ease; }
+a:hover { color: var(--accent); }
+
+.mono { font-family: 'JetBrains Mono', 'SF Mono', Menlo, monospace; }
+.serif-zh { font-family: 'Noto Serif SC', 'Songti SC', 'Source Han Serif SC', serif; }
+.serif-en { font-family: 'Newsreader', 'Iowan Old Style', Georgia, serif; }
+
+/* ====================================================
+   HEADER
+==================================================== */
+.site-header {
+  border-bottom: 1px solid var(--border-soft);
+  padding: 1.1rem 0;
+  position: sticky;
+  top: 0;
+  background: color-mix(in srgb, var(--bg) 85%, transparent);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  z-index: 10;
+  transition: background 0.25s ease, border-color 0.25s ease;
+}
+
+.container { max-width: 720px; margin: 0 auto; padding: 0 1.5rem; }
+.container-wide { max-width: 1040px; margin: 0 auto; padding: 0 1.5rem; }
+
+.nav-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+}
+
+.brand {
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 600;
+  font-size: 0.95rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--text);
+}
+
+.brand-dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--accent);
+  display: inline-block;
+}
+
+.brand-dim { color: var(--text-dim); font-weight: 400; }
+
+nav.main-nav ul {
+  list-style: none; margin: 0; padding: 0;
+  display: flex; gap: 1.75rem;
+  align-items: center;
+}
+
+.nav-link {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.85rem;
+  color: var(--text-soft);
+  position: relative;
+  padding: 0.25rem 0;
+}
+.nav-link:hover { color: var(--text); }
+.nav-link.active { color: var(--accent); }
+.nav-link.active::after {
+  content: '';
+  position: absolute;
+  left: 0; right: 0; bottom: -0.35rem;
+  height: 1.5px; background: var(--accent);
+  border-radius: 1px;
+}
+
+/* Theme toggle */
+.theme-toggle {
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--text-soft);
+  width: 34px; height: 34px;
+  border-radius: 8px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 0.5rem;
+  transition: border-color .15s ease, color .15s ease, background .15s ease;
+}
+.theme-toggle:hover { color: var(--accent); border-color: var(--accent); }
+.theme-toggle svg { width: 16px; height: 16px; }
+.theme-toggle .icon-dark { display: none; }
+[data-theme="dark"] .theme-toggle .icon-light { display: none; }
+[data-theme="dark"] .theme-toggle .icon-dark { display: inline; }
+
+/* ====================================================
+   HERO RIBBON（深色块，浅色主题下也是深，暗色主题下更深）
+==================================================== */
+.hero-ribbon {
+  background: var(--hero-bg);
+  color: var(--hero-text);
+  padding: 4rem 0 4.5rem;
+  position: relative;
+  overflow: hidden;
+  transition: background 0.25s ease;
+}
+
+.hero-inner {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+  position: relative;
+  z-index: 2;
+}
+
+.hero-eyebrow {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.8rem;
+  color: var(--hero-text-soft);
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.hero-eyebrow::before {
+  content: '';
+  width: 1.75rem; height: 1px;
+  background: var(--hero-accent);
+  display: inline-block;
+}
+
+.hero-quote {
+  font-family: 'Noto Serif SC', 'Songti SC', serif;
+  font-size: clamp(1.5rem, 3.5vw, 2.2rem);
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  color: var(--hero-text);
+  margin: 0;
+  line-height: 1.4;
+}
+
+.hero-quote-src {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 0.85rem;
+  color: var(--hero-text-soft);
+  margin-top: 1rem;
+  letter-spacing: 0.05em;
+}
+
+.hero-canvas-placeholder {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 15% 30%, rgba(224, 122, 79, 0.08) 0, transparent 40%),
+    radial-gradient(circle at 85% 70%, rgba(240, 233, 216, 0.04) 0, transparent 50%);
+  z-index: 1;
+}
+
+.hero-canvas-note {
+  position: absolute;
+  bottom: 0.75rem; right: 1rem;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.7rem;
+  color: var(--hero-text-soft);
+  opacity: 0.5;
+  z-index: 2;
+}
+
+/* ====================================================
+   BIO BAND（hero 下面那条简介）
+==================================================== */
+.bio-band {
+  border-bottom: 1px solid var(--border-soft);
+  padding: 2.5rem 0;
+}
+.bio-inner {
+  display: flex;
+  align-items: flex-start;
+  gap: 1.5rem;
+}
+.bio-avatar {
+  width: 64px; height: 64px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--accent), var(--accent-soft));
+  flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Noto Serif SC', serif;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #FAF7F0;
+  letter-spacing: 0;
+}
+.bio-text {
+  flex: 1;
+}
+.bio-name {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin: 0 0 0.25rem;
+  color: var(--text);
+}
+.bio-name-en {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.85rem;
+  color: var(--text-dim);
+  font-weight: 400;
+  margin-left: 0.5rem;
+}
+.bio-desc {
+  color: var(--text-soft);
+  margin: 0;
+  font-size: 0.95rem;
+  line-height: 1.65;
+}
+.bio-desc .accent-word { color: var(--accent); font-weight: 500; }
+
+/* ====================================================
+   SECTION
+==================================================== */
+main { padding: 0 0 4rem; }
+
+.section { padding: 3rem 0 1rem; }
+
+.section-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid var(--border-soft);
+}
+
+.section-head h2 {
+  margin: 0;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--text-soft);
+}
+.section-head h2::before {
+  content: '#';
+  color: var(--accent);
+  margin-right: 0.4rem;
+}
+.section-link {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.8rem;
+  color: var(--text-dim);
+}
+.section-link:hover { color: var(--accent); }
+
+/* ====================================================
+   WRITING LIST (zara-style: single column, month grouped)
+==================================================== */
+.month-block { margin-bottom: 2rem; }
+.month-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.75rem;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin: 0 0 0.5rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px dashed var(--border-soft);
+}
+
+.post-list { list-style: none; padding: 0; margin: 0; }
+.post-row {
+  display: flex;
+  align-items: baseline;
+  gap: 1.5rem;
+  padding: 0.9rem 0;
+  border-bottom: 1px solid var(--border-soft);
+}
+.post-row:last-child { border-bottom: none; }
+.post-row:hover .post-title { color: var(--accent); }
+
+.post-date {
+  flex-shrink: 0;
+  width: 60px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.78rem;
+  color: var(--text-dim);
+}
+
+.post-meta-col {
+  flex: 1;
+  min-width: 0;
+}
+.post-title {
+  font-size: 1rem;
+  color: var(--text);
+  transition: color .15s ease;
+  display: block;
+  margin-bottom: 0.15rem;
+}
+.post-sub {
+  font-size: 0.85rem;
+  color: var(--text-dim);
+  margin: 0;
+}
+
+/* ====================================================
+   PROJECTS GRID
+==================================================== */
+.project-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 1rem;
+}
+
+.project-card {
+  display: block;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 1.25rem 1.25rem 1.1rem;
+  transition: border-color .15s ease, transform .15s ease, box-shadow .15s ease;
+}
+
+[data-theme="dark"] .project-card { background: var(--bg-soft); }
+
+.project-card:hover {
+  border-color: var(--accent);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px -12px rgba(193, 95, 60, 0.20);
+}
+
+.project-card-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.project-card-title {
+  font-weight: 600;
+  font-size: 1rem;
+  color: var(--text);
+}
+
+.project-card-status {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.7rem;
+  padding: 0.15rem 0.55rem;
+  border-radius: 999px;
+  text-transform: lowercase;
+  border: 1px solid transparent;
+}
+.status-active     { background: rgba(193, 95, 60, 0.10); color: var(--accent); border-color: rgba(193, 95, 60, 0.25); }
+.status-experiment { background: rgba(120, 160, 100, 0.10); color: #5C8A4C; border-color: rgba(120, 160, 100, 0.25); }
+.status-paused     { background: rgba(139, 136, 129, 0.10); color: var(--text-soft); border-color: rgba(139, 136, 129, 0.25); }
+.status-archived   { background: rgba(139, 136, 129, 0.08); color: var(--text-dim); border-color: rgba(139, 136, 129, 0.15); }
+
+.project-card-tagline {
+  margin: 0.5rem 0 1rem;
+  color: var(--text-soft);
+  font-size: 0.9rem;
+  line-height: 1.55;
+}
+
+.project-card-meta {
+  font-family: 'JetBrains Mono', monospace;
+  color: var(--text-dim);
+  font-size: 0.75rem;
+}
+
+/* ====================================================
+   FOOTER
+==================================================== */
+.site-footer {
+  border-top: 1px solid var(--border-soft);
+  padding: 1.5rem 0;
+  margin-top: 3rem;
+}
+.footer-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.8rem;
+  color: var(--text-dim);
+}
+.footer-links a { color: var(--text-soft); margin-left: 0.75rem; }
+.footer-links a:hover { color: var(--accent); }
+
+/* ====================================================
+   MOBILE
+==================================================== */
+@media (max-width: 600px) {
+  html, body { overflow-x: hidden; }
+  .nav-row { gap: 0.75rem; }
+  nav.main-nav ul { gap: 1rem; flex-wrap: wrap; }
+  .theme-toggle { margin-left: 0; }
+  .hero-ribbon { padding: 2.5rem 0 3rem; }
+  .hero-quote { font-size: 1.25rem; letter-spacing: 0.03em; }
+  .bio-inner { flex-direction: column; gap: 1rem; }
+  .bio-avatar { width: 56px; height: 56px; font-size: 1.3rem; }
+  .post-row { flex-direction: column; gap: 0.25rem; align-items: flex-start; }
+  .post-date { width: auto; }
+}
+</style>
+</head>
+<body>
+
+<!-- Header -->
+<header class="site-header">
+  <div class="container-wide nav-row">
+    <a href="#" class="brand">
+      <span class="brand-dot"></span>
+      huasan<span class="brand-dim">.dev</span>
+    </a>
+    <nav class="main-nav">
+      <ul>
+        <li><a href="#" class="nav-link active">home</a></li>
+        <li><a href="#" class="nav-link">writing</a></li>
+        <li><a href="#" class="nav-link">projects</a></li>
+        <li><a href="#" class="nav-link">now</a></li>
+        <li><a href="#" class="nav-link">about</a></li>
+        <li>
+          <button class="theme-toggle" aria-label="Toggle theme" onclick="toggleTheme()">
+            <svg class="icon-light" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M5 5l1.5 1.5M17.5 17.5L19 19M5 19l1.5-1.5M17.5 6.5L19 5"/>
+            </svg>
+            <svg class="icon-dark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+            </svg>
+          </button>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<!-- Hero ribbon -->
+<section class="hero-ribbon">
+  <div class="hero-canvas-placeholder"></div>
+  <div class="hero-inner">
+    <div class="hero-eyebrow">huasan · 2026</div>
+    <p class="hero-quote">
+      路漫漫其修遠兮，吾將上下而求索
+    </p>
+    <p class="hero-quote-src">— 屈原《離騷》</p>
+  </div>
+  <div class="hero-canvas-note">[ canvas / particles → v0.2 ]</div>
+</section>
+
+<!-- Bio band -->
+<section class="bio-band">
+  <div class="container bio-inner">
+    <div class="bio-avatar">画</div>
+    <div class="bio-text">
+      <h1 class="bio-name">画伞<span class="bio-name-en">huasan · INTJ · 深圳</span></h1>
+      <p class="bio-desc">
+        前腾讯教育销售，去年开始独立做事。
+        一半时间用 <span class="accent-word">AI</span> 写代码做小工具，
+        一半时间写公众号记录过程。
+        想试出"<span class="accent-word">一个人也能跑通</span>"的活法。
+      </p>
+    </div>
+  </div>
+</section>
+
+<main>
+  <div class="container">
+
+    <!-- WRITING (zara-style: month grouped) -->
+    <section class="section">
+      <header class="section-head">
+        <h2>writing</h2>
+        <a href="#" class="section-link">all posts →</a>
+      </header>
+
+      <div class="month-block">
+        <h3 class="month-label">May 2026</h3>
+        <ul class="post-list">
+          <li>
+            <a href="#" class="post-row">
+              <span class="post-date">05.20</span>
+              <span class="post-meta-col">
+                <span class="post-title">SkillFlow MVP 上线：从想法到第一个用户的 14 天</span>
+                <p class="post-sub">把可视化 skill 编排做成一个可用的产品，是真的可以靠 AI coding 做到的事。</p>
+              </span>
+            </a>
+          </li>
+          <li>
+            <a href="#" class="post-row">
+              <span class="post-date">05.10</span>
+              <span class="post-meta-col">
+                <span class="post-title">前腾讯销冠转独立开发者，我学到的三件事</span>
+                <p class="post-sub">销售背景在独立创业里的真实优势和真实陷阱。</p>
+              </span>
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="month-block">
+        <h3 class="month-label">April 2026</h3>
+        <ul class="post-list">
+          <li>
+            <a href="#" class="post-row">
+              <span class="post-date">04.28</span>
+              <span class="post-meta-col">
+                <span class="post-title">用 Claude Code 做 OPC（一人公司）的工作流</span>
+                <p class="post-sub">把日常工作压缩到 4 小时的 Harness Engineering 实践。</p>
+              </span>
+            </a>
+          </li>
+          <li>
+            <a href="#" class="post-row">
+              <span class="post-date">04.14</span>
+              <span class="post-meta-col">
+                <span class="post-title">第一笔 100 块：能做能卖的最小验证</span>
+                <p class="post-sub">为口腔诊所做 AI 内容工作流，验证"能做 + 能卖"全链条。</p>
+              </span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section class="section">
+      <header class="section-head">
+        <h2>projects</h2>
+        <a href="#" class="section-link">all projects →</a>
+      </header>
+      <div class="project-grid">
+        <a href="#" class="project-card">
+          <div class="project-card-head">
+            <span class="project-card-title">SkillFlow</span>
+            <span class="project-card-status status-active">active</span>
+          </div>
+          <p class="project-card-tagline">让 Claude Code skill 工作流像 Figma 一样可视化编排</p>
+          <div class="project-card-meta">2026</div>
+        </a>
+        <a href="#" class="project-card">
+          <div class="project-card-head">
+            <span class="project-card-title">FloatTrans</span>
+            <span class="project-card-status status-active">active</span>
+          </div>
+          <p class="project-card-tagline">macOS 悬浮翻译，划词即出，键盘流体验</p>
+          <div class="project-card-meta">2026 · open source</div>
+        </a>
+        <a href="#" class="project-card">
+          <div class="project-card-head">
+            <span class="project-card-title">AI-Coding 基本功</span>
+            <span class="project-card-status status-experiment">experiment</span>
+          </div>
+          <p class="project-card-tagline">非技术背景的人怎么真正读懂 AI 写的代码</p>
+          <div class="project-card-meta">2026</div>
+        </a>
+        <a href="#" class="project-card">
+          <div class="project-card-head">
+            <span class="project-card-title">dental-content</span>
+            <span class="project-card-status status-archived">archived</span>
+          </div>
+          <p class="project-card-tagline">口腔诊所 AI 内容工作流（已验证能做能卖）</p>
+          <div class="project-card-meta">2026 · paid</div>
+        </a>
+      </div>
+    </section>
+
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="container-wide footer-row">
+    <span>画伞 · INTJ · 深圳</span>
+    <span class="footer-links">
+      <a href="#">github</a>
+      <a href="#">rss</a>
+      <a href="#">公众号</a>
+    </span>
+  </div>
+</footer>
+
+<script>
+  // Theme persistence
+  const KEY = 'huasan-theme';
+  function setTheme(theme) {
+    document.documentElement.setAttribute('data-theme', theme);
+    try { localStorage.setItem(KEY, theme); } catch {}
+  }
+  function toggleTheme() {
+    const current = document.documentElement.getAttribute('data-theme') || 'light';
+    setTheme(current === 'light' ? 'dark' : 'light');
+  }
+  (function init() {
+    try {
+      const saved = localStorage.getItem(KEY);
+      if (saved) { setTheme(saved); return; }
+    } catch {}
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    setTheme(prefersDark ? 'dark' : 'light');
+  })();
+</script>
+
+</body>
+</html>

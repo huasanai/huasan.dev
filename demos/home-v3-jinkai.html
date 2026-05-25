@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="light">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>画伞 · huasan.dev — Design Demo v3 (jinkai)</title>
+
+<!-- 中文：仓耳今楷 W04（与 tw93 同款，复用阿里云 CDN 子集化版本） -->
+<link rel="stylesheet" href="./jinkai.css">
+
+<!-- 英文：JetBrains Mono -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+/* ====================================================
+   THEME TOKENS
+==================================================== */
+:root[data-theme="light"] {
+  --bg:        #FCFBF7;   /* 低饱和米白 */
+  --bg-soft:   #F5F4ED;   /* 取自 tw93 */
+  --surface:   #FFFFFF;
+  --border:    #E8E5DC;
+  --border-soft: #EFECE2;
+  --text:      rgba(36, 41, 47, 0.92);   /* 取自 tw93：墨色 + 92% opacity */
+  --text-soft: rgba(36, 41, 47, 0.70);
+  --text-dim:  rgba(36, 41, 47, 0.45);
+  --accent:    #C15F3C;
+  --accent-soft: #A04F30;
+
+  --hero-bg:   #15141A;   /* 取自 tw93 的紫黑 */
+  --hero-text: #F0E9D8;
+  --hero-text-soft: rgba(240, 233, 216, 0.65);
+  --hero-accent: #E07A4F;
+}
+
+:root[data-theme="dark"] {
+  --bg:        #15141A;
+  --bg-soft:   #1D1C24;
+  --surface:   #1F1D24;
+  --border:    #2D2B35;
+  --border-soft: #25232C;
+  --text:      rgba(240, 233, 216, 0.92);
+  --text-soft: rgba(240, 233, 216, 0.65);
+  --text-dim:  rgba(240, 233, 216, 0.40);
+  --accent:    #E07A4F;
+  --accent-soft: #C56841;
+
+  --hero-bg:   #0F0E13;
+  --hero-text: #F0E9D8;
+  --hero-text-soft: rgba(240, 233, 216, 0.65);
+  --hero-accent: #E07A4F;
+}
+
+/* ====================================================
+   BASE
+==================================================== */
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'TsangerJinKai02', 'STKaiti', 'KaiTi', -apple-system, BlinkMacSystemFont, 'PingFang SC', sans-serif;
+  font-size: 15px;
+  line-height: 1.75;
+  letter-spacing: 0.5px;
+  -webkit-font-smoothing: subpixel-antialiased;
+  transition: background 0.25s ease, color 0.25s ease;
+}
+
+a { color: var(--text); text-decoration: none; transition: color .15s ease; }
+a:hover { color: var(--accent); }
+
+.mono { font-family: 'JetBrains Mono', 'SF Mono', Menlo, monospace; letter-spacing: 0; }
+
+/* ====================================================
+   HEADER
+==================================================== */
+.site-header {
+  border-bottom: 1px solid var(--border-soft);
+  padding: 1.1rem 0;
+  position: sticky;
+  top: 0;
+  background: color-mix(in srgb, var(--bg) 88%, transparent);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  z-index: 10;
+}
+
+.container { max-width: 720px; margin: 0 auto; padding: 0 1.5rem; }
+.container-wide { max-width: 1040px; margin: 0 auto; padding: 0 1.5rem; }
+
+.nav-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+}
+
+.brand {
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 600;
+  font-size: 0.95rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--text);
+}
+
+.brand-dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--accent);
+  display: inline-block;
+}
+
+.brand-dim { color: var(--text-dim); font-weight: 400; }
+
+nav.main-nav ul {
+  list-style: none; margin: 0; padding: 0;
+  display: flex; gap: 1.75rem;
+  align-items: center;
+}
+
+.nav-link {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.85rem;
+  color: var(--text-soft);
+  position: relative;
+  padding: 0.25rem 0;
+}
+.nav-link:hover { color: var(--text); }
+.nav-link.active { color: var(--accent); }
+.nav-link.active::after {
+  content: '';
+  position: absolute;
+  left: 0; right: 0; bottom: -0.35rem;
+  height: 1.5px; background: var(--accent);
+  border-radius: 1px;
+}
+
+.theme-toggle {
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--text-soft);
+  width: 34px; height: 34px;
+  border-radius: 8px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 0.5rem;
+  transition: all .15s ease;
+}
+.theme-toggle:hover { color: var(--accent); border-color: var(--accent); }
+.theme-toggle svg { width: 16px; height: 16px; }
+.theme-toggle .icon-dark { display: none; }
+[data-theme="dark"] .theme-toggle .icon-light { display: none; }
+[data-theme="dark"] .theme-toggle .icon-dark { display: inline; }
+
+/* ====================================================
+   HERO RIBBON
+==================================================== */
+.hero-ribbon {
+  background: var(--hero-bg);
+  color: var(--hero-text);
+  padding: 4rem 0 4.5rem;
+  position: relative;
+  overflow: hidden;
+  transition: background 0.25s ease;
+}
+
+.hero-inner {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+  position: relative;
+  z-index: 2;
+}
+
+.hero-eyebrow {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.78rem;
+  color: var(--hero-text-soft);
+  margin-bottom: 1.25rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  letter-spacing: 0;
+}
+.hero-eyebrow::before {
+  content: '';
+  width: 1.75rem; height: 1px;
+  background: var(--hero-accent);
+  display: inline-block;
+}
+
+.hero-quote-wrap {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.hero-quote {
+  font-family: 'TsangerJinKai02', 'STKaiti', 'KaiTi', serif;
+  font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  color: var(--hero-text);
+  margin: 0;
+  line-height: 1.5;
+  flex: 1;
+  min-width: 0;
+}
+
+.hero-quote-src {
+  font-family: 'TsangerJinKai02', serif;
+  font-size: 0.9rem;
+  color: var(--hero-text-soft);
+  margin-top: 1rem;
+  letter-spacing: 0.05em;
+}
+
+.quote-shuffle {
+  font-family: 'JetBrains Mono', monospace;
+  background: transparent;
+  border: 1px solid rgba(240, 233, 216, 0.20);
+  color: var(--hero-text-soft);
+  font-size: 0.7rem;
+  padding: 0.35rem 0.7rem;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: all .15s ease;
+  flex-shrink: 0;
+  letter-spacing: 0;
+}
+.quote-shuffle:hover {
+  color: var(--hero-accent);
+  border-color: var(--hero-accent);
+}
+
+.hero-canvas-placeholder {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 12% 25%, rgba(224, 122, 79, 0.10) 0, transparent 35%),
+    radial-gradient(circle at 88% 75%, rgba(240, 233, 216, 0.04) 0, transparent 50%);
+  z-index: 1;
+}
+
+.hero-canvas-note {
+  position: absolute;
+  bottom: 0.75rem; right: 1rem;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.68rem;
+  color: var(--hero-text-soft);
+  opacity: 0.45;
+  z-index: 2;
+}
+
+/* ====================================================
+   BIO BAND
+==================================================== */
+.bio-band {
+  border-bottom: 1px solid var(--border-soft);
+  padding: 2.5rem 0;
+}
+.bio-inner {
+  display: flex;
+  align-items: flex-start;
+  gap: 1.5rem;
+}
+.bio-avatar {
+  width: 64px; height: 64px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--accent), var(--accent-soft));
+  flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'TsangerJinKai02', serif;
+  font-size: 1.6rem;
+  font-weight: 500;
+  color: #FCFBF7;
+  letter-spacing: 0;
+}
+.bio-text { flex: 1; }
+.bio-name {
+  font-size: 1.15rem;
+  font-weight: 600;
+  margin: 0 0 0.25rem;
+  color: var(--text);
+}
+.bio-name-en {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.85rem;
+  color: var(--text-dim);
+  font-weight: 400;
+  margin-left: 0.5rem;
+  letter-spacing: 0;
+}
+.bio-desc {
+  color: var(--text-soft);
+  margin: 0;
+  font-size: 0.95rem;
+  line-height: 1.75;
+}
+.bio-desc .accent-word { color: var(--accent); }
+
+/* ====================================================
+   SECTIONS
+==================================================== */
+main { padding: 0 0 4rem; }
+.section { padding: 3rem 0 1rem; }
+
+.section-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid var(--border-soft);
+}
+.section-head h2 {
+  margin: 0;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--text-soft);
+  letter-spacing: 0;
+}
+.section-head h2::before {
+  content: '#';
+  color: var(--accent);
+  margin-right: 0.4rem;
+}
+.section-link {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.8rem;
+  color: var(--text-dim);
+  letter-spacing: 0;
+}
+.section-link:hover { color: var(--accent); }
+
+/* ====================================================
+   WRITING LIST — Zara-style card
+==================================================== */
+.month-block { margin-bottom: 2.5rem; }
+.month-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.72rem;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  margin: 0 0 1rem;
+}
+
+.post-list { list-style: none; padding: 0; margin: 0; }
+
+.post-card {
+  display: flex;
+  gap: 1.25rem;
+  padding: 1.25rem 0;
+  border-bottom: 1px solid var(--border-soft);
+  align-items: flex-start;
+  color: var(--text);
+}
+.post-card:last-child { border-bottom: none; }
+.post-card:hover .post-card-title { color: var(--accent); }
+
+.post-card-body {
+  flex: 1;
+  min-width: 0;
+}
+
+.post-card-title {
+  font-size: 1.15rem;
+  font-weight: 600;
+  margin: 0 0 0.35rem;
+  line-height: 1.4;
+  color: var(--text);
+  transition: color .15s ease;
+}
+
+.post-card-sub {
+  font-size: 0.95rem;
+  color: var(--text-soft);
+  margin: 0 0 0.75rem;
+  line-height: 1.55;
+}
+
+.post-card-meta {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.72rem;
+  color: var(--text-dim);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+.post-card-meta .meta-sep { margin: 0 0.5rem; opacity: 0.5; }
+
+.post-card-cover {
+  flex-shrink: 0;
+  width: 140px;
+  height: 92px;
+  border-radius: 6px;
+  background: var(--bg-soft);
+  border: 1px solid var(--border-soft);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.65rem;
+  color: var(--text-dim);
+  letter-spacing: 0.05em;
+  overflow: hidden;
+}
+
+/* 占位封面背景：渐变 + dot grid 暗示 */
+.post-card-cover.cover-1 { background: linear-gradient(135deg, #F5F0E6, #E8DFCB); }
+.post-card-cover.cover-2 { background: linear-gradient(135deg, #FAEDE3, #F4D9C3); }
+.post-card-cover.cover-3 { background: linear-gradient(135deg, #ECEFF0, #DDE3E5); }
+.post-card-cover.cover-4 { background: linear-gradient(135deg, #F0EBE0, #E5DCC4); }
+
+[data-theme="dark"] .post-card-cover {
+  background: var(--bg-soft);
+  color: var(--text-dim);
+}
+[data-theme="dark"] .post-card-cover.cover-1,
+[data-theme="dark"] .post-card-cover.cover-2,
+[data-theme="dark"] .post-card-cover.cover-3,
+[data-theme="dark"] .post-card-cover.cover-4 {
+  background: linear-gradient(135deg, #1F1D24, #2A2731);
+}
+
+/* ====================================================
+   PROJECTS GRID
+==================================================== */
+.project-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 1rem;
+}
+
+.project-card {
+  display: block;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 1.25rem 1.25rem 1.1rem;
+  transition: all .15s ease;
+}
+[data-theme="dark"] .project-card { background: var(--bg-soft); }
+
+.project-card:hover {
+  border-color: var(--accent);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px -12px rgba(193, 95, 60, 0.22);
+}
+
+.project-card-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.project-card-title {
+  font-weight: 600;
+  font-size: 1rem;
+  color: var(--text);
+}
+
+.project-card-status {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.7rem;
+  padding: 0.15rem 0.55rem;
+  border-radius: 999px;
+  text-transform: lowercase;
+  border: 1px solid transparent;
+  letter-spacing: 0;
+}
+.status-active     { background: rgba(193, 95, 60, 0.10); color: var(--accent); border-color: rgba(193, 95, 60, 0.25); }
+.status-experiment { background: rgba(120, 160, 100, 0.10); color: #5C8A4C; border-color: rgba(120, 160, 100, 0.25); }
+.status-archived   { background: rgba(139, 136, 129, 0.08); color: var(--text-dim); border-color: rgba(139, 136, 129, 0.15); }
+
+.project-card-tagline {
+  margin: 0.5rem 0 1rem;
+  color: var(--text-soft);
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
+
+.project-card-meta {
+  font-family: 'JetBrains Mono', monospace;
+  color: var(--text-dim);
+  font-size: 0.72rem;
+  letter-spacing: 0;
+}
+
+/* ====================================================
+   FOOTER
+==================================================== */
+.site-footer {
+  border-top: 1px solid var(--border-soft);
+  padding: 1.5rem 0;
+  margin-top: 3rem;
+}
+.footer-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.8rem;
+  color: var(--text-dim);
+  letter-spacing: 0;
+}
+.footer-links a { color: var(--text-soft); margin-left: 0.75rem; }
+.footer-links a:hover { color: var(--accent); }
+
+/* ====================================================
+   MOBILE
+==================================================== */
+@media (max-width: 600px) {
+  html, body { overflow-x: hidden; }
+  .nav-row { gap: 0.75rem; }
+  nav.main-nav ul { gap: 1rem; flex-wrap: wrap; }
+  .theme-toggle { margin-left: 0; }
+  .hero-ribbon { padding: 2.5rem 0 3rem; }
+  .hero-quote { font-size: 1.3rem; letter-spacing: 0.03em; }
+  .bio-inner { flex-direction: column; gap: 1rem; }
+  .bio-avatar { width: 56px; height: 56px; font-size: 1.4rem; }
+  .post-card { flex-direction: column-reverse; }
+  .post-card-cover { width: 100%; height: 160px; }
+}
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container-wide nav-row">
+    <a href="#" class="brand">
+      <span class="brand-dot"></span>
+      huasan<span class="brand-dim">.dev</span>
+    </a>
+    <nav class="main-nav">
+      <ul>
+        <li><a href="#" class="nav-link active">home</a></li>
+        <li><a href="#" class="nav-link">writing</a></li>
+        <li><a href="#" class="nav-link">projects</a></li>
+        <li><a href="#" class="nav-link">now</a></li>
+        <li><a href="#" class="nav-link">about</a></li>
+        <li>
+          <button class="theme-toggle" aria-label="Toggle theme" onclick="toggleTheme()">
+            <svg class="icon-light" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M5 5l1.5 1.5M17.5 17.5L19 19M5 19l1.5-1.5M17.5 6.5L19 5"/>
+            </svg>
+            <svg class="icon-dark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+            </svg>
+          </button>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<section class="hero-ribbon" id="hero">
+  <div class="hero-canvas-placeholder"></div>
+  <div class="hero-inner">
+    <div class="hero-eyebrow">huasan · 2026</div>
+    <div class="hero-quote-wrap">
+      <p class="hero-quote" id="quoteText">路漫漫其修遠兮，吾將上下而求索</p>
+      <button class="quote-shuffle" onclick="shuffleQuote()" aria-label="换一句">↻ 换一句</button>
+    </div>
+    <p class="hero-quote-src" id="quoteSrc">— 屈原《離騷》</p>
+  </div>
+  <div class="hero-canvas-note">[ 书法墨痕 canvas → v0.2 ]</div>
+</section>
+
+<section class="bio-band">
+  <div class="container bio-inner">
+    <div class="bio-avatar">画</div>
+    <div class="bio-text">
+      <h1 class="bio-name">画伞<span class="bio-name-en">huasan · INTJ · 深圳</span></h1>
+      <p class="bio-desc">
+        前腾讯教育销售，去年开始独立做事。
+        一半时间用 <span class="accent-word">AI</span> 写代码做小工具，
+        一半时间写公众号记录过程。
+        想试出"<span class="accent-word">一个人也能跑通</span>"的活法。
+      </p>
+    </div>
+  </div>
+</section>
+
+<main>
+  <div class="container">
+
+    <section class="section">
+      <header class="section-head">
+        <h2>writing</h2>
+        <a href="#" class="section-link">all posts →</a>
+      </header>
+
+      <div class="month-block">
+        <h3 class="month-label">May 2026</h3>
+        <ul class="post-list">
+          <li>
+            <a href="#" class="post-card">
+              <div class="post-card-body">
+                <h3 class="post-card-title">SkillFlow MVP 上线：从想法到第一个用户的 14 天</h3>
+                <p class="post-card-sub">把可视化 skill 编排做成可用的产品，是真的可以靠 AI coding 做到的事。</p>
+                <div class="post-card-meta">MAY 20 · 画伞</div>
+              </div>
+              <div class="post-card-cover cover-1">cover / 1</div>
+            </a>
+          </li>
+          <li>
+            <a href="#" class="post-card">
+              <div class="post-card-body">
+                <h3 class="post-card-title">前腾讯销冠转独立开发者，我学到的三件事</h3>
+                <p class="post-card-sub">销售背景在独立创业里的真实优势和真实陷阱。</p>
+                <div class="post-card-meta">MAY 10 · 画伞</div>
+              </div>
+              <div class="post-card-cover cover-2">cover / 2</div>
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="month-block">
+        <h3 class="month-label">April 2026</h3>
+        <ul class="post-list">
+          <li>
+            <a href="#" class="post-card">
+              <div class="post-card-body">
+                <h3 class="post-card-title">用 Claude Code 做 OPC（一人公司）的工作流</h3>
+                <p class="post-card-sub">把日常工作压缩到 4 小时的 Harness Engineering 实践。</p>
+                <div class="post-card-meta">APR 28 · 画伞</div>
+              </div>
+              <div class="post-card-cover cover-3">cover / 3</div>
+            </a>
+          </li>
+          <li>
+            <a href="#" class="post-card">
+              <div class="post-card-body">
+                <h3 class="post-card-title">第一笔 100 块：能做能卖的最小验证</h3>
+                <p class="post-card-sub">为口腔诊所做 AI 内容工作流，验证"能做 + 能卖"全链条。</p>
+                <div class="post-card-meta">APR 14 · 画伞</div>
+              </div>
+              <div class="post-card-cover cover-4">cover / 4</div>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="section">
+      <header class="section-head">
+        <h2>projects</h2>
+        <a href="#" class="section-link">all projects →</a>
+      </header>
+      <div class="project-grid">
+        <a href="#" class="project-card">
+          <div class="project-card-head">
+            <span class="project-card-title">SkillFlow</span>
+            <span class="project-card-status status-active">active</span>
+          </div>
+          <p class="project-card-tagline">让 Claude Code skill 工作流像 Figma 一样可视化编排</p>
+          <div class="project-card-meta">2026</div>
+        </a>
+        <a href="#" class="project-card">
+          <div class="project-card-head">
+            <span class="project-card-title">FloatTrans</span>
+            <span class="project-card-status status-active">active</span>
+          </div>
+          <p class="project-card-tagline">macOS 悬浮翻译，划词即出，键盘流体验</p>
+          <div class="project-card-meta">2026 · open source</div>
+        </a>
+        <a href="#" class="project-card">
+          <div class="project-card-head">
+            <span class="project-card-title">AI-Coding 基本功</span>
+            <span class="project-card-status status-experiment">experiment</span>
+          </div>
+          <p class="project-card-tagline">非技术背景的人怎么真正读懂 AI 写的代码</p>
+          <div class="project-card-meta">2026</div>
+        </a>
+        <a href="#" class="project-card">
+          <div class="project-card-head">
+            <span class="project-card-title">dental-content</span>
+            <span class="project-card-status status-archived">archived</span>
+          </div>
+          <p class="project-card-tagline">口腔诊所 AI 内容工作流（已验证能做能卖）</p>
+          <div class="project-card-meta">2026 · paid</div>
+        </a>
+      </div>
+    </section>
+
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="container-wide footer-row">
+    <span>画伞 · INTJ · 深圳</span>
+    <span class="footer-links">
+      <a href="#">github</a>
+      <a href="#">rss</a>
+      <a href="#">公众号</a>
+    </span>
+  </div>
+</footer>
+
+<script>
+  // ===== Quote pool: 古诗候选集 =====
+  // 数据驱动，未来可外置 JSON 或按文章 / 心境 / tag 推荐
+  const QUOTES = [
+    { text: "路漫漫其修遠兮，吾將上下而求索", src: "屈原《離騷》" },
+    { text: "千里之行，始於足下",           src: "老子《道德經》" },
+    { text: "學而時習之，不亦說乎",         src: "《論語·學而》" },
+    { text: "君子和而不同",                 src: "《論語·子路》" },
+    { text: "知己知彼，百戰不殆",           src: "《孫子兵法·謀攻》" },
+    { text: "兵者，國之大事",               src: "《孫子兵法·始計》" },
+    { text: "致廣大而盡精微",               src: "《中庸》" },
+    { text: "格物致知，知行合一",           src: "王陽明" },
+    { text: "獨善其身，兼濟天下",           src: "《孟子·盡心上》" },
+    { text: "不畏浮雲遮望眼，自緣身在最高層", src: "王安石《登飛來峰》" },
+  ];
+
+  let lastIdx = 0;
+  function shuffleQuote() {
+    let idx;
+    do { idx = Math.floor(Math.random() * QUOTES.length); }
+    while (idx === lastIdx && QUOTES.length > 1);
+    lastIdx = idx;
+    const q = QUOTES[idx];
+    const quoteEl = document.getElementById('quoteText');
+    const srcEl = document.getElementById('quoteSrc');
+    quoteEl.style.opacity = '0';
+    srcEl.style.opacity = '0';
+    setTimeout(() => {
+      quoteEl.textContent = q.text;
+      srcEl.textContent = '— ' + q.src;
+      quoteEl.style.transition = 'opacity 0.4s ease';
+      srcEl.style.transition = 'opacity 0.4s ease';
+      quoteEl.style.opacity = '1';
+      srcEl.style.opacity = '1';
+    }, 200);
+  }
+
+  // ===== Theme =====
+  const KEY = 'huasan-theme';
+  function setTheme(theme) {
+    document.documentElement.setAttribute('data-theme', theme);
+    try { localStorage.setItem(KEY, theme); } catch {}
+  }
+  function toggleTheme() {
+    const current = document.documentElement.getAttribute('data-theme') || 'light';
+    setTheme(current === 'light' ? 'dark' : 'light');
+  }
+  (function init() {
+    try {
+      const saved = localStorage.getItem(KEY);
+      if (saved) { setTheme(saved); return; }
+    } catch {}
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    setTheme(prefersDark ? 'dark' : 'light');
+  })();
+</script>
+
+</body>
+</html>

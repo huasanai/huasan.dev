@@ -1,0 +1,136 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const lastUpdated = '2026-05-25';
+
+const focuses = [
+  {
+    title: '把 SkillFlow 推到第一批真实用户',
+    body: '可视化 skill 编排的 MVP 已上线，下一步是从"我自己用"扩到 3-5 个外部用户，跑通反馈闭环。',
+  },
+  {
+    title: 'huasan.dev 的内容生产',
+    body: '建立"过程即内容"的稳定输出节奏，公众号 + 这个 blog 双轨；不追热点，记录真实工作。',
+  },
+  {
+    title: 'AI-Coding 基本功',
+    body: '把"非技术背景的人怎么读懂 AI 写的代码"做成一个长期实验，Python W1-6 周课程已启动。',
+  },
+];
+---
+
+<Layout title="now" description="画伞当前在做的事。">
+  <div class="container">
+    <header class="page-head">
+      <h1 class="page-title">now</h1>
+      <p class="page-desc">
+        当前在做的事。受 <a href="https://nownownow.com" target="_blank" rel="noopener">nownownow</a> 启发，不定期更新。
+      </p>
+      <p class="page-updated mono">last updated · {lastUpdated}</p>
+    </header>
+
+    <ul class="focus-list">
+      {
+        focuses.map((f, i) => (
+          <li class="focus-item">
+            <div class="focus-index mono">0{i + 1}</div>
+            <div class="focus-body">
+              <h3 class="focus-title">{f.title}</h3>
+              <p class="focus-text">{f.body}</p>
+            </div>
+          </li>
+        ))
+      }
+    </ul>
+
+    <section class="not-doing">
+      <h2 class="sub-title mono"># 暂时不做</h2>
+      <ul>
+        <li>接 1v1 咨询和外包（不卖时间）</li>
+        <li>追热点写"AI 速成"教程（不实践就不写）</li>
+        <li>同时开多条新产品线（一条没跑完不开第二条）</li>
+      </ul>
+    </section>
+  </div>
+
+  <style>
+    main { padding: 3rem 0 4rem; }
+    .page-head { margin-bottom: 2.5rem; }
+    .page-title {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 1.5rem;
+      font-weight: 500;
+      color: var(--text-soft);
+      margin: 0 0 0.5rem;
+      letter-spacing: 0;
+    }
+    .page-title::before { content: '#'; color: var(--accent); margin-right: 0.3rem; }
+    .page-desc { color: var(--text-soft); margin: 0; }
+    .page-updated {
+      font-size: 0.75rem;
+      color: var(--text-dim);
+      margin: 0.75rem 0 0;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    .focus-list {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 3rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    .focus-item {
+      display: flex;
+      gap: 1.25rem;
+      align-items: flex-start;
+      padding: 1.35rem 1.5rem;
+      background: var(--surface);
+      border: 1px solid var(--border-soft);
+      border-radius: 12px;
+      box-shadow: var(--shadow-card);
+    }
+    .focus-index {
+      font-size: 1.5rem;
+      color: var(--accent);
+      flex-shrink: 0;
+      font-weight: 500;
+      line-height: 1.4;
+    }
+    .focus-body { flex: 1; }
+    .focus-title { font-size: 1.1rem; font-weight: 600; margin: 0 0 0.4rem; line-height: 1.4; }
+    .focus-text {
+      color: var(--text-soft);
+      margin: 0;
+      font-size: 0.95rem;
+      line-height: 1.7;
+    }
+
+    .not-doing { margin-top: 2rem; }
+    .sub-title {
+      font-size: 0.95rem;
+      font-weight: 500;
+      color: var(--text-soft);
+      letter-spacing: 0;
+      margin: 0 0 1rem;
+    }
+    .not-doing ul {
+      list-style: none;
+      padding-left: 0;
+      color: var(--text-soft);
+    }
+    .not-doing li {
+      padding: 0.4rem 0;
+      padding-left: 1.5rem;
+      position: relative;
+    }
+    .not-doing li::before {
+      content: '—';
+      position: absolute;
+      left: 0;
+      color: var(--text-dim);
+    }
+  </style>
+</Layout>

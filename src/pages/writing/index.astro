@@ -1,0 +1,169 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+
+const posts = (await getCollection('writing', ({ data }) => !data.draft)).sort(
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+);
+
+function groupByMonth<T extends { data: { pubDate: Date } }>(items: T[]) {
+  const m = new Map<string, T[]>();
+  for (const p of items) {
+    const key = p.data.pubDate.toLocaleString('en-US', { month: 'long', year: 'numeric' });
+    if (!m.has(key)) m.set(key, []);
+    m.get(key)!.push(p);
+  }
+  return [...m.entries()];
+}
+
+function fmtMD(d: Date) {
+  return d.toLocaleString('en-US', { month: 'short', day: '2-digit' }).toUpperCase();
+}
+
+const grouped = groupByMonth(posts);
+const coverClasses = ['cover-1', 'cover-2', 'cover-3', 'cover-4'];
+---
+
+<Layout title="writing" description="画伞的写作：AI coding、独立创业、内容生产的过程记录。">
+  <div class="container">
+    <header class="page-head">
+      <h1 class="page-title">writing</h1>
+      <p class="page-desc">关于 AI coding、独立创业、内容生产工作流的过程记录。</p>
+    </header>
+
+    {
+      grouped.length === 0 ? (
+        <p class="empty">还没有文章。</p>
+      ) : (
+        grouped.map(([month, items]) => (
+          <div class="month-block">
+            <h3 class="month-label">{month}</h3>
+            <ul class="post-list">
+              {items.map((post, i) => (
+                <li>
+                  <a href={`/writing/${post.id}`} class="post-card">
+                    <div class="post-card-body">
+                      <h3 class="post-card-title">{post.data.title}</h3>
+                      {post.data.description && (
+                        <p class="post-card-sub">{post.data.description}</p>
+                      )}
+                      <div class="post-card-meta">
+                        {fmtMD(post.data.pubDate)} · 画伞
+                      </div>
+                    </div>
+                    <div class={`post-card-cover ${coverClasses[i % 4]}`}>cover</div>
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))
+      )
+    }
+  </div>
+
+  <style>
+    main { padding: 3rem 0 4rem; }
+    .page-head { margin-bottom: 2.5rem; }
+    .page-title {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 1.5rem;
+      font-weight: 500;
+      color: var(--text-soft);
+      margin: 0 0 0.5rem;
+      letter-spacing: 0;
+    }
+    .page-title::before {
+      content: '#';
+      color: var(--accent);
+      margin-right: 0.3rem;
+    }
+    .page-desc { color: var(--text-soft); margin: 0; }
+
+    .month-block { margin-bottom: 2rem; }
+    .month-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.72rem;
+      color: var(--text-dim);
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      margin: 0 0 0.85rem;
+      padding-left: 0.25rem;
+    }
+    .post-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 0.85rem;
+    }
+    .post-card {
+      display: flex;
+      gap: 1.25rem;
+      padding: 1.35rem 1.5rem;
+      background: var(--surface);
+      border: 1px solid var(--border-soft);
+      border-radius: 12px;
+      box-shadow: var(--shadow-card);
+      align-items: flex-start;
+      color: var(--text);
+      transition: transform .15s ease, box-shadow .15s ease, border-color .15s ease;
+    }
+    .post-card:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-card-hover);
+      border-color: var(--accent-soft);
+    }
+    .post-card:hover .post-card-title { color: var(--accent); }
+    .post-card-body { flex: 1; min-width: 0; }
+    .post-card-title {
+      font-size: 1.15rem;
+      font-weight: 600;
+      margin: 0 0 0.35rem;
+      line-height: 1.4;
+      color: var(--text);
+      transition: color .15s ease;
+    }
+    .post-card-sub {
+      font-size: 0.92rem;
+      color: var(--text-soft);
+      margin: 0 0 0.75rem;
+      line-height: 1.6;
+    }
+    .post-card-meta {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.72rem;
+      color: var(--text-dim);
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+    .post-card-cover {
+      flex-shrink: 0;
+      width: 140px;
+      height: 92px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.65rem;
+      color: var(--text-dim);
+      letter-spacing: 0.05em;
+      overflow: hidden;
+    }
+    .cover-1 { background: linear-gradient(135deg, #F5F0E6, #E8DFCB); }
+    .cover-2 { background: linear-gradient(135deg, #FAEDE3, #F4D9C3); }
+    .cover-3 { background: linear-gradient(135deg, #ECEFF0, #DDE3E5); }
+    .cover-4 { background: linear-gradient(135deg, #F0EBE0, #E5DCC4); }
+    :global([data-theme='dark']) .post-card-cover {
+      background: linear-gradient(135deg, #25232B, #2D2B33) !important;
+    }
+    .empty { color: var(--text-dim); }
+
+    @media (max-width: 600px) {
+      .post-card { flex-direction: column-reverse; padding: 1.25rem; }
+      .post-card-cover { width: 100%; height: 160px; }
+    }
+  </style>
+</Layout>

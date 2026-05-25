@@ -1,0 +1,122 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+
+const projects = (await getCollection('projects')).sort((a, b) => a.data.order - b.data.order);
+
+function groupByStatus<T extends { data: { status: string } }>(items: T[]) {
+  const order = ['active', 'experiment', 'paused', 'archived'];
+  const m = new Map<string, T[]>();
+  for (const p of items) {
+    const s = p.data.status;
+    if (!m.has(s)) m.set(s, []);
+    m.get(s)!.push(p);
+  }
+  return order.filter((s) => m.has(s)).map((s) => [s, m.get(s)!] as const);
+}
+
+const grouped = groupByStatus(projects);
+const statusLabel: Record<string, string> = {
+  active: 'active · 正在做',
+  experiment: 'experiment · 实验中',
+  paused: 'paused · 暂停',
+  archived: 'archived · 已归档',
+};
+---
+
+<Layout title="projects" description="画伞的项目展览：用 AI coding 做的小工具和实验。">
+  <div class="container">
+    <header class="page-head">
+      <h1 class="page-title">projects</h1>
+      <p class="page-desc">用 AI coding 做的小工具和实验。能跑能用，每个都解决一个我自己的真实问题。</p>
+    </header>
+
+    {
+      grouped.map(([status, items]) => (
+        <section class="status-block">
+          <h3 class="status-label">{statusLabel[status]}</h3>
+          <div class="project-grid">
+            {items.map((p) => (
+              <a href={`/projects/${p.id}`} class="project-card">
+                <div class="project-card-head">
+                  <span class="project-card-title">{p.data.title}</span>
+                </div>
+                <p class="project-card-tagline">{p.data.tagline}</p>
+                <div class="project-card-meta">
+                  {p.data.year}
+                  {p.data.repo && <span> · open source</span>}
+                </div>
+              </a>
+            ))}
+          </div>
+        </section>
+      ))
+    }
+  </div>
+
+  <style>
+    main { padding: 3rem 0 4rem; }
+    .page-head { margin-bottom: 2.5rem; }
+    .page-title {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 1.5rem;
+      font-weight: 500;
+      color: var(--text-soft);
+      margin: 0 0 0.5rem;
+      letter-spacing: 0;
+    }
+    .page-title::before { content: '#'; color: var(--accent); margin-right: 0.3rem; }
+    .page-desc { color: var(--text-soft); margin: 0; }
+
+    .status-block { margin-bottom: 2rem; }
+    .status-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.75rem;
+      color: var(--text-dim);
+      letter-spacing: 0.08em;
+      margin: 0 0 1rem;
+      padding-left: 0.25rem;
+      text-transform: lowercase;
+    }
+
+    .project-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 0.85rem;
+    }
+    .project-card {
+      display: block;
+      background: var(--surface);
+      border: 1px solid var(--border-soft);
+      border-radius: 12px;
+      padding: 1.25rem 1.25rem 1.1rem;
+      box-shadow: var(--shadow-card);
+      transition: all .15s ease;
+    }
+    .project-card:hover {
+      border-color: var(--accent-soft);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-card-hover);
+    }
+    .project-card:hover .project-card-title { color: var(--accent); }
+    .project-card-head { margin-bottom: 0.5rem; }
+    .project-card-title {
+      font-weight: 600;
+      font-size: 1.05rem;
+      color: var(--text);
+      transition: color .15s ease;
+    }
+    .project-card-tagline {
+      margin: 0.5rem 0 1rem;
+      color: var(--text-soft);
+      font-size: 0.9rem;
+      line-height: 1.6;
+    }
+    .project-card-meta {
+      font-family: 'JetBrains Mono', monospace;
+      color: var(--text-dim);
+      font-size: 0.72rem;
+      letter-spacing: 0;
+    }
+  </style>
+</Layout>

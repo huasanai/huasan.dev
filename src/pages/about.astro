@@ -1,0 +1,134 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="about" description="关于画伞：INTJ，前腾讯教育销售，独立开发者。">
+  <article class="container about">
+    <header class="page-head">
+      <h1 class="page-title">about</h1>
+    </header>
+
+    <section class="intro">
+      <div class="avatar">画</div>
+      <div class="intro-body">
+        <h2 class="intro-name">
+          画伞 <span class="mono name-en">huasan · INTJ · 深圳</span>
+        </h2>
+        <p class="intro-tag">前腾讯教育销售 → 独立开发者。一边用 AI 写代码，一边写公众号记录过程。</p>
+      </div>
+    </section>
+
+    <section class="prose">
+      <h2>我在做什么</h2>
+      <p>
+        前几年在腾讯做教育销售，带过 15 人团队，是销冠出身。
+        2025 年开始转独立，方向是 <strong>OPC（One Person Company，一人公司）</strong>—— 不雇人、不卖时间、不追融资，靠一组小工具和内容养活自己。
+      </p>
+      <p>
+        日常一半时间是写代码：用 Claude Code、Codex 这类 AI coding 工具做小工具，先解决我自己的问题，能跑能用之后再考虑开源或商业化。
+        另一半时间是写内容：把过程记下来，发在公众号和这个站上。
+      </p>
+
+      <h2>瓶颈在哪</h2>
+      <p>
+        能做（AI coding 能力够用）+ 能卖（销售背景）都不是问题。
+        真正的瓶颈是<strong>找到对的产品和对的用户</strong>——
+        这件事必须靠自己浸泡用户的混沌里慢慢长出来，不能用工具或方法论替代。
+      </p>
+
+      <h2>性格 / 工作方式</h2>
+      <ul>
+        <li>INTJ，独处充电，深度工作偏好极强</li>
+        <li>奥卡姆剃刀：能简单就不复杂，能少一层就少一层</li>
+        <li>小步快跑：v0.1 给真实用户，不行就换方向，不在脑子里推演</li>
+        <li>过程即内容：日常工作的副产品就是要发布的东西</li>
+      </ul>
+
+      <h2>联系</h2>
+      <p>
+        <a href="https://github.com/huasanai" target="_blank" rel="noopener">GitHub @huasanai</a>
+        ·
+        <span class="mono dim">公众号：画伞</span>
+      </p>
+    </section>
+  </article>
+
+  <style>
+    main { padding: 3rem 0 4rem; }
+    .about { max-width: 700px; }
+    .page-head { margin-bottom: 2rem; }
+    .page-title {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 1.5rem;
+      font-weight: 500;
+      color: var(--text-soft);
+      margin: 0;
+      letter-spacing: 0;
+    }
+    .page-title::before { content: '#'; color: var(--accent); margin-right: 0.3rem; }
+
+    .intro {
+      display: flex;
+      gap: 1.5rem;
+      align-items: center;
+      padding: 1.5rem;
+      background: var(--surface);
+      border: 1px solid var(--border-soft);
+      border-radius: 12px;
+      box-shadow: var(--shadow-card);
+      margin-bottom: 2.5rem;
+    }
+    .avatar {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent), var(--accent-soft));
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'TsangerJinKai02', serif;
+      font-size: 1.6rem;
+      font-weight: 500;
+      color: #FCFBF7;
+      letter-spacing: 0;
+    }
+    .intro-body { flex: 1; min-width: 0; }
+    .intro-name {
+      font-size: 1.15rem;
+      font-weight: 600;
+      margin: 0 0 0.25rem;
+    }
+    .name-en {
+      font-size: 0.8rem;
+      color: var(--text-dim);
+      font-weight: 400;
+      margin-left: 0.5rem;
+    }
+    .intro-tag {
+      color: var(--text-soft);
+      margin: 0;
+      font-size: 0.95rem;
+      line-height: 1.65;
+    }
+
+    .prose { font-size: 1rem; line-height: 1.85; }
+    .prose h2 {
+      font-size: 1.2rem;
+      margin: 2rem 0 0.75rem;
+      padding-top: 1rem;
+      border-top: 1px solid var(--border-soft);
+    }
+    .prose h2:first-of-type { padding-top: 0; border-top: none; margin-top: 0; }
+    .prose strong { color: var(--text); font-weight: 600; }
+    .prose ul { padding-left: 1.5rem; color: var(--text-soft); }
+    .prose li { margin: 0.35em 0; }
+    .prose a { color: var(--accent); }
+
+    .dim { color: var(--text-dim); }
+
+    @media (max-width: 600px) {
+      .intro { flex-direction: column; align-items: flex-start; }
+    }
+  </style>
+</Layout>
