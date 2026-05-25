@@ -227,6 +227,10 @@ const coverClasses = ['cover-1', 'cover-2', 'cover-3', 'cover-4'];
       justify-content: center;
       padding: 1.5rem;
     }
+    /* hidden 属性必须真正隐藏 picker，否则 backdrop 会拦截全页点击 */
+    .quote-picker[hidden] {
+      display: none;
+    }
     .quote-picker-backdrop {
       position: absolute;
       inset: 0;
