@@ -301,21 +301,25 @@ function fmtFull(d: Date) {
       border-radius: 999px;
     }
 
-    .post-body :global(.mermaid-svg) {
-      /* display:inline-block / vertical-align / 自然 pixel width 由 rehypeMermaidScroll 在 inline style 里写 */
-      /* 容器用 text-align:center 让 narrow 图居中；wide 图自然 overflow → 触发容器横向滚动 */
+    /* mermaid 客户端渲染前避免 FOUC（raw source 闪一下）*/
+    .post-body :global(.mermaid) {
+      color: transparent;
+      min-height: 60px;
+    }
+    .post-body :global(.mermaid[data-processed="true"]) {
+      color: inherit;
+      min-height: 0;
+    }
+
+    .post-body :global(.mermaid svg) {
+      display: inline-block;
       height: auto;
       margin: 0;
+      vertical-align: top;
     }
 
-    .post-body :global(.mermaid-svg foreignObject) {
-      overflow: visible;
-    }
-
-    /* htmlLabels=true 时节点文字走 foreignObject，给 line-height 让中文不挤 */
-    /* 不要强加 word-break/overflow-wrap —— 中文里那会让每个字单独成行 */
-    .post-body :global(.mermaid-svg foreignObject .nodeLabel),
-    .post-body :global(.mermaid-svg foreignObject .edgeLabel) {
+    .post-body :global(.mermaid svg foreignObject .nodeLabel),
+    .post-body :global(.mermaid svg foreignObject .edgeLabel) {
       line-height: 1.45;
     }
 

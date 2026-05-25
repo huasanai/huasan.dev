@@ -1,114 +1,49 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
 import expressiveCode from 'astro-expressive-code';
-import rehypeMermaid from 'rehype-mermaid';
 
-const MERMAID_VIEWBOX_PADDING = 32;
-
-function rehypeMermaidScroll() {
-  return (tree) => {
-    wrapMermaidSvgChildren(tree);
-  };
+/**
+ * Rehype plugin: convert ```mermaid code fences into <div class="mermaid">RAW SOURCE</div>
+ * so that the client-side mermaid script can render them in the user's actual browser
+ * (with the user's real CJK font), avoiding the SSR font-measurement mismatch that
+ * causes node-rect overflow when build-time renders use a non-CJK fallback.
+ */
+function rehypeMermaidToDiv() {
+  return (tree) => walk(tree);
 }
 
-function wrapMermaidSvgChildren(parent) {
+function walk(parent) {
   if (!parent || !Array.isArray(parent.children)) return;
-
   parent.children = parent.children.map((child) => {
-    if (isMermaidSvg(child)) {
-      usePaddedIntrinsicSvgSize(child);
-      allowForeignObjectOverflow(child);
-      child.properties.className = [
-        ...toClassList(child.properties.className),
-        'mermaid-svg',
-      ];
-
+    if (isMermaidPre(child)) {
+      const source = extractText(child).trim();
       return {
         type: 'element',
         tagName: 'div',
-        properties: { className: ['mermaid-scroll'] },
-        children: [child],
+        properties: { className: ['mermaid'] },
+        children: [{ type: 'text', value: source }],
       };
     }
-
-    wrapMermaidSvgChildren(child);
+    walk(child);
     return child;
   });
 }
 
-function isMermaidSvg(node) {
-  const id = node?.properties?.id;
-  return node?.type === 'element' && node.tagName === 'svg' && typeof id === 'string' && id.startsWith('mermaid-');
+function isMermaidPre(node) {
+  if (node?.type !== 'element' || node.tagName !== 'pre') return false;
+  const code = (node.children || []).find(
+    (c) => c?.type === 'element' && c.tagName === 'code'
+  );
+  if (!code) return false;
+  const classes = code.properties?.className;
+  const list = Array.isArray(classes) ? classes : classes ? [classes] : [];
+  return list.some((c) => c === 'language-mermaid');
 }
 
-function usePaddedIntrinsicSvgSize(svg) {
-  // 关键：保留 mermaid 自己设的 max-width 行为，只加 viewBox padding。
-  // 不要再硬写 width/height 像素属性 —— 那会让 SVG 失去响应式，溢出容器。
-  // 用 max-width(自然尺寸) + width:100% + height:auto：
-  //   narrow 图（单列）维持自然尺寸（CSS 再用 margin auto 居中）
-  //   wide 图自动缩到容器宽度
-  const viewBox = String(svg.properties.viewBox || svg.properties.viewbox || '');
-  const [x, y, width, height] = viewBox.split(/\s+/).map(Number);
-
-  let naturalWidth = null;
-
-  if (
-    Number.isFinite(x) &&
-    Number.isFinite(y) &&
-    Number.isFinite(width) &&
-    Number.isFinite(height) &&
-    width > 0 &&
-    height > 0
-  ) {
-    const paddedWidth = width + MERMAID_VIEWBOX_PADDING * 2;
-    const paddedHeight = height + MERMAID_VIEWBOX_PADDING * 2;
-    const paddedViewBox = [
-      x - MERMAID_VIEWBOX_PADDING,
-      y - MERMAID_VIEWBOX_PADDING,
-      paddedWidth,
-      paddedHeight,
-    ].join(' ');
-    svg.properties.viewBox = paddedViewBox;
-    svg.properties.viewbox = paddedViewBox;
-    naturalWidth = Math.ceil(paddedWidth);
-  }
-
-  // 删除任何旧的像素 width/height 属性，全部用 inline style 控制
-  delete svg.properties.width;
-  delete svg.properties.height;
-
-  // Obsidian 风格：SVG 保持自然尺寸（不缩小），容器横向可滚
-  // narrow 图（< 容器）→ inline-block + text-align:center 自动居中
-  // wide 图（> 容器）→ 容器 overflow-x:auto 横向滚动，文字清晰不被压
-  svg.properties.style = naturalWidth
-    ? `width: ${naturalWidth}px; height: auto; overflow: visible; display: inline-block; vertical-align: top;`
-    : 'overflow: visible; display: inline-block;';
-}
-
-function toClassList(value) {
-  if (Array.isArray(value)) return value;
-  if (typeof value === 'string') return value.split(/\s+/).filter(Boolean);
-  return [];
-}
-
-function allowForeignObjectOverflow(node) {
-  if (!node || node.type !== 'element') return;
-
-  if (String(node.tagName).toLowerCase() === 'foreignobject') {
-    node.properties = node.properties || {};
-    node.properties.style = appendStyle(node.properties.style, 'overflow: visible');
-  }
-
-  if (Array.isArray(node.children)) {
-    node.children.forEach(allowForeignObjectOverflow);
-  }
-}
-
-function appendStyle(value, declaration) {
-  const style = typeof value === 'string' ? value.trim() : '';
-  const property = declaration.split(':')[0].trim();
-  if (style.split(';').some((part) => part.trim().startsWith(`${property}:`))) return style;
-  return `${style ? `${style.replace(/;$/, '')}; ` : ''}${declaration};`;
+function extractText(node) {
+  if (node?.type === 'text') return node.value || '';
+  if (!Array.isArray(node?.children)) return '';
+  return node.children.map(extractText).join('');
 }
 
 export default defineConfig({
@@ -150,38 +85,9 @@ export default defineConfig({
     }),
   ],
   markdown: {
-    rehypePlugins: [
-      [
-        rehypeMermaid,
-        {
-          strategy: 'inline-svg',
-          colorScheme: 'light',
-          mermaidConfig: {
-            theme: 'base',
-            flowchart: {
-              htmlLabels: true,
-              useMaxWidth: true,
-              wrappingWidth: 220,
-              padding: 12,
-              nodeSpacing: 50,
-              rankSpacing: 60,
-              curve: 'basis',
-            },
-            themeVariables: {
-              background: '#FBF8F1',
-              primaryColor: '#F5EFE3',
-              primaryTextColor: '#2F2C27',
-              primaryBorderColor: '#D8C7AA',
-              lineColor: '#A9A095',
-              secondaryColor: '#FFF8EC',
-              tertiaryColor: '#F4E4D4',
-              fontFamily: 'Arial, sans-serif',
-            },
-          },
-        },
-      ],
-      rehypeMermaidScroll,
-    ],
+    // rehypeMermaidToDiv 必须在 expressive-code 之前生效，
+    // 把 mermaid 代码块改写成 div，这样 expressive-code 不会去高亮它
+    rehypePlugins: [rehypeMermaidToDiv],
   },
   build: {
     format: 'directory',

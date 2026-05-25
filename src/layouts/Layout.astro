@@ -138,6 +138,55 @@ function isActive(href: string) {
       });
     </script>
 
+    <script>
+      // 客户端渲染 mermaid —— 用用户真实浏览器的字体测量，
+      // 避免 SSR 字体缺失导致的节点 rect 测量错位（文字溢出 rect）
+      (async () => {
+        const blocks = document.querySelectorAll('.mermaid');
+        if (blocks.length === 0) return;
+
+        const { default: mermaid } = await import('mermaid');
+        mermaid.initialize({
+          startOnLoad: false,
+          securityLevel: 'loose',
+          theme: 'base',
+          themeVariables: {
+            background: '#FBF8F1',
+            primaryColor: '#F5EFE3',
+            primaryTextColor: '#2F2C27',
+            primaryBorderColor: '#D8C7AA',
+            lineColor: '#A9A095',
+            secondaryColor: '#FFF8EC',
+            tertiaryColor: '#F4E4D4',
+            fontFamily: "'TsangerJinKai02', 'STKaiti', 'KaiTi', 'PingFang SC', 'Hiragino Sans GB', sans-serif",
+          },
+          flowchart: {
+            htmlLabels: true,
+            useMaxWidth: false,   // 自然尺寸，由容器 overflow-x:auto 横向滚
+            wrappingWidth: 220,
+            padding: 14,
+            nodeSpacing: 50,
+            rankSpacing: 60,
+            curve: 'basis',
+          },
+        });
+
+        // 给每个 mermaid 块外包一层 .mermaid-scroll（CSS 里有 overflow-x:auto + 居中）
+        blocks.forEach((block) => {
+          const wrap = document.createElement('div');
+          wrap.className = 'mermaid-scroll';
+          block.parentNode.insertBefore(wrap, block);
+          wrap.appendChild(block);
+        });
+
+        try {
+          await mermaid.run({ querySelector: '.mermaid' });
+        } catch (e) {
+          console.error('mermaid render failed:', e);
+        }
+      })();
+    </script>
+
     <style>
       .site-header {
         border-bottom: 1px solid var(--border-soft);
