@@ -1,5 +1,6 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+import InkCanvas from '../../components/InkCanvas.astro';
 import Toc from '../../components/Toc.astro';
 import { getCollection, render } from 'astro:content';
 
@@ -13,6 +14,7 @@ export async function getStaticPaths() {
 
 const { post } = Astro.props;
 const { Content, headings } = await render(post);
+const heroTitle = post.data.title.includes('：') ? post.data.title.split('：')[0] : post.data.title;
 
 function fmtFull(d: Date) {
   return d.toLocaleString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
@@ -20,6 +22,14 @@ function fmtFull(d: Date) {
 ---
 
 <Layout title={post.data.title} description={post.data.description}>
+  <section class="post-hero" aria-label="文章主题">
+    <InkCanvas />
+    <div class="post-hero-inner">
+      <p class="post-hero-title">{heroTitle}</p>
+      {post.data.description && <p class="post-hero-sub">{post.data.description}</p>}
+    </div>
+  </section>
+
   <div class="writing-page">
     <div class="writing-shell">
       <article class="post-card post">
@@ -54,7 +64,45 @@ function fmtFull(d: Date) {
   <style>
     :global(main) {
       background: #f5f4ed;
-      padding: 2rem 0 4rem;
+      padding: 0 0 4rem;
+    }
+
+    .post-hero {
+      position: relative;
+      overflow: hidden;
+      min-height: 220px;
+      display: flex;
+      align-items: center;
+      background: var(--hero-bg);
+      color: var(--hero-text);
+      padding: 2.4rem 0 2.7rem;
+    }
+
+    .post-hero-inner {
+      width: min(860px, calc(100% - 3rem));
+      margin: 0 auto;
+      position: relative;
+      z-index: 2;
+      pointer-events: none;
+    }
+
+    .post-hero-title {
+      max-width: 760px;
+      margin: 0;
+      color: var(--hero-text);
+      font-size: clamp(1.55rem, 4vw, 2.6rem);
+      line-height: 1.35;
+      letter-spacing: 0;
+      font-weight: 500;
+    }
+
+    .post-hero-sub {
+      max-width: 680px;
+      margin: 0.95rem 0 0;
+      color: var(--hero-text-soft);
+      font-size: 0.98rem;
+      line-height: 1.7;
+      letter-spacing: 0.02em;
     }
 
     .writing-page {
@@ -72,7 +120,7 @@ function fmtFull(d: Date) {
       --post-toc-text: rgba(36, 41, 47, 0.62);
       --post-toc-child: rgba(36, 41, 47, 0.48);
       color: var(--post-text);
-      padding: 0 1rem;
+      padding: 2rem 1rem 0;
     }
 
     .writing-shell {
@@ -258,6 +306,11 @@ function fmtFull(d: Date) {
       max-width: none;
       height: auto;
       margin: 0;
+      overflow: visible;
+    }
+
+    .post-body :global(.mermaid-svg foreignObject) {
+      overflow: visible;
     }
 
     .post-footer {
@@ -277,11 +330,11 @@ function fmtFull(d: Date) {
 
     @media (min-width: 768px) {
       :global(main) {
-        padding: 3rem 0 4.5rem;
+        padding-bottom: 4.5rem;
       }
 
       .writing-page {
-        padding: 0 1.5rem;
+        padding: 3rem 1.5rem 0;
       }
 
       .post-card {
@@ -308,8 +361,21 @@ function fmtFull(d: Date) {
     }
 
     @media (max-width: 600px) {
+      .post-hero {
+        min-height: 180px;
+        padding: 1.8rem 0 2rem;
+      }
+
+      .post-hero-inner {
+        width: min(100% - 2rem, 860px);
+      }
+
+      .post-hero-title {
+        font-size: 1.35rem;
+      }
+
       .writing-page {
-        padding: 0;
+        padding: 1.5rem 0 0;
       }
 
       .post-card {

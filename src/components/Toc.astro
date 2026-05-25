@@ -42,10 +42,10 @@ for (const heading of items) {
           <ul class="toc-list">
             {
               tree.map((heading) => (
-                <li class:list={['toc-node', `toc-depth-${heading.depth}`, { 'has-children': heading.children.length > 0 }]}>
+                <li class:list={['toc-node', `toc-depth-${heading.depth}`, { 'has-children': heading.children.length > 0, collapsed: heading.children.length > 0 }]}>
                   <div class="toc-row">
                     {heading.children.length > 0 ? (
-                      <button class="toc-toggle" type="button" aria-expanded="true" aria-label={`折叠 ${heading.text}`} data-toc-toggle>
+                      <button class="toc-toggle" type="button" aria-expanded="false" aria-label={`展开 ${heading.text}`} data-toc-toggle>
                         <span aria-hidden="true">›</span>
                       </button>
                     ) : (
@@ -58,10 +58,10 @@ for (const heading of items) {
                   {heading.children.length > 0 && (
                     <ul class="toc-children">
                       {heading.children.map((child) => (
-                        <li class:list={['toc-node', `toc-depth-${child.depth}`, { 'has-children': child.children.length > 0 }]}>
+                        <li class:list={['toc-node', `toc-depth-${child.depth}`, { 'has-children': child.children.length > 0, collapsed: child.children.length > 0 }]}>
                           <div class="toc-row">
                             {child.children.length > 0 ? (
-                              <button class="toc-toggle" type="button" aria-expanded="true" aria-label={`折叠 ${child.text}`} data-toc-toggle>
+                              <button class="toc-toggle" type="button" aria-expanded="false" aria-label={`展开 ${child.text}`} data-toc-toggle>
                                 <span aria-hidden="true">›</span>
                               </button>
                             ) : (
@@ -101,6 +101,8 @@ for (const heading of items) {
 
 <script>
   const tocLinks = Array.from(document.querySelectorAll<HTMLAnchorElement>('[data-toc-link]'));
+  const tocNodes = Array.from(document.querySelectorAll<HTMLElement>('.toc-node'));
+  const tocInner = document.querySelector<HTMLElement>('.toc-inner');
   const headings = tocLinks
     .map((link) => {
       const id = link.dataset.tocLink;
@@ -110,9 +112,40 @@ for (const heading of items) {
     .filter((item): item is { id: string; link: HTMLAnchorElement; target: HTMLElement } => Boolean(item));
 
   const setActive = (id: string) => {
+    const activeLink = tocLinks.find((link) => link.dataset.tocLink === id);
+
     tocLinks.forEach((link) => {
       link.classList.toggle('active', link.dataset.tocLink === id);
     });
+
+    tocNodes.forEach((node) => {
+      node.classList.remove('active-branch');
+    });
+
+    let node = activeLink?.closest<HTMLElement>('.toc-node');
+    while (node) {
+      node.classList.add('active-branch');
+      node = node.parentElement?.closest<HTMLElement>('.toc-node') || null;
+    }
+
+    if (activeLink && tocInner && activeLink.offsetParent !== null) {
+      activeLink.scrollIntoView({ block: 'nearest' });
+    }
+  };
+
+  const computeActiveHeading = () => {
+    if (headings.length === 0) return;
+
+    const pivot = Math.max(96, window.innerHeight * 0.22);
+    let activeId = headings[0].id;
+
+    headings.forEach(({ id, target }) => {
+      if (target.getBoundingClientRect().top <= pivot) {
+        activeId = id;
+      }
+    });
+
+    setActive(activeId);
   };
 
   tocLinks.forEach((link) => {
@@ -140,24 +173,19 @@ for (const heading of items) {
   });
 
   if (headings.length > 0) {
-    setActive(headings[0].id);
+    let ticking = false;
+    const requestActiveUpdate = () => {
+      if (ticking) return;
+      ticking = true;
+      window.requestAnimationFrame(() => {
+        computeActiveHeading();
+        ticking = false;
+      });
+    };
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const visible = entries
-          .filter((entry) => entry.isIntersecting)
-          .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top);
-
-        const first = visible[0]?.target as HTMLElement | undefined;
-        if (first?.id) setActive(first.id);
-      },
-      {
-        rootMargin: '-96px 0px -65% 0px',
-        threshold: [0, 1],
-      }
-    );
-
-    headings.forEach(({ target }) => observer.observe(target));
+    computeActiveHeading();
+    window.addEventListener('scroll', requestActiveUpdate, { passive: true });
+    window.addEventListener('resize', requestActiveUpdate);
   }
 </script>
 
@@ -169,14 +197,14 @@ for (const heading of items) {
   @media (min-width: 1024px) {
     .toc {
       display: block;
-      align-self: start;
+      align-self: stretch;
       min-width: 0;
     }
 
     .toc-inner {
       position: sticky;
-      top: 92px;
-      max-height: calc(100vh - 120px);
+      top: 76px;
+      max-height: calc(100vh - 92px);
       overflow: auto;
       padding: 0.25rem 0 0.25rem 1rem;
       border-left: 1px solid var(--post-border-soft);
@@ -258,6 +286,11 @@ for (const heading of items) {
 
     .toc a:hover {
       color: var(--post-text);
+    }
+
+    .toc-node.active-branch > .toc-row > a {
+      color: var(--post-accent);
+      background: rgba(224, 123, 61, 0.07);
     }
 
     .toc a.active {
