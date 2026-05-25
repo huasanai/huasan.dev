@@ -1,6 +1,10 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+import HeroQuote from '../../components/HeroQuote.astro';
+import { PAGE_POOLS } from '../../lib/quotes';
 import { getCollection } from 'astro:content';
+
+const heroPool = PAGE_POOLS.writing;
 
 const posts = (await getCollection('writing', ({ data }) => !data.draft)).sort(
   (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
@@ -25,6 +29,7 @@ const coverClasses = ['cover-1', 'cover-2', 'cover-3', 'cover-4'];
 ---
 
 <Layout title="writing" description="画伞的写作：AI coding、独立创业、内容生产的过程记录。">
+  <HeroQuote current={heroPool.current} pool={heroPool.pool} />
   <div class="container">
     <header class="page-head">
       <h1 class="page-title">writing</h1>

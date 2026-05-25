@@ -1,8 +1,13 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import HeroQuote from '../components/HeroQuote.astro';
+import { PAGE_POOLS } from '../lib/quotes';
+
+const heroPool = PAGE_POOLS.about;
 ---
 
 <Layout title="about" description="关于画伞：INTJ，前腾讯教育销售，独立开发者。">
+  <HeroQuote current={heroPool.current} pool={heroPool.pool} />
   <article class="container about">
     <header class="page-head">
       <h1 class="page-title">about</h1>

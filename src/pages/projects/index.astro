@@ -1,6 +1,10 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+import HeroQuote from '../../components/HeroQuote.astro';
+import { PAGE_POOLS } from '../../lib/quotes';
 import { getCollection } from 'astro:content';
+
+const heroPool = PAGE_POOLS.projects;
 
 const projects = (await getCollection('projects')).sort((a, b) => a.data.order - b.data.order);
 
@@ -25,6 +29,7 @@ const statusLabel: Record<string, string> = {
 ---
 
 <Layout title="projects" description="画伞的项目展览：用 AI coding 做的小工具和实验。">
+  <HeroQuote current={heroPool.current} pool={heroPool.pool} />
   <div class="container">
     <header class="page-head">
       <h1 class="page-title">projects</h1>

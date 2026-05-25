@@ -1,5 +1,9 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import HeroQuote from '../components/HeroQuote.astro';
+import { PAGE_POOLS } from '../lib/quotes';
+
+const heroPool = PAGE_POOLS.now;
 
 const lastUpdated = '2026-05-25';
 
@@ -20,6 +24,7 @@ const focuses = [
 ---
 
 <Layout title="now" description="画伞当前在做的事。">
+  <HeroQuote current={heroPool.current} pool={heroPool.pool} />
   <div class="container">
     <header class="page-head">
       <h1 class="page-title">now</h1>
