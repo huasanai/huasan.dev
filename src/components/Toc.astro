@@ -10,46 +10,85 @@ interface Props {
 }
 
 const { headings } = Astro.props;
-const items = headings.filter((heading) => heading.depth === 2 || heading.depth === 3);
+const items = headings.filter((heading) => heading.depth >= 2 && heading.depth <= 4);
 
-const grouped = items.reduce<Array<Heading & { children: Heading[] }>>((acc, heading) => {
-  if (heading.depth === 2 || acc.length === 0) {
-    acc.push({ ...heading, children: [] });
-    return acc;
+type TocNode = Heading & { children: TocNode[] };
+
+const tree: TocNode[] = [];
+const stack: TocNode[] = [];
+
+for (const heading of items) {
+  const node = { ...heading, children: [] };
+
+  while (stack.length > 0 && stack[stack.length - 1].depth >= node.depth) {
+    stack.pop();
   }
 
-  acc[acc.length - 1].children.push(heading);
-  return acc;
-}, []);
+  if (stack.length === 0) {
+    tree.push(node);
+  } else {
+    stack[stack.length - 1].children.push(node);
+  }
+
+  stack.push(node);
+}
 ---
 
 {
-  grouped.length > 0 && (
+  tree.length > 0 && (
     <aside class="toc" aria-label="文章目录">
       <div class="toc-inner">
         <nav class="toc-nav">
-          <ul>
+          <ul class="toc-list">
             {
-              grouped.map((heading) => (
-                <li>
-                  <a href={`#${heading.slug}`} data-toc-link={heading.slug}>
-                    {heading.text}
-                  </a>
-                  {
-                    heading.children.length > 0 && (
-                      <ul>
-                        {
-                          heading.children.map((child) => (
-                            <li>
-                              <a class="toc-child" href={`#${child.slug}`} data-toc-link={child.slug}>
-                                {child.text}
-                              </a>
-                            </li>
-                          ))
-                        }
-                      </ul>
-                    )
-                  }
+              tree.map((heading) => (
+                <li class:list={['toc-node', `toc-depth-${heading.depth}`, { 'has-children': heading.children.length > 0 }]}>
+                  <div class="toc-row">
+                    {heading.children.length > 0 ? (
+                      <button class="toc-toggle" type="button" aria-expanded="true" aria-label={`折叠 ${heading.text}`} data-toc-toggle>
+                        <span aria-hidden="true">›</span>
+                      </button>
+                    ) : (
+                      <span class="toc-toggle-spacer"></span>
+                    )}
+                    <a href={`#${heading.slug}`} data-toc-link={heading.slug}>
+                      {heading.text}
+                    </a>
+                  </div>
+                  {heading.children.length > 0 && (
+                    <ul class="toc-children">
+                      {heading.children.map((child) => (
+                        <li class:list={['toc-node', `toc-depth-${child.depth}`, { 'has-children': child.children.length > 0 }]}>
+                          <div class="toc-row">
+                            {child.children.length > 0 ? (
+                              <button class="toc-toggle" type="button" aria-expanded="true" aria-label={`折叠 ${child.text}`} data-toc-toggle>
+                                <span aria-hidden="true">›</span>
+                              </button>
+                            ) : (
+                              <span class="toc-toggle-spacer"></span>
+                            )}
+                            <a href={`#${child.slug}`} data-toc-link={child.slug}>
+                              {child.text}
+                            </a>
+                          </div>
+                          {child.children.length > 0 && (
+                            <ul class="toc-children">
+                              {child.children.map((grandchild) => (
+                                <li class={`toc-node toc-depth-${grandchild.depth}`}>
+                                  <div class="toc-row">
+                                    <span class="toc-toggle-spacer"></span>
+                                    <a href={`#${grandchild.slug}`} data-toc-link={grandchild.slug}>
+                                      {grandchild.text}
+                                    </a>
+                                  </div>
+                                </li>
+                              ))}
+                            </ul>
+                          )}
+                        </li>
+                      ))}
+                    </ul>
+                  )}
                 </li>
               ))
             }
@@ -86,6 +125,17 @@ const grouped = items.reduce<Array<Heading & { children: Heading[] }>>((acc, hea
       target.scrollIntoView({ behavior: 'smooth', block: 'start' });
       history.replaceState(null, '', `#${id}`);
       setActive(id);
+    });
+  });
+
+  document.querySelectorAll<HTMLButtonElement>('[data-toc-toggle]').forEach((button) => {
+    button.addEventListener('click', () => {
+      const node = button.closest('.toc-node');
+      if (!node) return;
+
+      const collapsed = node.classList.toggle('collapsed');
+      button.setAttribute('aria-expanded', String(!collapsed));
+      button.setAttribute('aria-label', `${collapsed ? '展开' : '折叠'} ${node.querySelector('a')?.textContent?.trim() || ''}`);
     });
   });
 
@@ -143,8 +193,57 @@ const grouped = items.reduce<Array<Heading & { children: Heading[] }>>((acc, hea
       padding: 0;
     }
 
+    .toc-row {
+      display: flex;
+      align-items: center;
+      gap: 0.1rem;
+      min-width: 0;
+    }
+
+    .toc-toggle,
+    .toc-toggle-spacer {
+      flex: 0 0 1rem;
+      width: 1rem;
+      height: 1.45rem;
+    }
+
+    .toc-toggle {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0;
+      border: 0;
+      border-radius: 4px;
+      background: transparent;
+      color: var(--post-toc-child);
+      cursor: pointer;
+    }
+
+    .toc-toggle:hover {
+      color: var(--post-accent);
+      background: var(--post-code-bg);
+    }
+
+    .toc-toggle span {
+      display: block;
+      transform: rotate(90deg);
+      transition: transform 0.15s ease;
+      font-size: 0.95rem;
+      line-height: 1;
+    }
+
+    .toc-node.collapsed > .toc-row .toc-toggle span {
+      transform: rotate(0deg);
+    }
+
+    .toc-node.collapsed > .toc-children {
+      display: none;
+    }
+
     .toc a {
       display: block;
+      min-width: 0;
+      flex: 1 1 auto;
       padding: 0.32rem 0.35rem;
       border-radius: 8px;
       color: var(--post-toc-text);
@@ -167,13 +266,26 @@ const grouped = items.reduce<Array<Heading & { children: Heading[] }>>((acc, hea
       font-weight: 600;
     }
 
-    .toc a.toc-child {
-      padding-left: 1rem;
+    .toc-depth-3 > .toc-row {
+      padding-left: 0.55rem;
+    }
+
+    .toc-depth-4 > .toc-row {
+      padding-left: 1.1rem;
+    }
+
+    .toc-depth-3 a,
+    .toc-depth-4 a {
       color: var(--post-toc-child);
       font-size: 0.75rem;
     }
 
-    .toc a.toc-child.active {
+    .toc-depth-4 a {
+      font-size: 0.72rem;
+    }
+
+    .toc-depth-3 a.active,
+    .toc-depth-4 a.active {
       color: var(--post-accent);
     }
   }

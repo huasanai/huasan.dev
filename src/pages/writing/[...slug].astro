@@ -226,16 +226,38 @@ function fmtFull(d: Date) {
       margin: 0;
     }
 
-    .post-body :global(svg[id^='mermaid']) {
+    .post-body :global(.mermaid-scroll) {
       display: block;
-      width: 100%;
       max-width: 100%;
-      height: auto;
       margin: 1.5rem auto;
       padding: 1rem;
+      overflow-x: auto;
+      overflow-y: hidden;
       border: 1px solid var(--post-border-soft);
       border-radius: 8px;
       background: #fbf8f1;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .post-body :global(.mermaid-scroll::-webkit-scrollbar) {
+      height: 8px;
+    }
+
+    .post-body :global(.mermaid-scroll::-webkit-scrollbar-track) {
+      background: #f2e9da;
+      border-radius: 999px;
+    }
+
+    .post-body :global(.mermaid-scroll::-webkit-scrollbar-thumb) {
+      background: rgba(193, 95, 60, 0.34);
+      border-radius: 999px;
+    }
+
+    .post-body :global(.mermaid-svg) {
+      display: block;
+      max-width: none;
+      height: auto;
+      margin: 0;
     }
 
     .post-footer {

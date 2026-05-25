@@ -3,6 +3,59 @@ import { defineConfig } from 'astro/config';
 import expressiveCode from 'astro-expressive-code';
 import rehypeMermaid from 'rehype-mermaid';
 
+function rehypeMermaidScroll() {
+  return (tree) => {
+    wrapMermaidSvgChildren(tree);
+  };
+}
+
+function wrapMermaidSvgChildren(parent) {
+  if (!parent || !Array.isArray(parent.children)) return;
+
+  parent.children = parent.children.map((child) => {
+    if (isMermaidSvg(child)) {
+      useIntrinsicSvgSize(child);
+      child.properties.className = [
+        ...toClassList(child.properties.className),
+        'mermaid-svg',
+      ];
+
+      return {
+        type: 'element',
+        tagName: 'div',
+        properties: { className: ['mermaid-scroll'] },
+        children: [child],
+      };
+    }
+
+    wrapMermaidSvgChildren(child);
+    return child;
+  });
+}
+
+function isMermaidSvg(node) {
+  const id = node?.properties?.id;
+  return node?.type === 'element' && node.tagName === 'svg' && typeof id === 'string' && id.startsWith('mermaid-');
+}
+
+function useIntrinsicSvgSize(svg) {
+  const viewBox = String(svg.properties.viewBox || '');
+  const [, , width, height] = viewBox.split(/\s+/).map(Number);
+
+  if (Number.isFinite(width) && Number.isFinite(height) && width > 0 && height > 0) {
+    svg.properties.width = String(Math.ceil(width));
+    svg.properties.height = String(Math.ceil(height));
+  }
+
+  delete svg.properties.style;
+}
+
+function toClassList(value) {
+  if (Array.isArray(value)) return value;
+  if (typeof value === 'string') return value.split(/\s+/).filter(Boolean);
+  return [];
+}
+
 export default defineConfig({
   site: 'https://huasan.dev',
   trailingSlash: 'never',
@@ -63,6 +116,7 @@ export default defineConfig({
           },
         },
       ],
+      rehypeMermaidScroll,
     ],
   },
   build: {
