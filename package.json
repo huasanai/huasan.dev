@@ -12,6 +12,11 @@
     "astro": "astro"
   },
   "dependencies": {
-    "astro": "^6.3.7"
+    "astro": "^6.3.7",
+    "astro-expressive-code": "^0.42.0"
+  },
+  "devDependencies": {
+    "playwright": "^1.60.0",
+    "rehype-mermaid": "^3.0.0"
   }
 }

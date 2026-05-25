@@ -1,13 +1,12 @@
 ---
 title: 'prompt → skills → harness → OPC：我的 AI 实践与思考'
 description: 普通人学习 AI 的技术路线，如何进一步长成自己的 AI-native Founder OS。
+cover: /images/writing/prompt-skills-harness-opc/cover.png
 pubDate: 2026-05-25
 updatedDate: 2026-05-25
 draft: false
 tags: [ai-coding, prompt, skills, harness, opc, founder-os]
 ---
-
-![](/images/writing/prompt-skills-harness-opc/cover.png)
 
 **普通人学习 AI 的技术路线，如何进一步长成自己的 AI-native Founder OS。**
 

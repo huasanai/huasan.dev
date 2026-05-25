@@ -1,5 +1,6 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+import Toc from '../../components/Toc.astro';
 import { getCollection, render } from 'astro:content';
 
 export async function getStaticPaths() {
@@ -11,7 +12,7 @@ export async function getStaticPaths() {
 }
 
 const { post } = Astro.props;
-const { Content } = await render(post);
+const { Content, headings } = await render(post);
 
 function fmtFull(d: Date) {
   return d.toLocaleString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
@@ -19,95 +20,286 @@ function fmtFull(d: Date) {
 ---
 
 <Layout title={post.data.title} description={post.data.description}>
-  <article class="container post">
-    <header class="post-header">
-      <div class="post-meta">
-        <span class="mono date">{fmtFull(post.data.pubDate)}</span>
-        <span class="mono author">画伞</span>
-        {post.data.tags.length > 0 && (
-          <span class="post-tags">
-            {post.data.tags.map((tag: string) => <span class="tag mono">#{tag}</span>)}
-          </span>
-        )}
-      </div>
-      <h1>{post.data.title}</h1>
-      {post.data.description && <p class="post-desc">{post.data.description}</p>}
-    </header>
+  <div class="writing-page">
+    <div class="writing-shell">
+      <article class="post-card post">
+        <header class="post-header">
+          {post.data.cover && <img class="post-cover" src={post.data.cover} alt="" />}
+          <div class="post-meta">
+            <span class="mono date">{fmtFull(post.data.pubDate)}</span>
+            <span class="mono author">画伞</span>
+            {post.data.tags.length > 0 && (
+              <span class="post-tags">
+                {post.data.tags.map((tag: string) => <span class="tag mono">#{tag}</span>)}
+              </span>
+            )}
+          </div>
+          <h1>{post.data.title}</h1>
+          {post.data.description && <p class="post-desc">{post.data.description}</p>}
+        </header>
 
-    <div class="post-body">
-      <Content />
+        <div class="post-body">
+          <Content />
+        </div>
+
+        <footer class="post-footer">
+          <a href="/writing" class="mono back-link">← back to writing</a>
+        </footer>
+      </article>
+
+      <Toc headings={headings} />
     </div>
-
-    <footer class="post-footer">
-      <a href="/writing" class="mono back-link">← back to writing</a>
-    </footer>
-  </article>
+  </div>
 
   <style>
-    main { padding: 3rem 0 4rem; }
-    .post { max-width: 700px; }
+    :global(main) {
+      background: #f5f4ed;
+      padding: 2rem 0 4rem;
+    }
+
+    .writing-page {
+      --post-page-bg: #f5f4ed;
+      --post-card-bg: #fffdfa;
+      --post-text: rgba(36, 41, 47, 0.92);
+      --post-text-soft: rgba(36, 41, 47, 0.68);
+      --post-text-dim: rgba(36, 41, 47, 0.46);
+      --post-border-soft: #e8e0ca;
+      --post-shadow: 0 1px 2px rgba(31, 30, 27, 0.04), 0 18px 48px -32px rgba(31, 30, 27, 0.24);
+      --post-accent: #c15f3c;
+      --post-accent-strong: #a94622;
+      --post-code-bg: rgba(224, 123, 61, 0.1);
+      --post-code-border: rgba(224, 123, 61, 0.18);
+      --post-toc-text: rgba(36, 41, 47, 0.62);
+      --post-toc-child: rgba(36, 41, 47, 0.48);
+      color: var(--post-text);
+      padding: 0 1rem;
+    }
+
+    .writing-shell {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      gap: 1.5rem;
+      max-width: 1140px;
+      margin: 0 auto;
+    }
+
+    .post-card {
+      width: 100%;
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 1rem 1rem 2.5rem;
+      background: var(--post-card-bg);
+      border: 1px solid rgba(232, 224, 202, 0.78);
+      border-radius: 8px;
+      box-shadow: var(--post-shadow);
+    }
+
     .post-header {
       margin-bottom: 2.5rem;
       padding-bottom: 1.5rem;
-      border-bottom: 1px solid var(--border-soft);
+      border-bottom: 1px solid var(--post-border-soft);
     }
+
+    .post-cover {
+      display: block;
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      object-fit: cover;
+      margin: 0 0 1.7rem;
+      border-radius: 6px;
+      border: 1px solid rgba(232, 224, 202, 0.72);
+      background: #f5efe3;
+    }
+
     .post-meta {
       display: flex;
       gap: 1rem;
-      color: var(--text-dim);
-      font-size: 0.85rem;
+      color: var(--post-text-dim);
+      font-size: 0.78rem;
       margin-bottom: 1rem;
       flex-wrap: wrap;
       text-transform: uppercase;
       letter-spacing: 0.05em;
     }
-    .post-tags { display: flex; gap: 0.5rem; }
-    .tag { color: var(--accent-soft); text-transform: lowercase; letter-spacing: 0; }
+
+    .post-tags {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+
+    .tag {
+      color: var(--post-accent-strong);
+      text-transform: lowercase;
+      letter-spacing: 0;
+    }
+
     .post h1 {
-      font-size: 2rem;
+      font-size: clamp(1.75rem, 4vw, 2.45rem);
       margin: 0;
       letter-spacing: 0;
-      line-height: 1.3;
+      line-height: 1.25;
+      color: var(--post-text);
     }
+
     .post-desc {
-      color: var(--text-soft);
+      color: var(--post-text-soft);
       font-size: 1.05rem;
       margin: 1rem 0 0;
     }
+
     .post-body {
       font-size: 1rem;
-      line-height: 1.85;
+      line-height: 1.88;
     }
+
+    .post-body :global(h2),
+    .post-body :global(h3) {
+      scroll-margin-top: 96px;
+    }
+
     .post-body :global(h2) {
       font-size: 1.4rem;
-      margin: 2.5rem 0 1rem;
-      padding-top: 1rem;
-      border-top: 1px solid var(--border-soft);
+      margin: 2.6rem 0 1rem;
+      padding-top: 1.1rem;
+      border-top: 1px solid var(--post-border-soft);
+      color: var(--post-text);
     }
+
     .post-body :global(h3) {
       font-size: 1.15rem;
       margin: 2rem 0 0.75rem;
+      color: var(--post-text);
     }
+
+    .post-body :global(p),
+    .post-body :global(li) {
+      color: var(--post-text);
+    }
+
+    .post-body :global(a) {
+      color: var(--post-accent-strong);
+      border-bottom: 1px dotted rgba(193, 95, 60, 0.42);
+    }
+
+    .post-body :global(a:hover) {
+      border-bottom-style: solid;
+    }
+
     .post-body :global(img) {
       max-width: 100%;
       height: auto;
-      border-radius: 10px;
+      border-radius: 8px;
       margin: 1.5rem 0;
     }
-    .post-body :global(ul), .post-body :global(ol) {
+
+    .post-body :global(ul),
+    .post-body :global(ol) {
       padding-left: 1.5rem;
     }
-    .post-body :global(li) { margin: 0.3em 0; }
+
+    .post-body :global(li) {
+      margin: 0.3em 0;
+    }
+
+    .post-body :global(code:not(pre code)) {
+      margin: 0 0.08em;
+      padding: 0.08em 0.35em;
+      border: 1px solid var(--post-code-border);
+      border-radius: 3px;
+      background: var(--post-code-bg);
+      color: #c2410c;
+      font-size: 0.9em;
+      line-height: inherit;
+      white-space: normal;
+      overflow-wrap: anywhere;
+      word-break: break-word;
+      box-decoration-break: clone;
+      -webkit-box-decoration-break: clone;
+    }
+
+    .post-body :global(.expressive-code) {
+      margin: 1.5rem 0;
+    }
+
+    .post-body :global(.expressive-code pre) {
+      margin: 0;
+    }
+
+    .post-body :global(svg[id^='mermaid']) {
+      display: block;
+      width: 100%;
+      max-width: 100%;
+      height: auto;
+      margin: 1.5rem auto;
+      padding: 1rem;
+      border: 1px solid var(--post-border-soft);
+      border-radius: 8px;
+      background: #fbf8f1;
+    }
 
     .post-footer {
       margin-top: 4rem;
       padding-top: 1.5rem;
-      border-top: 1px solid var(--border-soft);
+      border-top: 1px solid var(--post-border-soft);
     }
+
     .back-link {
-      color: var(--text-dim);
+      color: var(--post-text-dim);
       font-size: 0.85rem;
     }
-    .back-link:hover { color: var(--accent); }
+
+    .back-link:hover {
+      color: var(--post-accent);
+    }
+
+    @media (min-width: 768px) {
+      :global(main) {
+        padding: 3rem 0 4.5rem;
+      }
+
+      .writing-page {
+        padding: 0 1.5rem;
+      }
+
+      .post-card {
+        padding: 1.25rem 3rem 4rem;
+      }
+    }
+
+    @media (min-width: 1024px) {
+      .writing-shell {
+        grid-template-columns: minmax(0, 860px) minmax(180px, 240px);
+        align-items: start;
+      }
+
+      .post-card {
+        margin: 0;
+      }
+    }
+
+    @media (min-width: 1180px) {
+      .post-card {
+        padding-left: 4rem;
+        padding-right: 4rem;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .writing-page {
+        padding: 0;
+      }
+
+      .post-card {
+        border-left: 0;
+        border-right: 0;
+        border-radius: 0;
+        box-shadow: none;
+      }
+
+      .post-meta {
+        gap: 0.6rem;
+      }
+    }
   </style>
 </Layout>
