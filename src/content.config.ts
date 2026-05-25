@@ -12,6 +12,8 @@ const writing = defineCollection({
     draft: z.boolean().default(false),
     tags: z.array(z.string()).default([]),
     externalUrl: z.string().url().optional(),
+    heroQuote: z.string().optional(),
+    heroQuoteSrc: z.string().optional(),
   }),
 });
 

@@ -6,6 +6,8 @@ pubDate: 2026-05-25
 updatedDate: 2026-05-25
 draft: false
 tags: [ai-coding, prompt, skills, harness, opc, founder-os]
+heroQuote: 工欲善其事，必先利其器
+heroQuoteSrc: 《論語·衛靈公》
 ---
 
 **普通人学习 AI 的技术路线，如何进一步长成自己的 AI-native Founder OS。**

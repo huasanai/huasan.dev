@@ -3,6 +3,7 @@ import Layout from '../../layouts/Layout.astro';
 import InkCanvas from '../../components/InkCanvas.astro';
 import Toc from '../../components/Toc.astro';
 import { getCollection, render } from 'astro:content';
+import { CURRENT_QUOTE } from '../../lib/quotes';
 
 export async function getStaticPaths() {
   const posts = await getCollection('writing', ({ data }) => !data.draft);
@@ -14,7 +15,8 @@ export async function getStaticPaths() {
 
 const { post } = Astro.props;
 const { Content, headings } = await render(post);
-const heroTitle = post.data.title.includes('：') ? post.data.title.split('：')[0] : post.data.title;
+const heroQuote = post.data.heroQuote ?? CURRENT_QUOTE.text;
+const heroQuoteSrc = post.data.heroQuoteSrc ?? CURRENT_QUOTE.src;
 
 function fmtFull(d: Date) {
   return d.toLocaleString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
@@ -25,8 +27,8 @@ function fmtFull(d: Date) {
   <section class="post-hero" aria-label="文章主题">
     <InkCanvas />
     <div class="post-hero-inner">
-      <p class="post-hero-title">{heroTitle}</p>
-      {post.data.description && <p class="post-hero-sub">{post.data.description}</p>}
+      <p class="post-hero-quote">{heroQuote}</p>
+      <p class="post-hero-quote-src">— {heroQuoteSrc}</p>
     </div>
   </section>
 
@@ -70,39 +72,36 @@ function fmtFull(d: Date) {
     .post-hero {
       position: relative;
       overflow: hidden;
-      min-height: 220px;
-      display: flex;
-      align-items: center;
       background: var(--hero-bg);
       color: var(--hero-text);
-      padding: 2.4rem 0 2.7rem;
+      padding: 2rem 0 2.25rem;
     }
 
     .post-hero-inner {
-      width: min(860px, calc(100% - 3rem));
+      max-width: 720px;
       margin: 0 auto;
+      padding: 0 1.5rem;
       position: relative;
       z-index: 2;
       pointer-events: none;
     }
 
-    .post-hero-title {
-      max-width: 760px;
-      margin: 0;
+    .post-hero-quote {
+      font-family: 'TsangerJinKai02', 'STKaiti', 'KaiTi', serif;
+      font-size: clamp(1.4rem, 3vw, 2rem);
+      font-weight: 400;
+      letter-spacing: 0.08em;
       color: var(--hero-text);
-      font-size: clamp(1.55rem, 4vw, 2.6rem);
-      line-height: 1.35;
-      letter-spacing: 0;
-      font-weight: 500;
+      margin: 0;
+      line-height: 1.5;
     }
 
-    .post-hero-sub {
-      max-width: 680px;
-      margin: 0.95rem 0 0;
+    .post-hero-quote-src {
+      font-family: 'TsangerJinKai02', serif;
+      font-size: 0.85rem;
       color: var(--hero-text-soft);
-      font-size: 0.98rem;
-      line-height: 1.7;
-      letter-spacing: 0.02em;
+      margin: 0.85rem 0 0;
+      letter-spacing: 0.05em;
     }
 
     .writing-page {
@@ -313,6 +312,19 @@ function fmtFull(d: Date) {
       overflow: visible;
     }
 
+    /* mermaid htmlLabels=true 时节点文字走 foreignObject → div，确保它能自动换行 */
+    .post-body :global(.mermaid-svg foreignObject > div),
+    .post-body :global(.mermaid-svg foreignObject .nodeLabel),
+    .post-body :global(.mermaid-svg foreignObject .edgeLabel),
+    .post-body :global(.mermaid-svg .nodeLabel),
+    .post-body :global(.mermaid-svg .edgeLabel) {
+      white-space: normal !important;
+      overflow-wrap: anywhere;
+      word-break: break-word;
+      line-height: 1.4;
+      max-width: 100%;
+    }
+
     .post-footer {
       margin-top: 4rem;
       padding-top: 1.5rem;
@@ -362,16 +374,12 @@ function fmtFull(d: Date) {
 
     @media (max-width: 600px) {
       .post-hero {
-        min-height: 180px;
-        padding: 1.8rem 0 2rem;
+        padding: 1.5rem 0 1.75rem;
       }
 
-      .post-hero-inner {
-        width: min(100% - 2rem, 860px);
-      }
-
-      .post-hero-title {
-        font-size: 1.35rem;
+      .post-hero-quote {
+        font-size: 1.2rem;
+        letter-spacing: 0.04em;
       }
 
       .writing-page {

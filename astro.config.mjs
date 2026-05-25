@@ -143,6 +143,15 @@ export default defineConfig({
           colorScheme: 'light',
           mermaidConfig: {
             theme: 'base',
+            flowchart: {
+              htmlLabels: true,
+              useMaxWidth: true,
+              wrappingWidth: 220,
+              padding: 12,
+              nodeSpacing: 50,
+              rankSpacing: 60,
+              curve: 'basis',
+            },
             themeVariables: {
               background: '#FBF8F1',
               primaryColor: '#F5EFE3',

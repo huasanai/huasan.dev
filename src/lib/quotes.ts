@@ -9,6 +9,7 @@ export const CURRENT_QUOTE: Quote = {
 // 候选库：owner 在浏览器按 S 键可在本地循环预览，挑好后把那句替换 CURRENT_QUOTE 即可。
 export const QUOTES_POOL: Quote[] = [
   { text: '路漫漫其修遠兮，吾將上下而求索', src: '屈原《離騷》' },
+  { text: '工欲善其事，必先利其器', src: '《論語·衛靈公》' },
   { text: '千里之行，始於足下', src: '老子《道德經》' },
   { text: '學而時習之，不亦說乎', src: '《論語·學而》' },
   { text: '君子和而不同', src: '《論語·子路》' },
