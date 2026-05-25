@@ -274,11 +274,12 @@ function fmtFull(d: Date) {
     }
 
     .post-body :global(.mermaid-scroll) {
-      display: block;
+      display: flex;
+      justify-content: center;     /* 单列窄图水平居中 */
       max-width: 100%;
       margin: 1.5rem auto;
       padding: 1rem;
-      overflow-x: auto;
+      overflow-x: auto;             /* 极端情况兜底：图比容器还宽时给滚动 */
       overflow-y: hidden;
       border: 1px solid var(--post-border-soft);
       border-radius: 8px;
@@ -302,27 +303,21 @@ function fmtFull(d: Date) {
 
     .post-body :global(.mermaid-svg) {
       display: block;
-      max-width: none;
       height: auto;
-      margin: 0;
+      margin: 0 auto;     /* flex 容器里再加 margin:auto 双保险居中 */
       overflow: visible;
+      /* max-width / width 由 rehypeMermaidScroll 在 SVG style 里写，让 mermaid 真实尺寸说了算 */
     }
 
     .post-body :global(.mermaid-svg foreignObject) {
       overflow: visible;
     }
 
-    /* mermaid htmlLabels=true 时节点文字走 foreignObject → div，确保它能自动换行 */
-    .post-body :global(.mermaid-svg foreignObject > div),
+    /* htmlLabels=true 时节点文字走 foreignObject，给 line-height 让中文不挤 */
+    /* 不要强加 word-break/overflow-wrap —— 中文里那会让每个字单独成行 */
     .post-body :global(.mermaid-svg foreignObject .nodeLabel),
-    .post-body :global(.mermaid-svg foreignObject .edgeLabel),
-    .post-body :global(.mermaid-svg .nodeLabel),
-    .post-body :global(.mermaid-svg .edgeLabel) {
-      white-space: normal !important;
-      overflow-wrap: anywhere;
-      word-break: break-word;
-      line-height: 1.4;
-      max-width: 100%;
+    .post-body :global(.mermaid-svg foreignObject .edgeLabel) {
+      line-height: 1.45;
     }
 
     .post-footer {

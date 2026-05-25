@@ -42,8 +42,15 @@ function isMermaidSvg(node) {
 }
 
 function usePaddedIntrinsicSvgSize(svg) {
+  // 关键：保留 mermaid 自己设的 max-width 行为，只加 viewBox padding。
+  // 不要再硬写 width/height 像素属性 —— 那会让 SVG 失去响应式，溢出容器。
+  // 用 max-width(自然尺寸) + width:100% + height:auto：
+  //   narrow 图（单列）维持自然尺寸（CSS 再用 margin auto 居中）
+  //   wide 图自动缩到容器宽度
   const viewBox = String(svg.properties.viewBox || svg.properties.viewbox || '');
   const [x, y, width, height] = viewBox.split(/\s+/).map(Number);
+
+  let naturalWidth = null;
 
   if (
     Number.isFinite(x) &&
@@ -63,11 +70,17 @@ function usePaddedIntrinsicSvgSize(svg) {
     ].join(' ');
     svg.properties.viewBox = paddedViewBox;
     svg.properties.viewbox = paddedViewBox;
-    svg.properties.width = String(Math.ceil(paddedWidth));
-    svg.properties.height = String(Math.ceil(paddedHeight));
+    naturalWidth = Math.ceil(paddedWidth);
   }
 
-  svg.properties.style = 'overflow: visible;';
+  // 删除任何旧的像素 width/height 属性（mermaid + rehype-mermaid 都可能写）
+  delete svg.properties.width;
+  delete svg.properties.height;
+
+  // SVG 自适应：naturalWidth 上限，超窄不拉伸，超宽缩到容器
+  svg.properties.style = naturalWidth
+    ? `max-width: ${naturalWidth}px; width: 100%; height: auto; overflow: visible;`
+    : 'max-width: 100%; height: auto; overflow: visible;';
 }
 
 function toClassList(value) {
