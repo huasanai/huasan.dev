@@ -1,8 +1,10 @@
 ---
-// 鼠标轨迹书法墨痕 canvas（粒子系统版）
-// - 头粗尾细：单次笔画起笔大粒子，1.4s 内衰减到细粒子
-// - 4 秒后完全消失：每个粒子有 maxLife，到期 splice 删除，画布每帧 clearRect
-// - 墨色随主题：读 :root[--ink-color] CSS 变量
+// hero canvas: 程序生成青山绿水 + spotlight reveal + 烟花 sparks
+// - 默认状态：山水几乎被深色 overlay 完全遮盖（dim ~6% 可见）
+// - 鼠标作为 spotlight (radius 240px, soft radial falloff)：半径内 reveal 出青绿山脊
+// - 烟花 sparks：从光圈中心向各方向迸射 (60% 暖橙 / 40% 米色)，1-1.5s 寿命，drag + 微重力
+// - 山脊用 hash-based 1D noise 程序生成，多 octave 合成，刷新页面会有微变（seed 固定但 noise 函数差异）
+// - 深色 hero bg 兜底 (无论主题)
 ---
 
 <canvas class="ink-canvas" data-ink-canvas></canvas>
@@ -19,12 +21,61 @@
 </style>
 
 <script>
-  type Particle = {
-    x: number;
-    y: number;
-    born: number;       // performance.now() at spawn
-    life: number;       // ms total
-    baseRadius: number; // initial radius
+  // ======== 配置 ========
+  const HERO_BG = '#0F0E14';
+  const OVERLAY_RGB = '15, 14, 20';
+  const OVERLAY_BASE_ALPHA = 0.94;    // default dim level (the bigger, the darker)
+  const OVERLAY_CENTER_MIN = 0.05;    // fully revealed center alpha
+  const SPOTLIGHT_RADIUS = 200;
+  // 蓝天 gradient (从 hero 顶部浅蓝到中间淡出)
+  const SKY_RGB = '155, 188, 210';
+  const SKY_TOP_ALPHA = 0.55;
+
+  type RidgeLayer = {
+    baseYRatio: number;
+    amplitude: number;
+    frequency: number;
+    colorRgb: string;
+    seed: number;
+  };
+
+  // 三层山脊（远 → 近），青山绿水配色
+  const RIDGES: RidgeLayer[] = [
+    // 远山 - 浅青蓝雾色
+    { baseYRatio: 0.46, amplitude: 22, frequency: 0.006, colorRgb: '120, 152, 172', seed: 1 },
+    // 中山 - 青绿
+    { baseYRatio: 0.64, amplitude: 32, frequency: 0.010, colorRgb: '74, 134, 108', seed: 42 },
+    // 近山 - 深墨绿
+    { baseYRatio: 0.84, amplitude: 42, frequency: 0.015, colorRgb: '40, 78, 60', seed: 137 },
+  ];
+
+  // ======== Noise ========
+  function hashRand(n: number): number {
+    const x = Math.sin(n * 12.9898 + 78.233) * 43758.5453;
+    return x - Math.floor(x);
+  }
+
+  function noise1D(x: number, seed: number): number {
+    const xi = Math.floor(x);
+    const xf = x - xi;
+    const a = hashRand(xi + seed * 1000);
+    const b = hashRand(xi + 1 + seed * 1000);
+    const t = xf * xf * (3 - 2 * xf);
+    return a * (1 - t) + b * t;
+  }
+
+  function ridgeNoise(x: number, layer: RidgeLayer): number {
+    let n = noise1D(x * layer.frequency, layer.seed) * 1.0;
+    n += noise1D(x * layer.frequency * 2.7, layer.seed + 5) * 0.5;
+    n += noise1D(x * layer.frequency * 5.3, layer.seed + 13) * 0.25;
+    return n / 1.75;
+  }
+
+  // ======== Sparks ========
+  type Spark = {
+    x: number; y: number;
+    vx: number; vy: number;
+    born: number; life: number;
   };
 
   function initOne(canvas: HTMLCanvasElement) {
@@ -48,104 +99,150 @@
     resize();
     new ResizeObserver(resize).observe(parent);
 
-    function getInk(): string {
-      const v = getComputedStyle(document.documentElement)
-        .getPropertyValue('--ink-color')
-        .trim();
-      return v || '240, 233, 216';
-    }
-
-    const particles: Particle[] = [];
-    const MAX_PARTICLES = 1200; // 防爆内存
-
-    // 笔触参数
-    const STROKE_MAX_SIZE = 5.2;   // 起笔最粒粗
-    const STROKE_MIN_SIZE = 0.45;  // 收笔最细
-    const TAPER_DURATION = 1.4;    // s，stroke 内多久从粗衰减到细
-    const PARTICLE_LIFE_MS = 4000; // 单个粒子寿命：4 秒后彻底消失
-    const SPACING = 2.8;           // 粒子间距（沿轨迹插值）
-
-    let last: { x: number; y: number; t: number } | null = null;
+    let mouseX = -9999, mouseY = -9999;
     let isInside = false;
-    let strokeStart = 0;
-
-    function pointerEvt(e: PointerEvent) {
-      const rect = parent!.getBoundingClientRect();
-      return { x: e.clientX - rect.left, y: e.clientY - rect.top, t: performance.now() };
-    }
+    let spotlightStrength = 0;
 
     parent.addEventListener('pointerenter', (e) => {
       isInside = true;
-      const p = pointerEvt(e);
-      last = p;
-      strokeStart = p.t;
+      const rect = parent!.getBoundingClientRect();
+      mouseX = e.clientX - rect.left;
+      mouseY = e.clientY - rect.top;
+    });
+
+    parent.addEventListener('pointermove', (e) => {
+      const rect = parent!.getBoundingClientRect();
+      mouseX = e.clientX - rect.left;
+      mouseY = e.clientY - rect.top;
     });
 
     parent.addEventListener('pointerleave', () => {
       isInside = false;
-      last = null;
     });
 
-    parent.addEventListener('pointermove', (e) => {
-      if (!isInside) return;
-      const p = pointerEvt(e);
-      if (!last) { last = p; strokeStart = p.t; return; }
+    const sparks: Spark[] = [];
+    const MAX_SPARKS = 250;
 
-      const dx = p.x - last.x;
-      const dy = p.y - last.y;
-      const dist = Math.hypot(dx, dy);
-      const steps = Math.max(1, Math.ceil(dist / SPACING));
-
-      for (let i = 1; i <= steps; i++) {
-        const tt = i / steps;
-        const x = last.x + dx * tt;
-        const y = last.y + dy * tt;
-
-        // 笔触粗细：基于 stroke 起始的时间，head 粗 tail 细
-        const strokeAge = (last.t + (p.t - last.t) * tt - strokeStart) / 1000;
-        const taper = Math.max(0.05, Math.pow(Math.max(0, 1 - strokeAge / TAPER_DURATION), 1.2));
-        const radius = STROKE_MIN_SIZE + (STROKE_MAX_SIZE - STROKE_MIN_SIZE) * taper;
-
-        particles.push({
-          x, y,
+    function spawnSparks() {
+      if (spotlightStrength < 0.3) return;
+      const count = 1 + Math.floor(Math.random() * 3); // 1-3 per frame
+      for (let i = 0; i < count; i++) {
+        const angle = Math.random() * Math.PI * 2;
+        const speed = 0.6 + Math.random() * 1.5;
+        sparks.push({
+          x: mouseX + (Math.random() - 0.5) * 12,
+          y: mouseY + (Math.random() - 0.5) * 12,
+          vx: Math.cos(angle) * speed,
+          vy: Math.sin(angle) * speed - 0.3,
           born: performance.now(),
-          life: PARTICLE_LIFE_MS,
-          baseRadius: radius,
+          life: 700 + Math.random() * 900,
         });
       }
-
-      // 防爆：只保留最近 MAX_PARTICLES 个
-      if (particles.length > MAX_PARTICLES) {
-        particles.splice(0, particles.length - MAX_PARTICLES);
+      if (sparks.length > MAX_SPARKS) {
+        sparks.splice(0, sparks.length - MAX_SPARKS);
       }
+    }
 
-      last = p;
-    });
-
-    function frame() {
+    function drawSparks() {
       const now = performance.now();
-      ctx!.clearRect(0, 0, w, h);
-      const ink = getInk();
-
-      for (let i = particles.length - 1; i >= 0; i--) {
-        const pt = particles[i];
-        const age = now - pt.born;
-        if (age >= pt.life) {
-          particles.splice(i, 1);
-          continue;
-        }
-        const lifeT = age / pt.life;
-        // ease-out 收缩 + 透明度衰减
-        const radius = pt.baseRadius * (1 - Math.pow(lifeT, 1.6) * 0.85);
-        const alpha = (1 - lifeT) * 0.72;
-        if (radius < 0.15 || alpha < 0.02) continue;
-        ctx!.fillStyle = `rgba(${ink}, ${alpha})`;
+      for (let i = sparks.length - 1; i >= 0; i--) {
+        const s = sparks[i];
+        const age = now - s.born;
+        if (age > s.life) { sparks.splice(i, 1); continue; }
+        s.x += s.vx;
+        s.y += s.vy;
+        s.vy += 0.025;   // gravity
+        s.vx *= 0.985;   // drag
+        s.vy *= 0.985;
+        const t = age / s.life;
+        const alpha = (1 - t) * 0.85;
+        if (alpha < 0.02) continue;
+        ctx!.fillStyle = `rgba(255, 255, 255, ${alpha})`;
         ctx!.beginPath();
-        ctx!.arc(pt.x, pt.y, radius, 0, Math.PI * 2);
+        ctx!.arc(s.x, s.y, 2.6 + (1 - t) * 0.6, 0, Math.PI * 2);
         ctx!.fill();
       }
+    }
 
+    function drawRidges() {
+      for (const layer of RIDGES) {
+        const baseY = h * layer.baseYRatio;
+        ctx!.fillStyle = `rgb(${layer.colorRgb})`;
+        ctx!.beginPath();
+        ctx!.moveTo(0, h + 2);
+        let firstY = baseY;
+        for (let x = 0; x <= w; x += 3) {
+          const n = ridgeNoise(x, layer);
+          const y = baseY - n * layer.amplitude;
+          if (x === 0) firstY = y;
+          ctx!.lineTo(x, y);
+        }
+        ctx!.lineTo(w, h + 2);
+        ctx!.closePath();
+        ctx!.fill();
+      }
+    }
+
+    function drawOverlay() {
+      // radial gradient: 中心半透 (spotlight reveal)，边缘几乎不透明 (dim overlay)
+      const centerAlpha =
+        OVERLAY_BASE_ALPHA - spotlightStrength * (OVERLAY_BASE_ALPHA - OVERLAY_CENTER_MIN);
+      const midAlpha =
+        OVERLAY_BASE_ALPHA - spotlightStrength * (OVERLAY_BASE_ALPHA - OVERLAY_CENTER_MIN) * 0.45;
+
+      const gradient = ctx!.createRadialGradient(
+        mouseX, mouseY, 0,
+        mouseX, mouseY, SPOTLIGHT_RADIUS
+      );
+      gradient.addColorStop(0, `rgba(${OVERLAY_RGB}, ${centerAlpha})`);
+      gradient.addColorStop(0.55, `rgba(${OVERLAY_RGB}, ${midAlpha})`);
+      gradient.addColorStop(1, `rgba(${OVERLAY_RGB}, ${OVERLAY_BASE_ALPHA})`);
+      ctx!.fillStyle = gradient;
+      ctx!.fillRect(0, 0, w, h);
+    }
+
+    let isVisible = true;
+    if ('IntersectionObserver' in window) {
+      const observer = new IntersectionObserver((entries) => {
+        for (const e of entries) isVisible = e.isIntersecting;
+      }, { threshold: 0 });
+      observer.observe(canvas);
+    }
+
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    function frame() {
       requestAnimationFrame(frame);
+      if (!isVisible) return;
+
+      const target = isInside ? 1 : 0;
+      spotlightStrength += (target - spotlightStrength) * 0.08;
+      if (Math.abs(spotlightStrength - target) < 0.005) spotlightStrength = target;
+
+      ctx!.clearRect(0, 0, w, h);
+
+      // 1. Bg
+      ctx!.fillStyle = HERO_BG;
+      ctx!.fillRect(0, 0, w, h);
+
+      // 2. 蓝天渐变（hero 顶部 → 中部淡出）
+      const sky = ctx!.createLinearGradient(0, 0, 0, h * 0.55);
+      sky.addColorStop(0, `rgba(${SKY_RGB}, ${SKY_TOP_ALPHA})`);
+      sky.addColorStop(1, `rgba(${SKY_RGB}, 0)`);
+      ctx!.fillStyle = sky;
+      ctx!.fillRect(0, 0, w, h * 0.55);
+
+      // 3. Full color ridges (默认会被 overlay 几乎完全遮盖)
+      drawRidges();
+
+      // 3. Overlay with radial spotlight cutout
+      drawOverlay();
+
+      // 4. Sparks (on top)
+      if (!reducedMotion) {
+        spawnSparks();
+        drawSparks();
+      }
     }
     frame();
   }

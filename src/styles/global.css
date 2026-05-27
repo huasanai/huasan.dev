@@ -36,12 +36,12 @@
   --accent:    #E07A4F;
   --accent-soft: #C56841;
 
-  /* dark 主题下 hero 翻转为浅色"宣纸"，与浅色模式 body 同色 */
-  --hero-bg:   #f5f4ed;
-  --hero-text: rgba(20, 18, 16, 0.92);
-  --hero-text-soft: rgba(20, 18, 16, 0.62);
-  --hero-accent: #C15F3C;
-  --ink-color: 20, 18, 16;       /* 深墨色：写在浅色 hero 上 */
+  /* hero 在两种主题下都保持深色，承载青山绿水 hero canvas */
+  --hero-bg:   #0F0E14;
+  --hero-text: #F0E9D8;
+  --hero-text-soft: rgba(240, 233, 216, 0.62);
+  --hero-accent: #E07A4F;
+  --ink-color: 240, 233, 216;
 }
 
 * { box-sizing: border-box; }
