@@ -5,31 +5,38 @@ import { PAGE_POOLS } from '../lib/quotes';
 
 const heroPool = PAGE_POOLS.now;
 
-const lastUpdated = '2026-05-25';
+const lastUpdated = '2026-05-27';
 
 const focuses = [
   {
-    title: '把 SkillFlow 推到第一批真实用户',
-    body: '可视化 skill 编排的 MVP 已上线，下一步是从"我自己用"扩到 3-5 个外部用户，跑通反馈闭环。',
+    title: '学技术：AI Coding + Harness Engineering',
+    paragraphs: [
+      '非技术背景出身，AI Coding 必须从底层啃。Python 跟着廖雪峰周课程练手，Harness Engineering 研究方法论——让 AI 不只是写一段代码，而是能长时间自动化 coding。',
+    ],
   },
   {
-    title: 'huasan.dev 的内容生产',
-    body: '建立"过程即内容"的稳定输出节奏，公众号 + 这个 blog 双轨；不追热点，记录真实工作。',
+    title: '学产品：读《创业者手册》找方向',
+    paragraphs: [
+      '这段时间没在构建新产品——前阵子做过几个 vibe coding 验证（Freedao、SkillFlow），意识到没有真实需求就盲目造没意义。先停做、专注找方向。',
+      '正在读 Anthropic 的 <a href="https://claude.com/blog/the-founders-playbook" target="_blank" rel="noopener">《创业者手册：构建 AI-native 创业公司》</a>，目标是找一个适合自己做的、能赚钱的产品方向，再用 AI Coding 快速验证。',
+    ],
   },
   {
-    title: 'AI-Coding 基本功',
-    body: '把"非技术背景的人怎么读懂 AI 写的代码"做成一个长期实验，Python W1-6 周课程已启动。',
+    title: '营销：build in public + 过程即内容',
+    paragraphs: [
+      '营销不是另起一摊事——做的过程本身就是内容。持续更新 huasan.dev、公众号《画伞的AI学习笔记》、抖音、X，让对的用户和合作者顺路找到。',
+    ],
   },
 ];
 ---
 
-<Layout title="now" description="画伞当前在做的事。">
+<Layout title="now" description="画伞当前在做的事：学技术、学产品、营销三脚架。">
   <HeroQuote current={heroPool.current} pool={heroPool.pool} />
   <div class="container">
     <header class="page-head">
       <h1 class="page-title">now</h1>
       <p class="page-desc">
-        当前在做的事。受 <a href="https://nownownow.com" target="_blank" rel="noopener">nownownow</a> 启发，不定期更新。
+        当前的三脚架——学技术、学产品、营销。不定期更新。
       </p>
       <p class="page-updated mono">last updated · {lastUpdated}</p>
     </header>
@@ -41,7 +48,9 @@ const focuses = [
             <div class="focus-index mono">0{i + 1}</div>
             <div class="focus-body">
               <h3 class="focus-title">{f.title}</h3>
-              <p class="focus-text">{f.body}</p>
+              {f.paragraphs.map((p) => (
+                <p class="focus-text" set:html={p} />
+              ))}
             </div>
           </li>
         ))
@@ -51,9 +60,9 @@ const focuses = [
     <section class="not-doing">
       <h2 class="sub-title mono"># 暂时不做</h2>
       <ul>
-        <li>接 1v1 咨询和外包（不卖时间）</li>
-        <li>追热点写"AI 速成"教程（不实践就不写）</li>
-        <li>同时开多条新产品线（一条没跑完不开第二条）</li>
+        <li>盲目做新产品（先找方向，看清楚再 ship）</li>
+        <li>追热点写 AI 速成教程（不实践就不写）</li>
+        <li>同时开多条新产品线（专注一条，跑通闭环再开第二条）</li>
       </ul>
     </section>
   </div>
@@ -104,13 +113,19 @@ const focuses = [
       font-weight: 500;
       line-height: 1.4;
     }
-    .focus-body { flex: 1; }
-    .focus-title { font-size: 1.1rem; font-weight: 600; margin: 0 0 0.4rem; line-height: 1.4; }
+    .focus-body { flex: 1; min-width: 0; }
+    .focus-title { font-size: 1.1rem; font-weight: 600; margin: 0 0 0.5rem; line-height: 1.5; }
     .focus-text {
       color: var(--text-soft);
       margin: 0;
       font-size: 0.95rem;
-      line-height: 1.7;
+      line-height: 1.75;
+    }
+    .focus-text + .focus-text {
+      margin-top: 0.65rem;
+    }
+    .focus-text a {
+      color: var(--accent);
     }
 
     .not-doing { margin-top: 2rem; }
