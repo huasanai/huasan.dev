@@ -72,8 +72,15 @@ export const PAGE_POOLS: Record<string, PagePool> = {
   },
 
   about: {
-    current: { text: '君子坦蕩蕩', src: '《論語·述而》' },
+    current: {
+      text: '天行健，君子以自強不息\n地勢坤，君子以厚德載物',
+      src: '',
+    },
     pool: [
+      {
+        text: '天行健，君子以自強不息\n地勢坤，君子以厚德載物',
+        src: '',
+      },
       { text: '君子坦蕩蕩', src: '《論語·述而》' },
       { text: '知人者智，自知者明', src: '老子《道德經》' },
       { text: '不戚戚於貧賤，不汲汲於富貴', src: '陶淵明《五柳先生傳》' },

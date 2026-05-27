@@ -23,7 +23,7 @@ const { current, pool } = Astro.props;
   <InkCanvas />
   <div class="hero-inner">
     <p class="hero-quote" data-quote-text>{current.text}</p>
-    <p class="hero-quote-src" data-quote-src>— {current.src}</p>
+    <p class="hero-quote-src" data-quote-src>{current.src ? `— ${current.src}` : ''}</p>
   </div>
 </section>
 
@@ -73,7 +73,7 @@ const { current, pool } = Astro.props;
       if (q.text === currentText) li.classList.add('active');
       li.innerHTML = `
         <p class="picker-quote">${q.text}</p>
-        <p class="picker-source">— ${q.src}</p>
+        <p class="picker-source">${q.src ? '— ' + q.src : ''}</p>
       `;
       li.addEventListener('click', () => applyQuote(q));
       list.appendChild(li);
@@ -95,7 +95,7 @@ const { current, pool } = Astro.props;
   }
   function applyQuote(q) {
     if (quoteText) quoteText.textContent = q.text;
-    if (quoteSrc) quoteSrc.textContent = '— ' + q.src;
+    if (quoteSrc) quoteSrc.textContent = q.src ? '— ' + q.src : '';
     closePicker();
   }
 
@@ -142,6 +142,7 @@ const { current, pool } = Astro.props;
     color: var(--hero-text);
     margin: 0;
     line-height: 1.5;
+    white-space: pre-line;
   }
   .hero-quote-src {
     font-family: 'TsangerJinKai02', serif;
@@ -149,6 +150,9 @@ const { current, pool } = Astro.props;
     color: var(--hero-text-soft);
     margin: 0.85rem 0 0;
     letter-spacing: 0.05em;
+  }
+  .hero-quote-src:empty {
+    display: none;
   }
 
   /* ===== Quote picker modal ===== */
@@ -254,6 +258,7 @@ const { current, pool } = Astro.props;
     color: var(--text);
     margin: 0 0 0.3rem;
     line-height: 1.5;
+    white-space: pre-line;
   }
   .picker-source {
     font-family: 'TsangerJinKai02', serif;
@@ -261,6 +266,9 @@ const { current, pool } = Astro.props;
     color: var(--text-dim);
     margin: 0;
     letter-spacing: 0.04em;
+  }
+  .picker-source:empty {
+    display: none;
   }
   .quote-item.active .picker-source {
     color: var(--accent);

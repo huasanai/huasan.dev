@@ -4,9 +4,13 @@ import HeroQuote from '../components/HeroQuote.astro';
 import { PAGE_POOLS } from '../lib/quotes';
 
 const heroPool = PAGE_POOLS.about;
+const lastUpdated = '2026-05';
 ---
 
-<Layout title="about" description="关于画伞：INTJ，前腾讯教育销售，独立开发者。">
+<Layout
+  title="about"
+  description="画伞：build in public 探索 AI-native 一人公司。用 AI 做能解决真实问题的小产品，正在啃 harness engineering。"
+>
   <HeroQuote current={heroPool.current} pool={heroPool.pool} />
   <article class="container about">
     <header class="page-head">
@@ -16,51 +20,121 @@ const heroPool = PAGE_POOLS.about;
     <section class="intro">
       <div class="avatar">画</div>
       <div class="intro-body">
-        <h2 class="intro-name">
-          画伞 <span class="mono name-en">huasan · INTJ · 深圳</span>
-        </h2>
-        <p class="intro-tag">前腾讯教育销售 → 独立开发者。一边用 AI 写代码，一边写公众号记录过程。</p>
+        <h2 class="intro-main">build in public 探索 AI-native 一人公司</h2>
+        <p class="intro-sub">
+          用 AI 做能解决真实问题的小产品 · 正在啃 harness engineering
+        </p>
       </div>
     </section>
 
-    <section class="prose">
-      <h2>我在做什么</h2>
-      <p>
-        前几年在腾讯做教育销售，带过 15 人团队，是销冠出身。
-        2025 年开始转独立，方向是 <strong>OPC（One Person Company，一人公司）</strong>—— 不雇人、不卖时间、不追融资，靠一组小工具和内容养活自己。
-      </p>
-      <p>
-        日常一半时间是写代码：用 Claude Code、Codex 这类 AI coding 工具做小工具，先解决我自己的问题，能跑能用之后再考虑开源或商业化。
-        另一半时间是写内容：把过程记下来，发在公众号和这个站上。
-      </p>
-
-      <h2>瓶颈在哪</h2>
-      <p>
-        能做（AI coding 能力够用）+ 能卖（销售背景）都不是问题。
-        真正的瓶颈是<strong>找到对的产品和对的用户</strong>——
-        这件事必须靠自己浸泡用户的混沌里慢慢长出来，不能用工具或方法论替代。
-      </p>
-
-      <h2>性格 / 工作方式</h2>
-      <ul>
-        <li>INTJ，独处充电，深度工作偏好极强</li>
-        <li>奥卡姆剃刀：能简单就不复杂，能少一层就少一层</li>
-        <li>小步快跑：v0.1 给真实用户，不行就换方向，不在脑子里推演</li>
-        <li>过程即内容：日常工作的副产品就是要发布的东西</li>
+    <section class="section">
+      <header class="section-head">
+        <h2 class="section-title">now</h2>
+        <span class="section-meta">last updated {lastUpdated}</span>
+      </header>
+      <p class="section-caption">当下在做的</p>
+      <ul class="section-list">
+        <li>
+          正在啃 <strong>harness engineering</strong>（让 AI 长时间自动化 coding）
+        </li>
+        <li>
+          用 Claude Code + Codex 做小工具（<a
+            href="https://huasanai.github.io/freedao/"
+            target="_blank"
+            rel="noopener">Freedao</a
+          >、<a
+            href="https://github.com/huasanai/lifeos-template"
+            target="_blank"
+            rel="noopener">lifeos-template</a
+          >）
+        </li>
+        <li>持续 build in public：抖音 + 公众号 + huasan.dev</li>
       </ul>
+    </section>
 
-      <h2>联系</h2>
-      <p>
-        <a href="https://github.com/huasanai" target="_blank" rel="noopener">GitHub @huasanai</a>
-        ·
-        <span class="mono dim">公众号：画伞</span>
+    <section class="section">
+      <header class="section-head">
+        <h2 class="section-title">principles</h2>
+      </header>
+      <p class="section-caption">原则</p>
+      <ul class="section-list principles-list">
+        <li>
+          <strong>奥卡姆剃刀</strong>
+          <span class="rule-desc"
+            >如无必要，勿增实体——能简单就不复杂，能少一层就少一层</span
+          >
+        </li>
+        <li>
+          <strong>第一性原理</strong>
+          <span class="rule-desc">拆到底层逻辑，不被表象和共识困住</span>
+        </li>
+        <li>
+          <strong>过程即内容</strong>
+          <span class="rule-desc">工作的副产品就是要发布的东西</span>
+        </li>
+      </ul>
+    </section>
+
+    <section class="section">
+      <header class="section-head">
+        <h2 class="section-title">vision</h2>
+      </header>
+      <p class="section-caption">想去哪</p>
+      <p class="section-text">
+        做一家 <strong>AI-native 的一人公司</strong>——不雇人、不卖时间、不规模化。
       </p>
+      <p class="section-text">
+        不一定 ship 一个 SaaS 神话，更可能是一组小工具 + 持续内容 + 一群同类，养活自己。
+      </p>
+    </section>
+
+    <section class="section">
+      <header class="section-head">
+        <h2 class="section-title">interfaces</h2>
+      </header>
+      <p class="section-caption">怎么对接</p>
+      <ul class="section-list channels-list">
+        <li>
+          <span class="channel-name">GitHub</span>
+          <a href="https://github.com/huasanai" target="_blank" rel="noopener"
+            >@huasanai</a
+          >
+        </li>
+        <li>
+          <span class="channel-name">公众号</span>
+          <span class="channel-value">画伞的AI学习笔记</span>
+        </li>
+        <li>
+          <span class="channel-name">抖音</span>
+          <a
+            href="https://v.douyin.com/zHu4VUhztes/"
+            target="_blank"
+            rel="noopener">@画伞</a
+          >
+        </li>
+        <li>
+          <span class="channel-name">X</span>
+          <a href="https://x.com/yfusionai" target="_blank" rel="noopener"
+            >@yfusionai</a
+          >
+        </li>
+        <li>
+          <span class="channel-name">微信</span>
+          <span class="channel-value"
+            ><code>huasanai</code><span class="channel-note"
+              >加好友请注明来意</span
+            ></span
+          >
+        </li>
+      </ul>
     </section>
   </article>
 
   <style>
     main { padding: 0 0 4rem; }
-    .about { max-width: 700px; }
+    .about { max-width: 720px; }
+
+    /* ===== Page head (与 writing/projects/now 保持一致) ===== */
     .page-head { margin-top: 3rem; margin-bottom: 2rem; }
     .page-title {
       font-family: 'JetBrains Mono', monospace;
@@ -72,16 +146,17 @@ const heroPool = PAGE_POOLS.about;
     }
     .page-title::before { content: '#'; color: var(--accent); margin-right: 0.3rem; }
 
+    /* ===== Intro card ===== */
     .intro {
       display: flex;
       gap: 1.5rem;
       align-items: center;
-      padding: 1.5rem;
+      padding: 1.75rem;
       background: var(--surface);
       border: 1px solid var(--border-soft);
       border-radius: 12px;
       box-shadow: var(--shadow-card);
-      margin-bottom: 2.5rem;
+      margin: 0 0 2.5rem;
     }
     .avatar {
       width: 64px;
@@ -99,41 +174,168 @@ const heroPool = PAGE_POOLS.about;
       letter-spacing: 0;
     }
     .intro-body { flex: 1; min-width: 0; }
-    .intro-name {
-      font-size: 1.15rem;
+    .intro-main {
+      font-size: clamp(1.1rem, 2.4vw, 1.3rem);
       font-weight: 600;
-      margin: 0 0 0.25rem;
+      line-height: 1.5;
+      color: var(--text);
+      margin: 0 0 0.55rem;
+      letter-spacing: 0;
     }
-    .name-en {
-      font-size: 0.8rem;
-      color: var(--text-dim);
-      font-weight: 400;
-      margin-left: 0.5rem;
-    }
-    .intro-tag {
+    .intro-sub {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.88rem;
       color: var(--text-soft);
       margin: 0;
-      font-size: 0.95rem;
+      letter-spacing: 0;
       line-height: 1.65;
     }
 
-    .prose { font-size: 1rem; line-height: 1.85; }
-    .prose h2 {
-      font-size: 1.2rem;
-      margin: 2rem 0 0.75rem;
-      padding-top: 1rem;
-      border-top: 1px solid var(--border-soft);
+    /* ===== Section ===== */
+    .section {
+      padding: 2rem 0;
+      border-bottom: 1px dotted var(--border-soft);
     }
-    .prose h2:first-of-type { padding-top: 0; border-top: none; margin-top: 0; }
-    .prose strong { color: var(--text); font-weight: 600; }
-    .prose ul { padding-left: 1.5rem; color: var(--text-soft); }
-    .prose li { margin: 0.35em 0; }
-    .prose a { color: var(--accent); }
+    .section:last-of-type {
+      border-bottom: none;
+      padding-bottom: 0.5rem;
+    }
+    .section-head {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-bottom: 0.15rem;
+    }
+    .section-title {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: var(--text);
+      margin: 0;
+      letter-spacing: 0;
+      line-height: 1.4;
+    }
+    .section-meta {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.78rem;
+      color: var(--text-dim);
+    }
+    .section-caption {
+      font-size: 0.88rem;
+      color: var(--text-dim);
+      margin: 0 0 1.1rem;
+      line-height: 1.6;
+      letter-spacing: 0;
+    }
 
-    .dim { color: var(--text-dim); }
+    /* ===== Lists ===== */
+    .section-list {
+      padding-left: 1.25rem;
+      color: var(--text-soft);
+      margin: 0;
+      line-height: 1.85;
+    }
+    .section-list li {
+      margin: 0.3em 0;
+      font-size: 0.97rem;
+    }
+    .section-list strong {
+      color: var(--text);
+      font-weight: 600;
+    }
+    .section-list a {
+      color: var(--accent);
+    }
+    .section-text {
+      color: var(--text-soft);
+      line-height: 1.9;
+      margin: 0;
+      font-size: 0.97rem;
+    }
+    .section-text + .section-text {
+      margin-top: 0.85rem;
+    }
+    .section-text strong {
+      color: var(--text);
+      font-weight: 600;
+    }
+
+    /* ===== Principles ===== */
+    .principles-list { padding-left: 0; list-style: none; }
+    .principles-list li {
+      display: flex;
+      align-items: baseline;
+      gap: 0.85rem;
+      margin: 0.7em 0;
+      flex-wrap: wrap;
+    }
+    .principles-list strong {
+      font-weight: 600;
+      font-size: 1rem;
+      color: var(--text);
+      letter-spacing: 0;
+      min-width: 5.5em;
+      flex-shrink: 0;
+    }
+    .rule-desc {
+      color: var(--text-soft);
+      font-size: 0.95rem;
+      line-height: 1.65;
+      flex: 1;
+      min-width: 0;
+    }
+
+    /* ===== Channels ===== */
+    .channels-list { padding-left: 0; list-style: none; }
+    .channels-list li {
+      display: flex;
+      align-items: baseline;
+      gap: 0.85rem;
+      margin: 0.5em 0;
+      font-size: 0.95rem;
+      flex-wrap: wrap;
+    }
+    .channel-name {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.82rem;
+      color: var(--text-dim);
+      min-width: 4.5em;
+      letter-spacing: 0;
+      flex-shrink: 0;
+    }
+    .channel-value {
+      color: var(--text-soft);
+      display: inline-flex;
+      align-items: baseline;
+      gap: 0.6rem;
+      flex-wrap: wrap;
+    }
+    .channel-note {
+      font-size: 0.8rem;
+      color: var(--text-dim);
+    }
+    .channels-list code {
+      font-family: 'JetBrains Mono', monospace;
+      background: var(--bg);
+      padding: 0.1em 0.4em;
+      border-radius: 4px;
+      font-size: 0.92em;
+      color: var(--text);
+    }
+    .channels-list a {
+      color: var(--accent);
+    }
 
     @media (max-width: 600px) {
-      .intro { flex-direction: column; align-items: flex-start; }
+      .intro { flex-direction: column; align-items: flex-start; padding: 1.25rem; }
+      .intro-main { font-size: 1.05rem; }
+      .intro-sub { font-size: 0.82rem; }
+      .section { padding: 1.5rem 0; }
+      .section-title { font-size: 1.15rem; }
+      .principles-list strong { min-width: auto; }
+      .channel-name { min-width: 3.5em; }
     }
   </style>
 </Layout>
