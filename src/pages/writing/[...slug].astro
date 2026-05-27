@@ -65,7 +65,7 @@ function fmtFull(d: Date) {
 
   <style>
     :global(main) {
-      background: #f5f4ed;
+      background: var(--bg);
       padding: 0 0 4rem;
     }
 
@@ -116,10 +116,36 @@ function fmtFull(d: Date) {
       --post-accent-strong: #a94622;
       --post-code-bg: rgba(224, 123, 61, 0.1);
       --post-code-border: rgba(224, 123, 61, 0.18);
+      --post-code-text: #c2410c;
+      --post-mermaid-bg: #fbf8f1;
+      --post-mermaid-track: #f2e9da;
+      --post-mermaid-thumb: rgba(193, 95, 60, 0.34);
       --post-toc-text: rgba(36, 41, 47, 0.62);
       --post-toc-child: rgba(36, 41, 47, 0.48);
       color: var(--post-text);
       padding: 2rem 1rem 0;
+    }
+
+    /* 深色模式覆盖：把 light 的 --post-* tokens 全部替换成 dark 版本，
+       UI 内部不需要改 var(...) 引用，自动响应主题切换 */
+    :global([data-theme='dark']) .writing-page {
+      --post-page-bg: #15141A;
+      --post-card-bg: #1F1D26;
+      --post-text: rgba(240, 233, 216, 0.92);
+      --post-text-soft: rgba(240, 233, 216, 0.66);
+      --post-text-dim: rgba(240, 233, 216, 0.44);
+      --post-border-soft: #2F2D38;
+      --post-shadow: 0 1px 2px rgba(0, 0, 0, 0.25), 0 18px 48px -32px rgba(0, 0, 0, 0.6);
+      --post-accent: #E07A4F;
+      --post-accent-strong: #FF8B5C;
+      --post-code-bg: rgba(224, 123, 61, 0.18);
+      --post-code-border: rgba(224, 123, 61, 0.34);
+      --post-code-text: #FFA877;
+      --post-mermaid-bg: #1B1A22;
+      --post-mermaid-track: #2A2832;
+      --post-mermaid-thumb: rgba(224, 122, 79, 0.42);
+      --post-toc-text: rgba(240, 233, 216, 0.6);
+      --post-toc-child: rgba(240, 233, 216, 0.42);
     }
 
     .writing-shell {
@@ -136,7 +162,7 @@ function fmtFull(d: Date) {
       margin: 0 auto;
       padding: 1rem 1rem 2.5rem;
       background: var(--post-card-bg);
-      border: 1px solid rgba(232, 224, 202, 0.78);
+      border: 1px solid var(--post-border-soft);
       border-radius: 8px;
       box-shadow: var(--post-shadow);
     }
@@ -154,8 +180,8 @@ function fmtFull(d: Date) {
       object-fit: cover;
       margin: 0 0 1.7rem;
       border-radius: 6px;
-      border: 1px solid rgba(232, 224, 202, 0.72);
-      background: #f5efe3;
+      border: 1px solid var(--post-border-soft);
+      background: var(--post-mermaid-bg);
     }
 
     .post-meta {
@@ -255,7 +281,7 @@ function fmtFull(d: Date) {
       border: 1px solid var(--post-code-border);
       border-radius: 3px;
       background: var(--post-code-bg);
-      color: #c2410c;
+      color: var(--post-code-text);
       font-size: 0.9em;
       line-height: inherit;
       white-space: normal;
@@ -283,7 +309,7 @@ function fmtFull(d: Date) {
       text-align: center;           /* narrow 图（< 容器宽）自动水平居中 */
       border: 1px solid var(--post-border-soft);
       border-radius: 8px;
-      background: #fbf8f1;
+      background: var(--post-mermaid-bg);
       -webkit-overflow-scrolling: touch;
     }
 
@@ -292,12 +318,12 @@ function fmtFull(d: Date) {
     }
 
     .post-body :global(.mermaid-scroll::-webkit-scrollbar-track) {
-      background: #f2e9da;
+      background: var(--post-mermaid-track);
       border-radius: 999px;
     }
 
     .post-body :global(.mermaid-scroll::-webkit-scrollbar-thumb) {
-      background: rgba(193, 95, 60, 0.34);
+      background: var(--post-mermaid-thumb);
       border-radius: 999px;
     }
 
@@ -316,6 +342,62 @@ function fmtFull(d: Date) {
       height: auto;
       margin: 0;
       vertical-align: top;
+    }
+
+    /* ---------- 表格 ---------- */
+    .post-body :global(table) {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.75rem 0;
+      font-size: 0.92em;
+      background: var(--post-card-bg);
+      border: 1px solid var(--post-border-soft);
+      border-radius: 6px;
+      overflow: hidden;
+      line-height: 1.6;
+    }
+
+    .post-body :global(thead) {
+      background: var(--post-mermaid-bg);
+    }
+
+    .post-body :global(th) {
+      padding: 0.7rem 0.95rem;
+      text-align: left;
+      font-weight: 600;
+      color: var(--post-text);
+      border-bottom: 1.5px solid var(--post-border-soft);
+      letter-spacing: 0;
+    }
+
+    .post-body :global(td) {
+      padding: 0.6rem 0.95rem;
+      border-bottom: 1px solid var(--post-border-soft);
+      color: var(--post-text);
+      vertical-align: top;
+    }
+
+    .post-body :global(tbody tr:last-child td) {
+      border-bottom: none;
+    }
+
+    .post-body :global(tbody tr:hover) {
+      background: color-mix(in srgb, var(--post-accent) 5%, transparent);
+    }
+
+    /* 表格内行内 code 在表格里再压缩一点 */
+    .post-body :global(td code:not(pre code)),
+    .post-body :global(th code:not(pre code)) {
+      font-size: 0.88em;
+    }
+
+    /* 移动端：让表格横向可滚而不撑爆 body */
+    @media (max-width: 600px) {
+      .post-body :global(table) {
+        display: block;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+      }
     }
 
     .post-body :global(.mermaid svg foreignObject .nodeLabel),
