@@ -22,3 +22,6 @@ pnpm-debug.log*
 
 # jetbrains setting folder
 .idea/
+
+# internal docs (沉淀到 LifeOS vault，暂时不开源；想开源时去掉这一行 + 把 .md 放回来)
+docs/
