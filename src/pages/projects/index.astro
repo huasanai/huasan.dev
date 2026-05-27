@@ -8,7 +8,7 @@ const heroPool = PAGE_POOLS.projects;
 
 const projects = (await getCollection('projects')).sort((a, b) => a.data.order - b.data.order);
 
-function groupByStatus<T extends { data: { status: string } }>(items: T[]) {
+function groupByKind<T extends { data: { status: string } }>(items: T[]) {
   const order = ['active', 'experiment', 'paused', 'archived'];
   const m = new Map<string, T[]>();
   for (const p of items) {
@@ -19,40 +19,54 @@ function groupByStatus<T extends { data: { status: string } }>(items: T[]) {
   return order.filter((s) => m.has(s)).map((s) => [s, m.get(s)!] as const);
 }
 
-const grouped = groupByStatus(projects);
-const statusLabel: Record<string, string> = {
-  active: 'active · 正在做',
-  experiment: 'experiment · 实验中',
+const grouped = groupByKind(projects);
+const kindLabel: Record<string, string> = {
+  active: 'skill · Claude Code 扩展',
+  experiment: 'tool · 小工具',
   paused: 'paused · 暂停',
   archived: 'archived · 已归档',
 };
+const kindMeta: Record<string, string> = {
+  active: 'skill',
+  experiment: 'tool',
+  paused: 'paused',
+  archived: 'archived',
+};
 ---
 
-<Layout title="projects" description="画伞的项目展览：用 AI coding 做的小工具和实验。">
+<Layout title="projects" description="画伞开源的 Claude Code skill 和小工具，每个都解决一个真实问题。">
   <HeroQuote current={heroPool.current} pool={heroPool.pool} />
   <div class="container">
     <header class="page-head">
       <h1 class="page-title">projects</h1>
-      <p class="page-desc">用 AI coding 做的小工具和实验。能跑能用，每个都解决一个我自己的真实问题。</p>
+      <p class="page-desc">用 AI coding 做的开源 skill 和小工具。每个都解决一个我自己的真实问题，能跑能用。</p>
     </header>
 
     {
       grouped.map(([status, items]) => (
         <section class="status-block">
-          <h3 class="status-label">{statusLabel[status]}</h3>
+          <h3 class="status-label">{kindLabel[status]}</h3>
           <div class="project-grid">
-            {items.map((p) => (
-              <a href={`/projects/${p.id}`} class="project-card">
-                <div class="project-card-head">
-                  <span class="project-card-title">{p.data.title}</span>
-                </div>
-                <p class="project-card-tagline">{p.data.tagline}</p>
-                <div class="project-card-meta">
-                  {p.data.year}
-                  {p.data.repo && <span> · open source</span>}
-                </div>
-              </a>
-            ))}
+            {items.map((p) => {
+              const href = p.data.repo ?? p.data.link;
+              return (
+                <a
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="project-card"
+                >
+                  <div class="project-card-head">
+                    <span class="project-card-title">{p.data.title}</span>
+                    <span class="project-card-icon" aria-hidden="true">↗</span>
+                  </div>
+                  <p class="project-card-tagline">{p.data.tagline}</p>
+                  <div class="project-card-meta">
+                    {kindMeta[status]} · {p.data.year} · open source
+                  </div>
+                </a>
+              );
+            })}
           </div>
         </section>
       ))
@@ -73,7 +87,8 @@ const statusLabel: Record<string, string> = {
     .page-title::before { content: '#'; color: var(--accent); margin-right: 0.3rem; }
     .page-desc { color: var(--text-soft); margin: 0; }
 
-    .status-block { margin-bottom: 2rem; }
+    .status-block { margin-bottom: 2.5rem; }
+    .status-block:last-of-type { margin-bottom: 0; }
     .status-label {
       font-family: 'JetBrains Mono', monospace;
       font-size: 0.75rem;
@@ -97,6 +112,7 @@ const statusLabel: Record<string, string> = {
       padding: 1.25rem 1.25rem 1.1rem;
       box-shadow: var(--shadow-card);
       transition: all .15s ease;
+      text-decoration: none;
     }
     .project-card:hover {
       border-color: var(--accent-soft);
@@ -104,12 +120,27 @@ const statusLabel: Record<string, string> = {
       box-shadow: var(--shadow-card-hover);
     }
     .project-card:hover .project-card-title { color: var(--accent); }
-    .project-card-head { margin-bottom: 0.5rem; }
+    .project-card:hover .project-card-icon { color: var(--accent); transform: translate(2px, -2px); }
+    .project-card-head {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 0.5rem;
+      margin-bottom: 0.5rem;
+    }
     .project-card-title {
       font-weight: 600;
       font-size: 1.05rem;
       color: var(--text);
       transition: color .15s ease;
+      letter-spacing: 0;
+    }
+    .project-card-icon {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.95rem;
+      color: var(--text-dim);
+      transition: all .15s ease;
+      flex-shrink: 0;
     }
     .project-card-tagline {
       margin: 0.5rem 0 1rem;
