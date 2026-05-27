@@ -20,8 +20,11 @@ function groupByMonth<T extends { data: { pubDate: Date } }>(items: T[]) {
   return [...m.entries()];
 }
 
-function fmtMD(d: Date) {
-  return d.toLocaleString('en-US', { month: 'short', day: '2-digit' }).toUpperCase();
+function fmtISO(d: Date) {
+  const y = d.getFullYear();
+  const m = String(d.getMonth() + 1).padStart(2, '0');
+  const day = String(d.getDate()).padStart(2, '0');
+  return `${y}-${m}-${day}`;
 }
 
 const grouped = groupByMonth(posts);
@@ -53,7 +56,7 @@ const coverClasses = ['cover-1', 'cover-2', 'cover-3', 'cover-4'];
                         <p class="post-card-sub">{post.data.description}</p>
                       )}
                       <div class="post-card-meta">
-                        {fmtMD(post.data.pubDate)} · 画伞
+                        {fmtISO(post.data.pubDate)} · 画伞
                       </div>
                     </div>
                     <div class={`post-card-cover ${coverClasses[i % 4]}`}>
@@ -146,8 +149,7 @@ const coverClasses = ['cover-1', 'cover-2', 'cover-3', 'cover-4'];
       font-family: 'JetBrains Mono', monospace;
       font-size: 0.72rem;
       color: var(--text-dim);
-      letter-spacing: 0.05em;
-      text-transform: uppercase;
+      letter-spacing: 0;
     }
     .post-card-cover {
       flex-shrink: 0;
