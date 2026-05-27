@@ -59,6 +59,12 @@ html, body {
   transition: background 0.25s ease, color 0.25s ease;
 }
 
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
 a { color: var(--text); text-decoration: none; transition: color .15s ease; }
 a:hover { color: var(--accent); }
 
