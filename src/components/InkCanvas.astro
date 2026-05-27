@@ -1,10 +1,11 @@
 ---
 // hero canvas: 程序生成青山绿水 + spotlight reveal + 烟花 sparks
-// - 默认状态：山水几乎被深色 overlay 完全遮盖（dim ~6% 可见）
-// - 鼠标作为 spotlight (radius 240px, soft radial falloff)：半径内 reveal 出青绿山脊
-// - 烟花 sparks：从光圈中心向各方向迸射 (60% 暖橙 / 40% 米色)，1-1.5s 寿命，drag + 微重力
-// - 山脊用 hash-based 1D noise 程序生成，多 octave 合成，刷新页面会有微变（seed 固定但 noise 函数差异）
+// - 默认状态：山水几乎被深色 overlay 完全遮盖 (dim ~6% 可见)；hero 顶部有浅蓝天 gradient hint
+// - 鼠标作为 spotlight (radius 200px, soft radial falloff)：半径内 reveal 出青绿山脊
+// - 烟花 sparks：从光圈中心向各方向迸射白色大颗粒 (2.6-3.2px)，700-1600ms 寿命，drag + 微重力
+// - 山脊用 hash-based 1D noise 程序生成，多 octave 合成，seed 固定 (刷新一致)
 // - 深色 hero bg 兜底 (无论主题)
+// 详细设计与实现说明：docs/hero-canvas.md
 ---
 
 <canvas class="ink-canvas" data-ink-canvas></canvas>
@@ -235,10 +236,10 @@
       // 3. Full color ridges (默认会被 overlay 几乎完全遮盖)
       drawRidges();
 
-      // 3. Overlay with radial spotlight cutout
+      // 4. Overlay with radial spotlight cutout
       drawOverlay();
 
-      // 4. Sparks (on top)
+      // 5. Sparks (on top)
       if (!reducedMotion) {
         spawnSparks();
         drawSparks();
