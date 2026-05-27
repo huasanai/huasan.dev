@@ -118,6 +118,7 @@ function fmtFull(d: Date) {
       --post-code-border: rgba(224, 123, 61, 0.18);
       --post-code-text: #c2410c;
       --post-mermaid-bg: #fbf8f1;
+      --post-mermaid-text: #2F2C27;       /* 跟 mermaid themeVariables 固定的浅色节点配对，不随主题切换 */
       --post-mermaid-track: #f2e9da;
       --post-mermaid-thumb: rgba(193, 95, 60, 0.34);
       --post-toc-text: rgba(36, 41, 47, 0.62);
@@ -333,8 +334,21 @@ function fmtFull(d: Date) {
       min-height: 60px;
     }
     .post-body :global(.mermaid[data-processed="true"]) {
-      color: inherit;
+      /* 文字色固定深色，跟 mermaid 主题里固化的浅色节点配对——
+         不用 inherit 是因为深色模式下 .post-body 的 color 会变浅，
+         会跟 mermaid 节点的浅色背景一起糊成看不清 */
+      color: var(--post-mermaid-text);
       min-height: 0;
+    }
+
+    /* htmlLabels=true 下，节点文字是 foreignObject 里的真实 HTML，
+       兜底确保其文字色不被外层继承覆盖 */
+    .post-body :global(.mermaid foreignObject span),
+    .post-body :global(.mermaid foreignObject p),
+    .post-body :global(.mermaid foreignObject div),
+    .post-body :global(.mermaid .nodeLabel),
+    .post-body :global(.mermaid .edgeLabel) {
+      color: var(--post-mermaid-text);
     }
 
     .post-body :global(.mermaid svg) {
