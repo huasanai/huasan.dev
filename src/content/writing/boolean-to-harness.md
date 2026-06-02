@@ -78,11 +78,11 @@ flowchart LR
 ```mermaid
 flowchart TB
     L1["Layer 1｜硬件层\n晶体管实现布尔逻辑门\n布尔运算 → 加法器 → CPU\n冯·诺依曼结构（运算 + 存储 + 控制）"]
-    L2["Layer 2｜操作系统层\n虚拟内存、进程、文件系统、环境变量\n把硬件资源抽象成"程序可以用的东西""]
-    L3["Layer 3｜网络层\nTCP/IP、HTTP、DNS\n把跨机器的通信抽象成"程序可以调用的接口""]
-    L4["Layer 4｜语言与运行时层\n调用栈、堆、事件循环、GC\n把机器码抽象成"人可以写的语言""]
-    L5["Layer 5｜LLM 层\n向量空间、Transformer、注意力机制\n把海量文本压缩成"可以被查询的隐式知识""]
-    L6["Layer 6｜Agent 层\nHarness、工具、状态、编排\n把无流程控制的推理引擎包装成"可以完成长期任务的系统""]
+    L2["Layer 2｜操作系统层\n虚拟内存、进程、文件系统、环境变量\n把硬件资源抽象成「程序可以用的东西」"]
+    L3["Layer 3｜网络层\nTCP/IP、HTTP、DNS\n把跨机器的通信抽象成「程序可以调用的接口」"]
+    L4["Layer 4｜语言与运行时层\n调用栈、堆、事件循环、GC\n把机器码抽象成「人可以写的语言」"]
+    L5["Layer 5｜LLM 层\n向量空间、Transformer、注意力机制\n把海量文本压缩成「可以被查询的隐式知识」"]
+    L6["Layer 6｜Agent 层\nHarness、工具、状态、编排\n把无流程控制的推理引擎包装成「可以完成长期任务的系统」"]
 
     L1 --> L2 --> L3 --> L4 --> L5 --> L6
 
@@ -204,7 +204,7 @@ flowchart TD
     C["一个只有运算的系统要完成需要流程控制的任务\n必须在外部补上流程控制"]
     D["Harness = 给 LLM 补上流程控制 + 状态的那层外壳\nThink → Act → Observe → 循环 / 检查点 / 分支 / 子 agent"]
     E["Context Engineering\n保证每步喂进去的信息质量"]
-    F["Tool Design\n保证"行动"这一步的可靠性和可测性"]
+    F["Tool Design\n保证「行动」这一步的可靠性和可测性"]
     G["Evals\n保证整个系统行为正确，不随模型/框架/工具变化而退化"]
 
     A --> B --> C --> D
@@ -231,7 +231,7 @@ flowchart TD
 
 **Context Engineering** — 上下文就是状态。管理 context 的方式决定 agent 的可靠性上限。Chroma 的 context rot 研究已经量化了这个现象，是生产级失败的主要来源之一。
 
-**Tool Design** — 5~10 个命名良好的工具（英语动词短语命名）好过 20 个平庸的工具。**错误信息是 tool design 里最被忽视的杠杆**：一条错误信息能让模型明白"怎么改"和只说"Error 400"之间，retry loop 次数差 3~5 倍，直接影响成本。
+**Tool Design** — 5 到 10 个命名良好的工具（英语动词短语命名）好过 20 个平庸的工具。**错误信息是 tool design 里最被忽视的杠杆**：一条错误信息能让模型明白"怎么改"和只说"Error 400"之间，retry loop 次数差 3 到 5 倍，直接影响成本。
 
 **Orchestrator-Subagent 模式** — 默认单 agent，只有在三种情况下才用多 agent：上下文压力超过窗口上限、需要并行执行异构任务、子任务高度独立且重复。子 agent 只读，主 agent 拥有写状态的权限。天真并行（多个 agent 写共享状态）在 demo 里好看，在生产里必崩。
 
@@ -272,7 +272,7 @@ flowchart TD
 | **LangGraph** | 默认选择，复杂有状态 agent | 月下载量 9000 万，Uber/JPMorgan/BlackRock 在用 |
 | **Pydantic AI** | Greenfield + 强类型 + Python 类型安全 | 2025 年底到 v1.0，活跃增长中 |
 | **Mastra** | TypeScript 生态 | TS 生态的事实标准 |
-| **CrewAI** | 快速原型（2~4 小时出来）| 别把它当生产基础——产品化前迁移 LangGraph |
+| **CrewAI** | 快速原型（2 到 4 小时出来）| 别把它当生产基础——产品化前迁移 LangGraph |
 
 注意：原文把 CrewAI 判断为"不要用于生产"过于绝对——它每日仍有 1200 万次执行量，v1.10.1 支持 MCP 和 A2A。真实模式是：CrewAI 原型 → 产品化时迁移 LangGraph。
 
@@ -343,7 +343,7 @@ flowchart LR
 
 这一刀**不能用 LangGraph**，必须裸 Python + Anthropic SDK。
 
-目标是写一个能跑 3~5 步工具调用的最简 agent：
+目标是写一个能跑 3 到 5 步工具调用的最简 agent：
 
 ```python
 while step < max_steps:
