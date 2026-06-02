@@ -1,6 +1,7 @@
 ---
 title: '运算 + 流程控制 = 一切：非科班的 AI 工程认知地图'
 description: 从李笑来"布尔逻辑是计算的基础"出发，推导出 LLM 恰好缺少流程控制这半边，以及 Harness Engineering 为什么是 AI 工程里杠杆最大的一层。附六层认知框架、三层工程解析、五刀学习路线，以及 2026 年 agent 工具全景。
+cover: /images/writing/boolean-to-harness/cover.png
 pubDate: 2026-06-02
 draft: false
 tags: [ai-coding, harness, llm, context-engineering, learning-path, agent]
