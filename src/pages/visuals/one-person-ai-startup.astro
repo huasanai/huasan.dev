@@ -1,0 +1,891 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const title = '一人公司 AI 创业：需求判断力与杠杆解';
+const description = '一人公司 AI 创业的主矛盾不是全栈技术，而是需求判断力。6 个学习层级、杠杆解、真需求评分表与 7 天验证行动指南。';
+---
+
+<Layout title={title} description={description}>
+  <div class="visual-page">
+    <header class="hero">
+      <div class="eyebrow">从“学技术”切换到“跑通付费闭环”</div>
+      <h1>一人公司 AI 创业，主矛盾不是全栈技术。</h1>
+      <p>前端、后端、数据库、Linux、Shell、Harness Engineering 都重要；但它们应该服务于同一件事：找到真实需求，快速交付结果，拿到付款验证。</p>
+      <div class="hero-quote">真正的杠杆解：服务化验证 → AI 半自动交付 → 流程沉淀 → Harness → 产品化。</div>
+    </header>
+
+    <section>
+      <div class="section-head">
+        <h2><span class="nl">01</span>需要学习的东西：6 个层级</h2>
+        <div class="note">越靠上越接近商业判断，越靠下越接近工程实现。学习顺序不是从底到顶，而是围绕产品闭环按需补课。</div>
+      </div>
+
+      <div class="layers">
+        <div class="layer">
+          <div class="layer-no">01</div>
+          <div>
+            <span class="tagline">主战场</span>
+            <h3>市场 / 用户需求层</h3>
+            <p>用户是谁？痛点是什么？为什么现在痛？是否愿意付费？</p>
+          </div>
+          <div>
+            <p><strong>解决的问题：</strong>这个东西到底该不该做？谁会现在就要？</p>
+          </div>
+          <div class="pill-list">
+            <span class="pill">用户访谈</span><span class="pill">需求验证</span><span class="pill">付费意愿</span><span class="pill">场景洞察</span>
+          </div>
+        </div>
+
+        <div class="layer">
+          <div class="layer-no">02</div>
+          <div>
+            <span class="tagline">翻译层</span>
+            <h3>产品层</h3>
+            <p>把真实需求翻译成可理解、可使用、可收费的解决方案。</p>
+          </div>
+          <div>
+            <p><strong>解决的问题：</strong>做成什么形态，用户才觉得值？</p>
+          </div>
+          <div class="pill-list">
+            <span class="pill">价值主张</span><span class="pill">交付形态</span><span class="pill">定价</span><span class="pill">体验路径</span>
+          </div>
+        </div>
+
+        <div class="layer">
+          <div class="layer-no">03</div>
+          <div>
+            <span class="tagline">现金流层</span>
+            <h3>增长 / 销售层</h3>
+            <p>内容、私域、社群、直播、SEO、冷启动、私聊成交。</p>
+          </div>
+          <div>
+            <p><strong>解决的问题：</strong>用户在哪里？怎么触达？怎么成交？</p>
+          </div>
+          <div class="pill-list">
+            <span class="pill">分发</span><span class="pill">信任</span><span class="pill">转化</span><span class="pill">复购</span>
+          </div>
+        </div>
+
+        <div class="layer">
+          <div class="layer-no">04</div>
+          <div>
+            <span class="tagline">AI 生产系统</span>
+            <h3>Harness Engineering 层</h3>
+            <p>把模型、上下文、工具、记忆、流程、评估组合成稳定系统。</p>
+          </div>
+          <div>
+            <p><strong>解决的问题：</strong>如何让 AI 稳定、可控、可复用地交付结果？</p>
+          </div>
+          <div class="pill-list">
+            <span class="pill">Prompt</span><span class="pill">Context</span><span class="pill">Tools</span><span class="pill">Memory</span><span class="pill">Eval</span>
+          </div>
+        </div>
+
+        <div class="layer">
+          <div class="layer-no">05</div>
+          <div>
+            <span class="tagline">实现层</span>
+            <h3>工程实现层</h3>
+            <p>前端、后端、数据库、API、登录、支付、部署、监控。</p>
+          </div>
+          <div>
+            <p><strong>解决的问题：</strong>这个东西如何被可靠地做出来、跑起来、维护住？</p>
+          </div>
+          <div class="pill-list">
+            <span class="pill">前端</span><span class="pill">后端</span><span class="pill">数据库</span><span class="pill">API</span><span class="pill">部署</span>
+          </div>
+        </div>
+
+        <div class="layer">
+          <div class="layer-no">06</div>
+          <div>
+            <span class="tagline">底层理解</span>
+            <h3>计算机基础层</h3>
+            <p>Linux / Unix、Shell、文件系统、进程、网络、权限、状态。</p>
+          </div>
+          <div>
+            <p><strong>解决的问题：</strong>程序到底怎么运行？出问题时如何定位和排错？</p>
+          </div>
+          <div class="pill-list">
+            <span class="pill">Linux</span><span class="pill">Shell</span><span class="pill">网络</span><span class="pill">文件</span><span class="pill">进程</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="section-head">
+        <h2><span class="nl">02</span>杠杆解：先验证需求，再产品化</h2>
+        <div class="note">不要先追求“像创业公司一样完整”，而要先追求“像一人公司一样快速闭环”。</div>
+      </div>
+
+      <div class="card ladder">
+        <div class="chain">
+          <div class="chain-item">
+            <span class="rank">最重要</span>
+            <strong>需求判断力</strong>
+            <div class="weight" aria-label="重要度 5/5"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></div>
+            <span>识别谁真的痛、痛在哪里、是否愿意付费。</span>
+          </div>
+          <div class="chain-item">
+            <strong>快速交付力</strong>
+            <div class="weight" aria-label="重要度 4/5"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i></div>
+            <span>1–7 天做出可演示、可使用、可收费版本。</span>
+          </div>
+          <div class="chain-item">
+            <strong>分发成交力</strong>
+            <div class="weight" aria-label="重要度 3/5"><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i></div>
+            <span>用内容、直播、社群、私聊把产品推到用户面前。</span>
+          </div>
+          <div class="chain-item">
+            <strong>Harness 自动化</strong>
+            <div class="weight" aria-label="重要度 2/5"><i class="on"></i><i class="on"></i><i></i><i></i><i></i></div>
+            <span>把一次性交付沉淀为可复用 AI 工作流。</span>
+          </div>
+          <div class="chain-item">
+            <strong>工程理解力</strong>
+            <div class="weight" aria-label="重要度 1/5"><i class="on"></i><i></i><i></i><i></i><i></i></div>
+            <span>够用即可：看懂、改动、部署、排错。</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid-3" style="margin-top:14px;">
+        <div class="formula card">
+          <div class="label">主线</div>
+          <div class="code">做出能收费的 AI 产品 / AI 服务</div>
+        </div>
+        <div class="formula card">
+          <div class="label">辅线</div>
+          <div class="code">Linux / Shell / 底层原理 / 工程知识，提高交付效率</div>
+        </div>
+        <div class="formula card">
+          <div class="label">方法</div>
+          <div class="code">用 Harness Engineering，把 AI 变成稳定生产系统</div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="section-head">
+        <h2><span class="nl">03</span>市场 / 用户需求层：判断真需求</h2>
+        <div class="note">真需求不是用户说“我想要”，而是用户已经为它付出过代价。</div>
+      </div>
+
+      <div class="quotes">
+        <div class="quote-card"><div class="mark">“</div><strong>付款是需求真实性的验钞机。</strong></div>
+        <div class="quote-card"><div class="mark">“</div><strong>用户为结果付费，不为功能付费。</strong></div>
+        <div class="quote-card"><div class="mark">“</div><strong>不要在脑子里验证需求，要在行为里验证需求。</strong></div>
+        <div class="quote-card"><div class="mark">“</div><strong>技术学习不是创业推进，付费闭环才是。</strong></div>
+      </div>
+
+      <div class="grid-3" style="margin-top:14px;">
+        <div class="formula card">
+          <div class="label">真需求公式</div>
+          <div class="code">真需求 = 特定人群 + 特定场景 + 高频/高痛问题 + 当前替代方案 + 已付出代价 + 可触达 + 可成交</div>
+        </div>
+        <div class="formula card">
+          <div class="label">需求价值公式</div>
+          <div class="code">需求价值 = 痛感强度 × 发生频率 × 付费能力 × 触达效率 × 交付确定性</div>
+        </div>
+        <div class="formula card">
+          <div class="label">验证路径</div>
+          <div class="code">服务化验证 → AI 半自动交付 → 找到重复流程 → 沉淀 Harness → 最后产品化</div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="section-head">
+        <h2><span class="nl">04</span>需求评分表：满分 50</h2>
+        <div class="note">低于 30：先别做产品；30–40：做服务验证；40+：值得考虑产品化。</div>
+      </div>
+
+      <table class="score-table">
+        <thead>
+          <tr><th>维度</th><th>0 分</th><th>5 分</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>人群具体</td><td>所有普通人</td><td>正在用 Claude Code 做第一个 SaaS 的非程序员</td></tr>
+          <tr><td>场景具体</td><td>提升效率</td><td>每次开发到部署时卡在环境变量、支付、数据库、报错</td></tr>
+          <tr><td>痛感强度</td><td>有点麻烦</td><td>不解决就无法上线、无法赚钱、无法交付客户</td></tr>
+          <tr><td>发生频率</td><td>一年一次</td><td>每天 / 每周都发生</td></tr>
+          <tr><td>替代方案</td><td>用户什么都没做</td><td>已经买课、买工具、请人、找朋友、自己写脚本</td></tr>
+          <tr><td>付费能力</td><td>只是觉得有趣</td><td>已经为类似问题付过钱，或有明确预算</td></tr>
+          <tr><td>触达效率</td><td>不知道去哪找人</td><td>能在社群、星球、直播间、评论区、GitHub 直接找到</td></tr>
+          <tr><td>你的优势</td><td>完全不了解</td><td>你自己就是用户，或每天都接触这群人</td></tr>
+          <tr><td>AI 放大率</td><td>AI 帮不上忙</td><td>AI 能把交付成本降低 70% 以上</td></tr>
+          <tr><td>最小交付</td><td>必须开发完整平台</td><td>表单 + AI + 飞书/Notion/邮件就能收费交付</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section>
+      <div class="section-head">
+        <h2><span class="nl">05</span>行动指南：7 天跑一次需求验证</h2>
+        <div class="note">目标不是做出完整产品，而是拿到真实行为证据和至少一个强承诺。</div>
+      </div>
+
+      <div class="guide">
+        <div class="day"><div class="num">1</div><strong>选极窄人群</strong><span>30 分钟内能列出 20 个潜在用户在哪里。</span></div>
+        <div class="day"><div class="num">2</div><strong>收集 50 条抱怨</strong><span>只存原话：我卡在、太麻烦、有没有工具。</span></div>
+        <div class="day"><div class="num">3</div><strong>聚类 3–5 个主题</strong><span>按痛感、频率、付费、触达、交付排序。</span></div>
+        <div class="day"><div class="num">4</div><strong>约 5 个访谈</strong><span>只问过去事实，不推销自己的 idea。</span></div>
+        <div class="day"><div class="num">5</div><strong>再约 5 个访谈</strong><span>找重复模式：谁、场景、代价、替代方案。</span></div>
+        <div class="day"><div class="num">6</div><strong>设计可收费交付</strong><span>先卖结果，不卖工具；先服务，不做平台。</span></div>
+        <div class="day"><div class="num">7</div><strong>看强承诺</strong><span>愿意发资料、约时间、付定金、现在付款。</span></div>
+      </div>
+    </section>
+
+    <section>
+      <div class="split">
+        <div class="dos card good">
+          <h3>访谈时，多问这些<span class="badge">该做</span></h3>
+          <ul>
+            <li><span class="mk">✓</span><span>你最近一次遇到这个问题是什么时候？</span></li>
+            <li><span class="mk">✓</span><span>当时你原本想完成什么任务？具体卡在哪里？</span></li>
+            <li><span class="mk">✓</span><span>你当时怎么解决？花了多久？有没有花钱？</span></li>
+            <li><span class="mk">✓</span><span>如果不解决，会有什么后果？</span></li>
+            <li><span class="mk">✓</span><span>你试过哪些工具/教程/服务？为什么不满意？</span></li>
+          </ul>
+        </div>
+
+        <div class="dos card avoid">
+          <h3>尽量少问这些<span class="badge">避免</span></h3>
+          <ul>
+            <li><span class="mk">✕</span><span>你喜不喜欢这个 idea？</span></li>
+            <li><span class="mk">✕</span><span>如果我做出来你会用吗？</span></li>
+            <li><span class="mk">✕</span><span>你觉得这个功能怎么样？</span></li>
+            <li><span class="mk">✕</span><span>你会不会为了它付费？</span></li>
+            <li><span class="mk">✕</span><span>你觉得市场大不大？</span></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="section-head">
+        <h2><span class="nl">06</span>时间分配建议</h2>
+        <div class="note">你的学习不是停掉技术，而是让技术围绕真实产品闭环生长。</div>
+      </div>
+      <div class="card ladder">
+        <div class="timeline">
+          <div class="seg" style="--g:50; --i:60; --pct:50%;">
+            <div class="bar"><span class="pct">50%</span></div>
+            <div class="lbl">用户需求、访谈、抱怨收集、需求评分</div>
+          </div>
+          <div class="seg" style="--g:20; --i:38; --pct:20%;">
+            <div class="bar"><span class="pct">20%</span></div>
+            <div class="lbl">做可收费交付，拿真实用户反馈</div>
+          </div>
+          <div class="seg" style="--g:20; --i:38; --pct:20%;">
+            <div class="bar"><span class="pct">20%</span></div>
+            <div class="lbl">沉淀 AI Harness、Prompt、流程、脚本</div>
+          </div>
+          <div class="seg" style="--g:10; --i:22; --pct:10%;">
+            <div class="bar"><span class="pct">10%</span></div>
+            <div class="lbl">Linux / Shell / 底层原理补课</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="visual-footer">
+      核心提醒：不要先成为工程师，再创业；要在创业过程中，长出足够用的工程能力。
+    </footer>
+  </div>
+</Layout>
+
+<style>
+  :global(main) { background: var(--bg); }
+
+  .visual-page {
+    /* 主题无关 */
+    --v-font: 'TsangerJinKai02', 'STKaiti', 'KaiTi', -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Hiragino Sans GB', sans-serif;
+    --v-mono: 'JetBrains Mono', 'SF Mono', Menlo, Monaco, Consolas, monospace;
+    --v-r-lg: 16px;
+    --v-r-md: 12px;
+    --v-r-sm: 8px;
+    /* 跟随 global.css：自动浅/暗 + 全站改色自动同步 */
+    --v-bg: var(--bg);
+    --v-surface: var(--surface);
+    --v-border: var(--border);
+    --v-border-soft: var(--border-soft);
+    --v-text: var(--text);
+    --v-text-soft: var(--text-soft);
+    --v-text-dim: var(--text-dim);
+    --v-accent: var(--accent);
+    --v-accent-soft: var(--accent-soft);
+    --v-shadow-card: var(--shadow-card);
+    /* 本图专属（global 未定义，显式给浅色，下方暗色覆盖）*/
+    --v-surface-2: #f3ecdd;
+    --v-orange: #E07A4F;
+    --v-dim-bg: #ebe9e1;
+    --v-dim-text: rgba(36, 41, 47, 0.5);
+
+    width: min(1100px, calc(100% - 32px));
+    margin: 0 auto;
+    padding: 2rem 0 3rem;
+    font-family: var(--v-font);
+    line-height: 1.62;
+    color: var(--v-text);
+  }
+
+  :global([data-theme='dark']) .visual-page {
+    --v-surface-2: #2A2832;
+    --v-orange: #FF8B5C;
+    --v-dim-bg: #1A1922;
+    --v-dim-text: rgba(240, 233, 216, 0.45);
+  }
+
+  /* ============ Hero ============ */
+  .hero {
+    background: var(--v-surface);
+    border: 1px solid var(--v-border-soft);
+    box-shadow: var(--v-shadow-card);
+    border-radius: var(--v-r-lg);
+    padding: 34px 36px;
+  }
+
+  .eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 12px;
+    border-radius: 999px;
+    background: color-mix(in srgb, var(--v-orange) 12%, transparent);
+    border: 1px solid color-mix(in srgb, var(--v-orange) 30%, transparent);
+    color: var(--v-accent);
+    font-family: var(--v-mono);
+    font-size: 12px;
+    font-weight: 500;
+    margin-bottom: 18px;
+  }
+
+  .hero h1 {
+    margin: 0 0 16px;
+    font-size: clamp(30px, 4.2vw, 50px);
+    line-height: 1.2;
+    letter-spacing: 0;
+    font-weight: 600;
+    max-width: 900px;
+    color: var(--v-text);
+  }
+
+  .hero p {
+    margin: 0;
+    max-width: 760px;
+    color: var(--v-text-soft);
+    font-size: 17px;
+  }
+
+  .hero-quote {
+    margin-top: 26px;
+    padding: 18px 22px;
+    border-left: 3px solid var(--v-orange);
+    background: color-mix(in srgb, var(--v-orange) 7%, transparent);
+    border-radius: 0 var(--v-r-md) var(--v-r-md) 0;
+    font-size: 19px;
+    font-weight: 600;
+    line-height: 1.5;
+    color: var(--v-text);
+  }
+
+  /* ============ 区块标题 ============ */
+  section { margin-top: 22px; }
+
+  .section-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+    gap: 20px;
+    margin: 38px 0 16px;
+  }
+
+  .section-head h2 {
+    margin: 0;
+    font-size: clamp(23px, 3vw, 32px);
+    letter-spacing: 0;
+    font-weight: 600;
+    line-height: 1.22;
+    color: var(--v-text);
+  }
+  .section-head h2 .nl {
+    font-family: var(--v-mono);
+    color: var(--v-accent);
+    font-weight: 600;
+    margin-right: 4px;
+  }
+
+  .section-head .note {
+    color: var(--v-text-soft);
+    font-size: 13.5px;
+    max-width: 360px;
+    text-align: right;
+  }
+
+  /* ============ 卡片基底 ============ */
+  .card {
+    background: var(--v-surface);
+    border: 1px solid var(--v-border-soft);
+    border-radius: var(--v-r-md);
+    box-shadow: var(--v-shadow-card);
+  }
+
+  .grid-3 {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 14px;
+  }
+
+  /* ============ 01 层级 ============ */
+  .layers { display: grid; gap: 12px; }
+
+  .layer {
+    display: grid;
+    grid-template-columns: 88px minmax(0, 1.2fr) minmax(0, 1.45fr) minmax(0, 1fr);
+    gap: 18px;
+    align-items: stretch;
+    padding: 16px;
+    background: var(--v-surface);
+    border: 1px solid var(--v-border-soft);
+    border-radius: var(--v-r-md);
+    box-shadow: var(--v-shadow-card);
+  }
+
+  .layer-no {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 72px;
+    border-radius: var(--v-r-sm);
+    background: var(--v-surface-2);
+    border: 1px solid var(--v-border-soft);
+    color: var(--v-accent);
+    font-family: var(--v-mono);
+    font-size: 26px;
+    font-weight: 600;
+  }
+
+  .layer h3 {
+    margin: 2px 0 8px;
+    font-size: 19px;
+    letter-spacing: 0;
+    font-weight: 600;
+    color: var(--v-text);
+  }
+
+  .layer p {
+    margin: 0;
+    color: var(--v-text-soft);
+    font-size: 14.5px;
+  }
+  .layer p strong { color: var(--v-accent); font-weight: 600; }
+
+  .tagline {
+    display: inline-flex;
+    padding: 4px 9px;
+    border-radius: 999px;
+    background: color-mix(in srgb, var(--v-orange) 12%, transparent);
+    color: var(--v-accent);
+    font-family: var(--v-mono);
+    font-size: 11px;
+    font-weight: 500;
+    margin-bottom: 8px;
+  }
+
+  .pill-list {
+    display: flex;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    align-items: flex-start;
+    gap: 7px;
+    margin-top: 10px;
+  }
+
+  .pill {
+    border: 1px solid var(--v-border-soft);
+    background: var(--v-surface-2);
+    color: var(--v-text-soft);
+    padding: 4px 9px;
+    border-radius: 999px;
+    font-family: var(--v-mono);
+    font-size: 11.5px;
+  }
+
+  /* ============ 02 能力链：重要度橙色梯度 ============ */
+  .ladder { padding: 22px; }
+
+  .chain {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 12px;
+    align-items: stretch;
+    margin-top: 6px;
+  }
+
+  .chain-item {
+    position: relative;
+    min-height: 138px;
+    padding: 18px 16px 14px;
+    border-radius: var(--v-r-md);
+    background: color-mix(in srgb, var(--v-orange) calc(var(--w) * 15%), transparent);
+    border: 1px solid var(--v-border-soft);
+    overflow: visible;
+  }
+  .chain-item:nth-child(1) { --w: 1; }
+  .chain-item:nth-child(2) { --w: 0.8; }
+  .chain-item:nth-child(3) { --w: 0.6; }
+  .chain-item:nth-child(4) { --w: 0.4; }
+  .chain-item:nth-child(5) { --w: 0.25; }
+
+  .chain-item::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: var(--v-orange);
+    opacity: var(--w);
+    border-radius: var(--v-r-md) var(--v-r-md) 0 0;
+  }
+
+  .chain-item strong {
+    display: block;
+    font-size: 17px;
+    font-weight: 600;
+    letter-spacing: 0;
+    margin-bottom: 10px;
+    color: var(--v-text);
+  }
+
+  .chain-item span {
+    color: var(--v-text-soft);
+    font-size: 12.5px;
+  }
+
+  .chain-item .weight {
+    display: flex;
+    gap: 4px;
+    margin-bottom: 10px;
+  }
+  .chain-item .weight i {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--v-border);
+  }
+  .chain-item .weight i.on { background: var(--v-orange); }
+
+  .chain-item .rank {
+    position: absolute;
+    top: 10px; right: 10px;
+    font-family: var(--v-mono);
+    font-size: 9.5px;
+    letter-spacing: 0.04em;
+    color: var(--v-accent);
+    border: 1px solid color-mix(in srgb, var(--v-orange) 40%, transparent);
+    background: color-mix(in srgb, var(--v-orange) 10%, transparent);
+    padding: 2px 6px;
+    border-radius: 999px;
+  }
+
+  .chain-item:not(:last-child)::after {
+    content: "›";
+    position: absolute;
+    right: -13px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--v-orange);
+    font-size: 28px;
+    font-weight: 300;
+    z-index: 2;
+  }
+
+  /* ============ 公式卡 ============ */
+  .formula {
+    padding: 20px;
+    min-height: 150px;
+  }
+  .formula .label {
+    font-family: var(--v-mono);
+    color: var(--v-accent);
+    font-size: 11px;
+    font-weight: 600;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+  .formula .code {
+    font-family: var(--v-mono);
+    font-size: 14px;
+    line-height: 1.65;
+    color: var(--v-text);
+    letter-spacing: 0;
+  }
+
+  /* ============ 03 金句卡 ============ */
+  .quotes {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 14px;
+  }
+  .quote-card {
+    min-height: 148px;
+    padding: 20px;
+    background: var(--v-surface);
+    border: 1px solid var(--v-border-soft);
+    border-left: 3px solid var(--v-orange);
+    border-radius: var(--v-r-md);
+    box-shadow: var(--v-shadow-card);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .quote-card .mark {
+    color: var(--v-orange);
+    font-size: 36px;
+    line-height: 1;
+    font-family: Georgia, serif;
+  }
+  .quote-card strong {
+    display: block;
+    font-size: 18px;
+    line-height: 1.45;
+    font-weight: 600;
+    letter-spacing: 0;
+    color: var(--v-text);
+  }
+
+  /* ============ 04 评分表：0分压暗 / 5分点亮 ============ */
+  .score-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    overflow: hidden;
+    border: 1px solid var(--v-border-soft);
+    border-radius: var(--v-r-md);
+    background: var(--v-surface);
+    box-shadow: var(--v-shadow-card);
+  }
+  .score-table th,
+  .score-table td {
+    padding: 13px 16px;
+    border-bottom: 1px solid var(--v-border-soft);
+    text-align: left;
+    vertical-align: top;
+    font-size: 14px;
+  }
+  .score-table thead th {
+    font-family: var(--v-mono);
+    font-size: 12px;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    font-weight: 600;
+  }
+  .score-table th:first-child { color: var(--v-text-soft); background: var(--v-surface-2); }
+  /* 0 分列：压暗 = 要避开的状态 */
+  .score-table th:nth-child(2) { color: var(--v-text-dim); background: var(--v-dim-bg); }
+  .score-table td:nth-child(2) {
+    background: var(--v-dim-bg);
+    color: var(--v-dim-text);
+  }
+  /* 5 分列：点亮 = 目标状态 */
+  .score-table th:nth-child(3) {
+    color: var(--v-accent);
+    background: color-mix(in srgb, var(--v-orange) 13%, transparent);
+    border-left: 2px solid var(--v-orange);
+  }
+  .score-table td:nth-child(3) {
+    background: color-mix(in srgb, var(--v-orange) 7%, transparent);
+    color: var(--v-text);
+    border-left: 2px solid color-mix(in srgb, var(--v-orange) 55%, transparent);
+  }
+  .score-table tr:last-child td { border-bottom: 0; }
+  .score-table td:first-child { font-weight: 600; color: var(--v-text); width: 18%; }
+
+  /* ============ 05 行动指南 7 天 ============ */
+  .guide {
+    display: grid;
+    grid-template-columns: repeat(7, minmax(0, 1fr));
+    gap: 10px;
+  }
+  .day {
+    padding: 14px;
+    border-radius: var(--v-r-md);
+    border: 1px solid var(--v-border-soft);
+    background: var(--v-surface);
+    box-shadow: var(--v-shadow-card);
+    min-height: 150px;
+  }
+  .day .num {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: color-mix(in srgb, var(--v-orange) 14%, transparent);
+    color: var(--v-accent);
+    font-family: var(--v-mono);
+    font-weight: 600;
+    font-size: 13px;
+    margin-bottom: 12px;
+  }
+  .day strong {
+    display: block;
+    font-size: 14.5px;
+    line-height: 1.35;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: var(--v-text);
+  }
+  .day span { color: var(--v-text-soft); font-size: 12.5px; }
+
+  /* ============ 05 访谈 do / don't ============ */
+  .split {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    align-items: stretch;
+  }
+  .dos { padding: 22px; }
+  .dos h3 {
+    margin: 0 0 14px;
+    font-size: 19px;
+    font-weight: 600;
+    letter-spacing: 0;
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    color: var(--v-text);
+  }
+  .dos h3 .badge {
+    font-family: var(--v-mono);
+    font-size: 11px;
+    font-weight: 500;
+    padding: 3px 9px;
+    border-radius: 999px;
+  }
+  .dos ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    gap: 11px;
+  }
+  .dos li {
+    display: flex;
+    gap: 11px;
+    font-size: 14.5px;
+    align-items: flex-start;
+  }
+  .dos .mk {
+    flex: 0 0 auto;
+    width: 16px; height: 16px;
+    margin-top: 3px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    font-size: 11px;
+    font-weight: 700;
+  }
+
+  /* 多问 = 暖橙高亮 = 该做 */
+  .dos.good {
+    background: color-mix(in srgb, var(--v-orange) 7%, transparent);
+    border: 1px solid color-mix(in srgb, var(--v-orange) 40%, transparent);
+    border-left: 4px solid var(--v-orange);
+  }
+  .dos.good h3 .badge {
+    color: var(--v-accent);
+    background: color-mix(in srgb, var(--v-orange) 16%, transparent);
+  }
+  .dos.good li { color: var(--v-text); }
+  .dos.good .mk {
+    background: var(--v-orange);
+    color: #fff;
+  }
+
+  /* 少问 = 压暗 = 别做 */
+  .dos.avoid {
+    background: var(--v-dim-bg);
+    border: 1px solid var(--v-border-soft);
+    border-left: 4px solid var(--v-border);
+  }
+  .dos.avoid h3 { color: var(--v-text-soft); }
+  .dos.avoid h3 .badge {
+    color: var(--v-text-dim);
+    background: color-mix(in srgb, var(--v-text-dim) 12%, transparent);
+  }
+  .dos.avoid li { color: var(--v-dim-text); }
+  .dos.avoid .mk {
+    background: transparent;
+    border: 1px solid var(--v-text-dim);
+    color: var(--v-text-dim);
+  }
+
+  /* ============ 06 时间分配：比例 timeline ============ */
+  .timeline {
+    display: flex;
+    gap: 10px;
+    align-items: stretch;
+    margin-top: 4px;
+  }
+  .seg {
+    flex-grow: var(--g);
+    flex-basis: 0;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .seg .bar {
+    width: 100%;
+    height: 60px;
+    border-radius: var(--v-r-sm);
+    background: color-mix(in srgb, var(--v-orange) calc(var(--i) * 1%), transparent);
+    border: 1px solid color-mix(in srgb, var(--v-orange) 40%, transparent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .seg .pct {
+    font-family: var(--v-mono);
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--v-accent);
+  }
+  .seg .lbl {
+    font-size: 12.5px;
+    color: var(--v-text-soft);
+    line-height: 1.4;
+  }
+
+  /* ============ Footer ============ */
+  .visual-footer {
+    margin-top: 34px;
+    padding: 22px 0 0;
+    color: var(--v-text-dim);
+    font-size: 13px;
+    text-align: center;
+  }
+
+  /* ============ 响应式 ============ */
+  @media (max-width: 980px) {
+    .layer { grid-template-columns: 64px 1fr; }
+    .layer > div:nth-child(3), .layer > div:nth-child(4) { grid-column: 2; }
+    .grid-3, .quotes, .guide, .chain { grid-template-columns: 1fr; }
+    .split { grid-template-columns: 1fr; }
+    .chain-item { min-height: 0; }
+    .chain-item:not(:last-child)::after { display: none; }
+    .section-head { align-items: start; flex-direction: column; }
+    .section-head .note { text-align: left; }
+  }
+
+  @media (max-width: 720px) {
+    .timeline { flex-direction: column; }
+    .seg { flex-direction: row; align-items: center; gap: 14px; }
+    .seg .bar { width: var(--pct); min-width: 76px; height: 48px; flex-shrink: 0; }
+    .seg .lbl { flex: 1; }
+  }
+</style>
