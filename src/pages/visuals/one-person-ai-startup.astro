@@ -193,6 +193,43 @@ const description = '一人公司 AI 创业的主要矛盾不是编程技术，�
           <div class="code">服务化验证 → AI 半自动交付 → 找到重复流程 → 沉淀 Harness → 最后产品化</div>
         </div>
       </div>
+
+      <div class="card evidence">
+        <div class="ev-head">
+          <strong>判断真需求，看 4 类证据</strong>
+          <span class="ev-flow">从弱 → 强</span>
+        </div>
+        <div class="ev-list">
+          <div class="ev-row" style="--lv:1">
+            <div class="ev-num">1</div>
+            <div class="ev-body">
+              <div class="ev-top"><strong>口头兴趣</strong><span class="ev-val">价值很低</span></div>
+              <p>“这个不错”“我可能会用”“挺有意思”。</p>
+            </div>
+          </div>
+          <div class="ev-row" style="--lv:2">
+            <div class="ev-num">2</div>
+            <div class="ev-body">
+              <div class="ev-top"><strong>行为证据</strong><span class="ev-val">价值中等</span></div>
+              <p>他已经搜索过、收藏过、问过别人、试过工具、自己搭过笨办法。</p>
+            </div>
+          </div>
+          <div class="ev-row" style="--lv:3">
+            <div class="ev-num">3</div>
+            <div class="ev-body">
+              <div class="ev-top"><strong>成本证据</strong><span class="ev-val">价值很高</span></div>
+              <p>他已经花时间、花钱、雇人、买课、买软件、忍受麻烦。</p>
+            </div>
+          </div>
+          <div class="ev-row" style="--lv:4">
+            <div class="ev-num">4</div>
+            <div class="ev-body">
+              <div class="ev-top"><strong>承诺证据</strong><span class="ev-val">价值最高</span></div>
+              <p>他愿意预约、转介绍、加入等待名单、试用、预付费、现在付款。</p>
+            </div>
+          </div>
+        </div>
+      </div>
     </section>
 
     <section>
@@ -653,6 +690,78 @@ const description = '一人公司 AI 创业的主要矛盾不是编程技术，�
     font-weight: 600;
     letter-spacing: 0;
     color: var(--v-text);
+  }
+
+  /* ============ 03 判断真需求：4 类证据，从弱到强 ============ */
+  .evidence { margin-top: 14px; padding: 20px 22px; }
+  .ev-head {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    margin-bottom: 14px;
+  }
+  .ev-head strong {
+    font-size: 17px;
+    font-weight: 600;
+    color: var(--v-text);
+  }
+  .ev-flow {
+    font-family: var(--v-mono);
+    font-size: 12px;
+    color: var(--v-accent);
+    letter-spacing: 0.04em;
+  }
+  .ev-list { display: grid; gap: 8px; }
+  .ev-row {
+    display: grid;
+    grid-template-columns: 36px 1fr;
+    gap: 14px;
+    align-items: start;
+    padding: 13px 16px;
+    border-radius: var(--v-r-md);
+    border: 1px solid var(--v-border-soft);
+    border-left: 3px solid color-mix(in srgb, var(--v-orange) calc(var(--lv) * 25%), transparent);
+    background: color-mix(in srgb, var(--v-orange) calc(var(--lv) * 6%), transparent);
+  }
+  .ev-num {
+    width: 30px; height: 30px;
+    display: flex; align-items: center; justify-content: center;
+    border-radius: 50%;
+    font-family: var(--v-mono);
+    font-weight: 600;
+    font-size: 13px;
+    color: var(--v-accent);
+    background: color-mix(in srgb, var(--v-orange) calc(var(--lv) * 10%), transparent);
+  }
+  .ev-top {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 4px;
+  }
+  .ev-top strong {
+    font-size: 15.5px;
+    font-weight: 600;
+    color: var(--v-text);
+  }
+  .ev-val {
+    font-family: var(--v-mono);
+    font-size: 11px;
+    font-weight: 500;
+    padding: 2px 9px;
+    border-radius: 999px;
+    color: var(--v-accent);
+    background: color-mix(in srgb, var(--v-orange) calc(var(--lv) * 12%), transparent);
+    white-space: nowrap;
+  }
+  /* 价值很低：中性灰，几乎没价值；价值最高：实心橙点睛（呼应"目标态"）*/
+  .ev-list .ev-row:nth-child(1) .ev-val { color: var(--v-dim-text); background: var(--v-dim-bg); }
+  .ev-list .ev-row:nth-child(4) .ev-val { color: #fff; background: var(--v-orange); }
+  .ev-body p {
+    margin: 0;
+    color: var(--v-text-soft);
+    font-size: 13.5px;
+    line-height: 1.6;
   }
 
   /* ============ 04 评分表：0分压暗 / 5分点亮 ============ */
