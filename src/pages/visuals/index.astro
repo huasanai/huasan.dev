@@ -1,0 +1,111 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import HeroQuote from '../../components/HeroQuote.astro';
+import { PAGE_POOLS } from '../../lib/quotes';
+import { VISUALS } from '../../lib/visuals';
+
+const heroPool = PAGE_POOLS.visuals;
+const visuals = [...VISUALS].sort((a, b) => b.date.localeCompare(a.date));
+---
+
+<Layout title="visuals" description="画伞把复杂内容拆解成一图看懂的结构化信息图。">
+  <HeroQuote current={heroPool.current} pool={heroPool.pool} />
+  <div class="container">
+    <header class="page-head">
+      <h1 class="page-title">visuals</h1>
+      <p class="page-desc">把复杂的内容拆解成一图看懂的结构化信息图。每张都为一个真实问题画一张地图。</p>
+    </header>
+
+    {
+      visuals.length === 0 ? (
+        <p class="empty">还没有可视化页。</p>
+      ) : (
+        <div class="visual-grid">
+          {visuals.map((v) => (
+            <a href={`/visuals/${v.slug}`} class="visual-card">
+              <div class="visual-card-head">
+                <span class="visual-card-title">{v.title}</span>
+                <span class="visual-card-icon" aria-hidden="true">→</span>
+              </div>
+              <p class="visual-card-desc">{v.description}</p>
+              <div class="visual-card-meta">{v.date} · 信息图</div>
+            </a>
+          ))}
+        </div>
+      )
+    }
+  </div>
+
+  <style>
+    main { padding: 0 0 4rem; }
+    .page-head { margin-top: 3rem; margin-bottom: 2.5rem; }
+    .page-title {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 1.5rem;
+      font-weight: 500;
+      color: var(--text-soft);
+      margin: 0 0 0.5rem;
+      letter-spacing: 0;
+    }
+    .page-title::before { content: '#'; color: var(--accent); margin-right: 0.3rem; }
+    .page-desc { color: var(--text-soft); margin: 0; }
+
+    .visual-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 0.85rem;
+    }
+    .visual-card {
+      display: block;
+      background: var(--surface);
+      border: 1px solid var(--border-soft);
+      border-radius: 12px;
+      padding: 1.4rem 1.4rem 1.2rem;
+      box-shadow: var(--shadow-card);
+      transition: all .15s ease;
+      text-decoration: none;
+    }
+    .visual-card:hover {
+      border-color: var(--accent-soft);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-card-hover);
+    }
+    .visual-card:hover .visual-card-title { color: var(--accent); }
+    .visual-card:hover .visual-card-icon { color: var(--accent); transform: translateX(3px); }
+    .visual-card-head {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 0.5rem;
+      margin-bottom: 0.5rem;
+    }
+    .visual-card-title {
+      font-weight: 600;
+      font-size: 1.1rem;
+      color: var(--text);
+      line-height: 1.4;
+      transition: color .15s ease;
+      letter-spacing: 0;
+    }
+    .visual-card-icon {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 1rem;
+      color: var(--text-dim);
+      transition: all .15s ease;
+      flex-shrink: 0;
+    }
+    .visual-card-desc {
+      margin: 0.5rem 0 1.1rem;
+      color: var(--text-soft);
+      font-size: 0.92rem;
+      line-height: 1.65;
+    }
+    .visual-card-meta {
+      font-family: 'JetBrains Mono', monospace;
+      color: var(--text-dim);
+      font-size: 0.72rem;
+      letter-spacing: 0;
+    }
+    .empty { color: var(--text-dim); }
+  </style>
+</Layout>

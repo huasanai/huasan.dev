@@ -57,6 +57,18 @@ export const PAGE_POOLS: Record<string, PagePool> = {
     ],
   },
 
+  visuals: {
+    current: { text: '删繁就簡三秋樹，領異標新二月花', src: '鄭板橋' },
+    pool: [
+      { text: '删繁就簡三秋樹，領異標新二月花', src: '鄭板橋' },
+      { text: '致廣大而盡精微', src: '《中庸》' },
+      { text: '圖難於其易，為大於其細', src: '老子《道德經》' },
+      { text: '大音希聲，大象無形', src: '老子《道德經》' },
+      { text: '大巧若拙', src: '老子《道德經》' },
+      { text: '運用之妙，存乎一心', src: '《宋史·岳飛傳》' },
+    ],
+  },
+
   now: {
     current: { text: '行到水窮處，坐看雲起時', src: '王維《終南別業》' },
     pool: [
