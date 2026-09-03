@@ -1,0 +1,2899 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const title = '欧洲与亚洲文明发展脉络及关键转折点';
+const description = '欧洲文明与以中华文明为主线的亚洲文明的宏观演化地图：两条并列的线、24 个关键转折点、对照观察与最少书单。这是理解结构的模型，不是线性进步史。';
+---
+
+<Layout title={title} description={description}>
+  <div class="visual-page">
+    <script is:inline>
+      /* 首帧前接管分区显示，避免闪现全部内容；脚本失败时下面会移除该类 */
+      document.currentScript.parentElement.classList.add('is-routed');
+    </script>
+
+    <nav class="partbar" aria-label="分区导航">
+      <div class="partbar__row">
+        <span class="partbar__tag">总起</span>
+        <a href="#v-intro">导读与阅读说明</a>
+        <span class="partbar__sep" aria-hidden="true"></span>
+        <span class="partbar__tag">分述 · 并列</span>
+        <span class="partbar__pair">
+          <a class="is-eu" href="#v-europe">欧洲文明</a>
+          <a class="is-as" href="#v-asia">亚洲文明</a>
+        </span>
+        <span class="partbar__sep" aria-hidden="true"></span>
+        <span class="partbar__tag">总合</span>
+        <a href="#v-compare">对照观察</a>
+        <a href="#v-books">书单</a>
+        <a href="#v-notes">核校说明</a>
+      </div>
+    </nav>
+
+  <section class="view" id="v-intro" aria-labelledby="v-intro-t">
+    <div class="viewbody">
+  <header class="hero">
+    <div class="wrap">
+      <p class="hero__kicker">04-LIBRARY · 已核校的宏观模型</p>
+      <h1>欧洲与亚洲<br><em>文明发展脉络</em><br>及<i>关键转折点</i></h1>
+      <p class="hero__sub">欧洲文明，与以中华文明为主线的亚洲文明。四张图，两套最少书单，一份核校清单。</p>
+      <p class="hero__meta mono">
+        <span>创建 2026-09-03</span>
+        <span>四图 · 24 个转折点 · 6 本书</span>
+        <span>状态：已核校</span>
+      </p>
+
+      <div class="caution">
+        <p><strong>这是一张地图，不是一条直线。</strong></p>
+        <p>这四张图是帮助理解的<strong>宏观模型</strong>，不是把历史压缩成一条必然进步的直线。「欧洲文明」和「亚洲文明」都是后世形成的概括，内部始终存在多个中心、断裂和竞争传统。</p>
+      </div>
+
+      <h3 class="h" style="margin-top:14px">这份材料的组织方式</h3>
+      <p class="prose" style="color:var(--ink-2);margin-bottom:6px"><strong>总 — 分 — 总。</strong>中间那一层是<strong>并列的两条线</strong>：欧洲与亚洲左右并置，不是上下顺序，谁也不在谁之后。</p>
+
+      <div class="mapstruct">
+        <div class="ms-stage">
+          <span class="ms-tag">总起</span>
+          <div class="ms-node ms-node--now">导读与阅读说明<em>你在这里</em></div>
+        </div>
+        <div class="link link--down" style="--n:2"><i></i><i></i></div>
+        <div class="ms-stage">
+          <span class="ms-tag">分述 · 两条并行的线</span>
+          <div class="gates">
+            <a class="gate gate--eu" href="#v-europe">
+              <span class="g-n">线 A · 并列</span>
+              <h3>欧洲文明</h3>
+              <p>三条源流汇合，基督教化，罗马西部终结与拜占庭延续，中世纪多中心结构，直到一体化与冷战终结。</p>
+              <span class="g-go">大脉络 + 12 个转折点 →</span>
+            </a>
+            <a class="gate gate--as" href="#v-asia">
+              <span class="g-n">线 B · 并列</span>
+              <h3>亚洲文明 · 以中华文明为主线</h3>
+              <p>先看西亚、南亚、东亚、中亚草原与海洋网络如何相互塑造，再沿中华文明主轴从多元起源走到 2001。</p>
+              <span class="g-go">互动总览 + 大脉络 + 12 个转折点 →</span>
+            </a>
+          </div>
+        </div>
+        <div class="link link--up" style="--n:2"><i></i><i></i></div>
+        <div class="ms-stage">
+          <span class="ms-tag">总合 · 把两条线放回一起</span>
+          <div class="ms-row">
+            <a href="#v-compare"><b>对照观察</b><span>可比与不可比</span></a>
+            <a href="#v-books"><b>最少书单</b><span>各 3 本</span></a>
+            <a href="#v-notes"><b>核校说明</b><span>改了什么、依据是什么</span></a>
+          </div>
+        </div>
+      </div>
+
+      <p class="lede" style="margin-top:34px">
+        <strong>阅读方法：</strong>先看两张「大脉络图」获得方向感，再看两张「关键转折点图」记住骨架，最后按最少书单补足细节。
+      </p>
+    </div>
+  </header>
+
+  <section id="howto">
+    <div class="wrap">
+      <p class="eyebrow">使用说明与核校原则</p>
+      <h2 class="h">怎样读这张地图</h2>
+      <div class="prose">
+        <p class="lede">在看任何一条线之前，先接受四条限制。它们决定了这些图能回答什么问题、不能回答什么问题。</p>
+      </div>
+
+      <div class="legend-grid reveal" style="grid-template-columns:repeat(auto-fit,minmax(min(100%,250px),1fr))">
+        <div class="lg">
+          <h4>后世的概括</h4>
+          <p>「欧洲文明」和「亚洲文明」都是后世形成的概括，内部始终存在多个中心、断裂和竞争传统。</p>
+        </div>
+        <div class="lg">
+          <h4>箭头不等于唯一原因</h4>
+          <p>箭头表示继承、吸收、冲突或结构变化，不表示后一个结果只由前一个原因造成。</p>
+        </div>
+        <div class="lg">
+          <h4>年份只是导航标记</h4>
+          <p>关键年份是导航标记；许多变化持续数十年至数百年。</p>
+        </div>
+        <div class="lg">
+          <h4>分析概念不是事件</h4>
+          <p>「封建主义」「民族国家」「唐宋之变」「商业革命」等都是史学分析概念，不能当成某一天突然发生的单一事件。</p>
+        </div>
+        <div class="lg">
+          <h4>亚洲不等于中国王朝史</h4>
+          <p>亚洲部分以中华文明为主线，但保留西亚、南亚、中亚草原、东南亚和海洋网络的互动，避免把「亚洲史」等同于「中国王朝史」。</p>
+        </div>
+      </div>
+
+      <h3 class="h" style="margin-top:52px">四类因素：统一图例</h3>
+      <p class="prose" style="color:var(--ink-2)">全页用同一组形状标记区分四类变化。<strong>形状表示因素类别，颜色只用于区分文明</strong>：欧洲部分用深蓝／酒红／旧金，亚洲部分用朱砂／黛青／玉石绿。</p>
+
+      <div class="legend-grid reveal">
+        <div class="lg">
+          <h4><span class="mk mk--inst"></span>制度</h4>
+          <p>治理形式、法律、官僚、财政与军事组织。例：郡县行政、议会与宪章、科举文官。</p>
+        </div>
+        <div class="lg">
+          <h4><span class="mk mk--idea"></span>思想／宗教</h4>
+          <p>信仰、经典、哲学与合法性语言。例：基督教化、宗教改革、天命与礼乐、儒释道互动。</p>
+        </div>
+        <div class="lg">
+          <h4><span class="mk mk--tech"></span>生产／技术</h4>
+          <p>农业、能源、工具与知识生产方式。例：铁器扩散、印刷革命、工厂与化石能源。</p>
+        </div>
+        <div class="lg">
+          <h4><span class="mk mk--flow"></span>跨区域交流</h4>
+          <p>贸易、迁徙、战争、传教与技术传播。例：丝绸之路、翻译运动、白银流入、哥伦布大交换。</p>
+        </div>
+      </div>
+
+      <h3 class="h" style="margin-top:52px">符号约定</h3>
+      <div class="sym">
+        <div><b>│ ┬ ┴</b><span>细线肘接表示分叉与汇合。并行的支线是真的并行，不要读成主次先后。</span></div>
+        <div><b>◇ 节点</b><span>脊线上的方形节点是一个年代带的起点，实心节点表示该文明的主干转折。</span></div>
+        <div><b>1453</b><span>等宽数字是年份刻度。年份是导航标记，不是变化完成的日期。</span></div>
+        <div><b>判断</b><span>带竖线的浅色块是分析性判断（对应原文中的 ★），不是事实陈述。</span></div>
+        <div><b>? 展开</b><span>可展开注释表示这是有争论的概念或对应关系，点开可看学界分歧所在。</span></div>
+        <div><b>虚线框</b><span>旁注：来自本条主线之外、但对它产生持续影响的力量。</span></div>
+      </div>
+    </div>
+  </section>
+
+    </div>
+  </section>
+
+  <section class="view" id="v-europe" style="--vc:var(--eu-1);--accent:var(--eu-1)" aria-labelledby="v-europe-t">
+    <div class="viewhead">
+      <div class="wrap">
+        <p class="stage"><b>分述 · 线 A（与线 B 并列）</b></p>
+        <h2 id="v-europe-t">欧洲文明</h2>
+        <p>从古代近东、古希腊、古罗马三条源流，到今天的「民族国家 + 欧洲联盟 + 跨大西洋体系并存」。这条线与「亚洲文明」并列，两者不构成先后。</p>
+      </div>
+    </div>
+
+    <nav class="subnav" aria-label="欧洲文明 · 分节">
+      <div class="wrap">
+        <span class="subnav__label">欧洲文明</span>
+          <a href="#europe">大脉络</a>
+          <a href="#europe-tp">12 个关键转折点</a>
+      </div>
+    </nav>
+    <div class="viewbody">
+  <section id="europe" style="--accent:var(--eu-1)">
+    <div class="wrap">
+      <p class="eyebrow"><span class="num">图一</span> 欧洲文明发展大脉络</p>
+      <h2 class="h">欧洲文明发展大脉络</h2>
+      <div class="prose">
+        <p class="lede">从三条源流开始，到今天的「民族国家 + 欧洲联盟 + 跨大西洋体系并存」。并行的支线是真的并行，不要读成主次先后。</p>
+      </div>
+
+      <div class="tl">
+
+        <!-- 源流 -->
+        <div id="eu-e1" class="era era--major reveal">
+          <div class="era__rail"><span class="era__year">前3000—前1世纪</span><span class="era__tag">源流</span></div>
+          <div class="era__body">
+            <h4>三条源流</h4>
+            <p>后来被称作「欧洲」的东西，起点不在一处，也不在欧洲内部。</p>
+            <div class="branch" style="--n:3">
+              <article class="strand strand--idea">
+                <h5>古代近东</h5>
+                <p>两河城市、文字、法律。古以色列—犹太教与《希伯来圣经》。</p>
+                <div class="tags"><span class="tag tag--inst"><i class="mk mk--inst"></i>制度</span><span class="tag tag--idea"><i class="mk mk--idea"></i>思想／宗教</span></div>
+              </article>
+              <article class="strand strand--idea">
+                <h5>古希腊</h5>
+                <p>城邦、哲学、史学。公民政治，但范围有限。</p>
+                <div class="tags"><span class="tag tag--idea"><i class="mk mk--idea"></i>思想／宗教</span><span class="tag tag--inst"><i class="mk mk--inst"></i>制度</span></div>
+              </article>
+              <article class="strand strand--inst">
+                <h5>古罗马</h5>
+                <p>共和、成文法、帝国治理。拉丁语与地中海网络。</p>
+                <div class="tags"><span class="tag tag--inst"><i class="mk mk--inst"></i>制度</span><span class="tag tag--flow"><i class="mk mk--flow"></i>跨区域交流</span></div>
+              </article>
+            </div>
+            <div class="link link--up" style="--n:3"><i></i><i></i><i></i></div>
+            <div class="branch" style="--n:1">
+              <article class="strand strand--key">
+                <h5>早期基督教，在罗马帝国中传播</h5>
+                <p>源出古以色列—犹太教传统，在古希腊与古罗马汇合形成的地中海共同空间中扩散。</p>
+              </article>
+            </div>
+          </div>
+        </div>
+
+        <!-- 基督教化 -->
+        <div id="eu-e2" class="era era--major reveal">
+          <div class="era__rail"><span class="era__year">313 · 380</span><span class="era__tag">基督教化</span></div>
+          <div class="era__body">
+            <h4>从受迫害到帝国正统</h4>
+            <div class="branch" style="--n:2">
+              <article class="strand strand--idea">
+                <span class="yr">313</span>
+                <h5>获得合法地位</h5>
+                <p>并非成为国教。这一年主要是容许基督教合法存在。</p>
+              </article>
+              <article class="strand strand--idea">
+                <span class="yr">380</span>
+                <h5>尼西亚基督教成为帝国正统信仰</h5>
+                <p>380 年以后才可概括为「帝国正统」。两步之间隔了近七十年。</p>
+              </article>
+            </div>
+          </div>
+        </div>
+
+        <!-- 476 分途 -->
+        <div id="eu-e3" class="era era--major reveal">
+          <div class="era__rail"><span class="era__year">476 / 1453</span><span class="era__tag">分途</span></div>
+          <div class="era__body">
+            <h4>帝国分途：西部终结，东部延续近千年</h4>
+            <div class="branch" style="--n:2">
+              <article class="strand strand--inst">
+                <span class="yr">476</span>
+                <h5>西部帝国终结</h5>
+                <p>西欧政治碎片化。这是西部帝国的终结，不是罗马文明整体的消失。</p>
+              </article>
+              <article class="strand strand--idea">
+                <span class="yr">至 1453</span>
+                <h5>东罗马 / 拜占庭</h5>
+                <p>延续至 1453 年。东正教传统、罗马法与希腊古典学术在此保存和发展。</p>
+              </article>
+            </div>
+            <div class="link link--up" style="--n:3"><i></i><i></i><i></i></div>
+            <div class="branch" style="--n:1">
+              <article class="strand strand--key">
+                <h5>罗马—基督教—日耳曼传统长期重组</h5>
+                <p>这是一个持续数百年的重组过程，拜占庭的传统也持续汇入其中。</p>
+              </article>
+            </div>
+            <div class="claim">
+              <p>476 年只是西部帝国终结，东罗马帝国延续至 1453 年；不能写成「罗马文明整体在 476 年消失」。</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- 西部重组 -->
+        <div id="eu-e4" class="era reveal">
+          <div class="era__rail"><span class="era__year">5—9世纪</span><span class="era__tag">重组</span></div>
+          <div class="era__body">
+            <h4>西部：三份遗产重新组合</h4>
+            <div class="branch" style="--n:3">
+              <article class="strand strand--inst">
+                <h5>日耳曼诸王国</h5>
+                <p>新的政治单位在原西部帝国疆域上建立。</p>
+              </article>
+              <article class="strand strand--idea">
+                <h5>拉丁教会</h5>
+                <p>在政治碎片化中提供跨地域的组织与语言。</p>
+              </article>
+              <article class="strand strand--inst">
+                <h5>罗马法与拉丁文</h5>
+                <p>法律与书写传统被继承、改写并持续使用。</p>
+              </article>
+            </div>
+          </div>
+        </div>
+
+        <!-- 伊斯兰文明 -->
+        <div id="eu-e5" class="era reveal">
+          <div class="era__rail"><span class="era__year">7世纪以后</span><span class="era__tag">旁注</span></div>
+          <div class="era__body">
+            <h4>伊斯兰文明兴起</h4>
+            <div class="aside-note">
+              <b>来自主线之外，但持续塑造主线</b>
+              保存、发展并转译古典知识；与欧洲之间存在贸易、战争和知识交流。欧洲的古典知识复兴和地中海发展，不能脱离拜占庭、伊斯兰世界及翻译网络来理解。
+              <div class="tags"><span class="tag tag--flow"><i class="mk mk--flow"></i>跨区域交流</span><span class="tag tag--idea"><i class="mk mk--idea"></i>思想／宗教</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 中世纪 -->
+        <div id="eu-e6" class="era era--major reveal">
+          <div class="era__rail"><span class="era__year">约9—13世纪</span><span class="era__tag">多中心</span></div>
+          <div class="era__body">
+            <h4>中世纪拉丁基督教世界</h4>
+            <p>教皇 / 皇帝 / 国王 / 领主 / 城市等多中心并存。没有一个中心能单独决定其余部分。</p>
+            <div class="branch" style="--n:4">
+              <article class="strand strand--tech">
+                <h5>庄园与领主制</h5>
+                <p>土地、依附关系与地方权力。</p>
+              </article>
+              <article class="strand strand--idea">
+                <h5>教会网络</h5>
+                <p>修道院、大学。跨地域的知识与组织体系。</p>
+              </article>
+              <article class="strand strand--flow">
+                <h5>城市复兴</h5>
+                <p>行会、商业。城市获得独立于领主的法律地位。</p>
+              </article>
+              <article class="strand strand--inst">
+                <h5>王权与法制</h5>
+                <p>普通法、议会、宪章。约束权力的制度传统在此生长。</p>
+              </article>
+            </div>
+            <div class="link link--up" style="--n:4"><i></i><i></i><i></i><i></i></div>
+            <div class="branch" style="--n:1">
+              <article class="strand strand--key">
+                <span class="yr">11—13世纪</span>
+                <h5>扩张期</h5>
+                <p>人口增长、商业扩张、十字军与翻译运动。</p>
+                <div class="tags"><span class="tag tag--flow"><i class="mk mk--flow"></i>跨区域交流</span><span class="tag tag--tech"><i class="mk mk--tech"></i>生产／技术</span></div>
+              </article>
+            </div>
+            <details class="dispute">
+              <summary><span class="dispute__term">封建主义</span>：这是史学分析概念，不是一种统一制度</summary>
+              <div class="dispute__body">
+                <p>「封建主义」与「民族国家」「唐宋之变」「商业革命」一样，都是史学分析概念，不能当成某一天突然发生的单一事件。</p>
+                <p>本图中的「庄园与领主制」表示的是一组地方性的土地与依附关系，它在不同地区、不同时期差别很大，与同期并存的教会网络、城市和王权始终处在竞争关系中。</p>
+              </div>
+            </details>
+          </div>
+        </div>
+
+        <!-- 14世纪危机 -->
+        <div id="eu-e7" class="era era--major reveal">
+          <div class="era__rail"><span class="era__year">14世纪</span><span class="era__tag">危机</span></div>
+          <div class="era__body">
+            <h4>战争、饥荒、黑死病</h4>
+            <p>黑死病（1347—1351）之后，人口与劳动力关系重组。欧洲现代化不仅是思想内部演进，也与人口冲击直接相连。</p>
+            <div class="link link--down" style="--n:2"><i></i><i></i></div>
+            <div class="branch" style="--n:2">
+              <article class="strand strand--idea">
+                <h5>文艺复兴与人文主义</h5>
+                <p>随后出现印刷革命（约 1450），知识的复制与传播成本大幅下降。</p>
+                <div class="tags"><span class="tag tag--idea"><i class="mk mk--idea"></i>思想／宗教</span><span class="tag tag--tech"><i class="mk mk--tech"></i>生产／技术</span></div>
+              </article>
+              <article class="strand strand--inst">
+                <h5>王权集中与财政—军事竞争</h5>
+                <p>另一条并行的线：国家汲取资源和组织军队的能力开始拉开差距。</p>
+                <div class="tags"><span class="tag tag--inst"><i class="mk mk--inst"></i>制度</span></div>
+              </article>
+            </div>
+          </div>
+        </div>
+
+        <!-- 三重转折 -->
+        <div id="eu-e8" class="era era--major reveal">
+          <div class="era__rail"><span class="era__year">1453 · 1492 · 1517</span><span class="era__tag">三重转折</span></div>
+          <div class="era__body">
+            <h4>半个世纪里的三件事</h4>
+            <div class="branch" style="--n:3">
+              <article class="strand strand--inst">
+                <span class="yr">1453</span>
+                <h5>君士坦丁堡陷落</h5>
+                <p>拜占庭帝国终结。延续近千年的东部帝国到此为止。</p>
+              </article>
+              <article class="strand strand--flow">
+                <span class="yr">1492 以后</span>
+                <h5>跨大西洋扩张</h5>
+                <p>殖民、贸易、奴隶制，与「哥伦布大交换」。欧洲现代化与跨洋扩张和全球资源流动相连。</p>
+              </article>
+              <article class="strand strand--idea">
+                <span class="yr">1517</span>
+                <h5>宗教改革</h5>
+                <p>路德、改革宗、英国改革。西方基督教分裂。</p>
+              </article>
+            </div>
+            <div class="link link--up" style="--n:3"><i></i><i></i><i></i></div>
+            <div class="branch" style="--n:1">
+              <article class="strand strand--key">
+                <h5>宗教分裂、国家建构与长期战争</h5>
+                <p>三条线交汇后，欧洲进入一个多国竞争与宗教冲突叠加的长时段。</p>
+              </article>
+            </div>
+            <div class="claim">
+              <p>不能把「新教」直接等同于「个人主义、资本主义或民主」。这些关系存在争论，并受城市、商业、战争、法律和国家能力等多因素影响。宗教改革本身也是多地区、多层面的长期变化，不只是「天主教对新教」的二元冲突。</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- 1648 -->
+        <div id="eu-e9" class="era reveal">
+          <div class="era__rail"><span class="era__year">1648</span><span class="era__tag">节点</span></div>
+          <div class="era__body">
+            <h4>威斯特伐利亚和约</h4>
+            <p>重要节点，但不是民族国家突然诞生的日期。</p>
+            <details class="dispute">
+              <summary><span class="dispute__term">1648</span>：它到底改变了什么？</summary>
+              <div class="dispute__body">
+                <p>威斯特伐利亚和约是宗教战争、帝国秩序和国家主权史上的重要节点，但现代国家和民族认同是更长时段的产物。</p>
+                <p>把 1648 写成「民族国家诞生之年」，会遮蔽此前数百年的王权集中、财政—军事竞争、法律传统和教会—国家关系，也会遮蔽此后两百年的国家建构过程。相关研究已对「1648 瞬间创造现代国家」的叙事作出修正，改用多因素解释欧洲国家形成。</p>
+              </div>
+            </details>
+          </div>
+        </div>
+
+        <!-- 科学革命 / 宪政 / 商业 -->
+        <div id="eu-e10" class="era era--major reveal">
+          <div class="era__rail"><span class="era__year">16—17世纪</span><span class="era__tag">三线并行</span></div>
+          <div class="era__body">
+            <h4>知识、政治约束与财富，同时改变</h4>
+            <div class="branch" style="--n:3">
+              <article class="strand strand--tech">
+                <h5>科学革命</h5>
+                <p>观察、实验、数学化。知识生产方式本身发生变化。</p>
+              </article>
+              <article class="strand strand--inst">
+                <span class="yr">1640—1689</span>
+                <h5>英国宪政冲突</h5>
+                <p>政治权力被约束的方式发生变化。</p>
+              </article>
+              <article class="strand strand--flow">
+                <h5>大西洋商业扩张</h5>
+                <p>金融与殖民帝国。财政能力与海外资源流动相互加强。</p>
+              </article>
+            </div>
+            <div class="link link--up" style="--n:3"><i></i><i></i><i></i></div>
+            <div class="branch" style="--n:1">
+              <article class="strand strand--key">
+                <h5>启蒙运动</h5>
+                <p>理性、自然权利、主权与进步观。</p>
+              </article>
+            </div>
+          </div>
+        </div>
+
+        <!-- 革命与工业化 -->
+        <div id="eu-e11" class="era era--major reveal">
+          <div class="era__rail"><span class="era__year">1776 · 1789</span><span class="era__tag">革命</span></div>
+          <div class="era__body">
+            <h4>三场同时展开的转变</h4>
+            <div class="branch" style="--n:3">
+              <article class="strand strand--inst">
+                <span class="yr">1776</span>
+                <h5>美国革命</h5>
+                <p>成文宪法实验。</p>
+              </article>
+              <article class="strand strand--idea">
+                <span class="yr">1789</span>
+                <h5>法国革命</h5>
+                <p>公民与民族主权。</p>
+              </article>
+              <article class="strand strand--tech">
+                <h5>工业革命</h5>
+                <p>工厂、化石能源、城市化。</p>
+              </article>
+            </div>
+            <div class="link link--up" style="--n:3"><i></i><i></i><i></i></div>
+            <div class="branch" style="--n:2">
+              <article class="strand strand--idea">
+                <span class="yr">19世纪</span>
+                <h5>民族国家与大众政治：思想光谱</h5>
+                <p>自由主义 / 保守主义 / 民族主义 / 社会主义，同时在场并相互竞争。</p>
+              </article>
+              <article class="strand strand--tech">
+                <span class="yr">19世纪</span>
+                <h5>社会经济力量</h5>
+                <p>资本主义扩张 / 工人运动 / 帝国主义。</p>
+              </article>
+            </div>
+          </div>
+        </div>
+
+        <!-- 两次大战 -->
+        <div id="eu-e12" class="era era--major reveal">
+          <div class="era__rail"><span class="era__year">1914—1945</span><span class="era__tag">断裂</span></div>
+          <div class="era__body">
+            <h4>总体战、革命与极权主义</h4>
+            <div class="branch" style="--n:2">
+              <article class="strand strand--inst">
+                <span class="yr">1914—1918</span>
+                <h5>第一次世界大战</h5>
+                <p>帝国瓦解、民族自决扩散。</p>
+              </article>
+              <article class="strand strand--idea">
+                <span class="yr">1917</span>
+                <h5>俄国革命</h5>
+                <p>共产主义国家实验。</p>
+              </article>
+            </div>
+            <div class="link link--up" style="--n:2"><i></i><i></i></div>
+            <div class="branch" style="--n:1">
+              <article class="strand strand--key">
+                <h5>法西斯主义 / 纳粹主义 / 经济大危机</h5>
+              </article>
+            </div>
+            <div class="link link--plain"></div>
+            <div class="branch" style="--n:1">
+              <article class="strand strand--key">
+                <span class="yr">1939—1945</span>
+                <h5>第二次世界大战与大屠杀</h5>
+              </article>
+            </div>
+          </div>
+        </div>
+
+        <!-- 战后 -->
+        <div id="eu-e13" class="era era--major reveal">
+          <div class="era__rail"><span class="era__year">1945—1991</span><span class="era__tag">重建</span></div>
+          <div class="era__body">
+            <h4>三条战后线索</h4>
+            <div class="branch" style="--n:3">
+              <article class="strand strand--inst">
+                <h5>民主与福利国家</h5>
+                <p>人权法治重建。</p>
+              </article>
+              <article class="strand strand--idea">
+                <h5>冷战分裂</h5>
+                <p>西欧 / 东欧两大阵营。</p>
+              </article>
+              <article class="strand strand--flow">
+                <h5>殖民帝国解体</h5>
+                <p>全球权力重组。</p>
+              </article>
+            </div>
+            <div class="link link--up" style="--n:3"><i></i><i></i><i></i></div>
+            <div class="branch" style="--n:1">
+              <article class="strand strand--key">
+                <span class="yr">1951 → 1957</span>
+                <h5>欧洲一体化</h5>
+                <p>1951 煤钢共同体 → 1957 欧洲经济共同体。</p>
+              </article>
+            </div>
+            <div class="link link--plain"></div>
+            <div class="branch" style="--n:1">
+              <article class="strand strand--key">
+                <span class="yr">1989—1991</span>
+                <h5>冷战秩序瓦解</h5>
+              </article>
+            </div>
+          </div>
+        </div>
+
+        <!-- 今日 -->
+        <div id="eu-e14" class="era era--major reveal">
+          <div class="era__rail"><span class="era__year">今日</span><span class="era__tag">现状</span></div>
+          <div class="era__body">
+            <h4>民族国家 + 欧洲联盟 + 跨大西洋体系并存</h4>
+            <p>三套秩序同时运行，彼此重叠也彼此拉扯。这不是终点，只是这张图目前画到的地方。</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <section id="europe-tp" style="--accent:var(--eu-1)">
+    <div class="wrap">
+      <p class="eyebrow"><span class="num">图二</span> 欧洲文明的 12 个关键转折点</p>
+      <h2 class="h">欧洲文明的 12 个关键转折点</h2>
+      <div class="prose">
+        <p class="lede">大脉络给方向感，这十二个节点给骨架。每个节点标注时间、变化了什么、以及为什么它算一次转折。每条都可跳回大脉络中的对应年代带。</p>
+      </div>
+
+      <div class="tps">
+
+        <div class="tp reveal">
+          <div class="tp__n">① <span class="tp__yr">约前8—前4世纪</span></div>
+          <div class="tp__b">
+            <h4>希腊城邦与古典思想</h4>
+            <p class="shift"><em>变化</em><span>神话解释</span><b>→</b><span>哲学、史学与公民政治</span></p>
+            <p>在神话解释之外，发展出哲学、史学与公民政治这几种新的解释与组织方式。</p>
+            <p class="cav">限定：公民资格排除妇女、奴隶和外来者。「公民政治」在这里的范围是有限的。</p>
+            <a class="tp__jump" href="#eu-e1">↑ 大脉络 · 三条源流</a>
+          </div>
+        </div>
+
+        <div class="tp reveal">
+          <div class="tp__n">② <span class="tp__yr">前509—476</span></div>
+          <div class="tp__b">
+            <h4>罗马共和国与帝国</h4>
+            <p>法律、城市、道路、行政与地中海共同空间。罗马提供的不是一种思想，而是一套可以跨地域运行的物质与制度基础设施。</p>
+            <div class="tags"><span class="tag tag--inst"><i class="mk mk--inst"></i>制度</span><span class="tag tag--flow"><i class="mk mk--flow"></i>跨区域交流</span></div>
+            <a class="tp__jump" href="#eu-e1">↑ 大脉络 · 三条源流</a>
+          </div>
+        </div>
+
+        <div class="tp reveal">
+          <div class="tp__n">③ <span class="tp__yr">313 / 380</span></div>
+          <div class="tp__b">
+            <h4>基督教化</h4>
+            <p class="shift"><em>变化</em><span>受迫害宗教</span><b>→</b><span>合法宗教</span><b>→</b><span>帝国正统信仰</span></p>
+            <p class="cav">两步不能合并：313 年是获得合法地位，380 年以后才可概括为尼西亚基督教成为帝国正统信仰。</p>
+            <div class="tags"><span class="tag tag--idea"><i class="mk mk--idea"></i>思想／宗教</span></div>
+            <a class="tp__jump" href="#eu-e2">↑ 大脉络 · 基督教化</a>
+          </div>
+        </div>
+
+        <div class="tp reveal">
+          <div class="tp__n">④ <span class="tp__yr">476</span></div>
+          <div class="tp__b">
+            <h4>西罗马帝国终结</h4>
+            <p>西欧政治碎片化；罗马传统、教会和日耳曼王国重新组合。</p>
+            <p class="cav">限定：东罗马仍延续近千年，至 1453 年。476 年不是罗马文明整体的消失。</p>
+            <a class="tp__jump" href="#eu-e3">↑ 大脉络 · 帝国分途</a>
+          </div>
+        </div>
+
+        <div class="tp reveal">
+          <div class="tp__n">⑤ <span class="tp__yr">约9—13世纪</span></div>
+          <div class="tp__b">
+            <h4>中世纪制度生长</h4>
+            <p>王权、教权、领主、城市、大学、议会和法律传统多中心竞争。欧洲后来的许多特征，在这个「谁也吃不掉谁」的结构里生长出来。</p>
+            <div class="tags"><span class="tag tag--inst"><i class="mk mk--inst"></i>制度</span><span class="tag tag--idea"><i class="mk mk--idea"></i>思想／宗教</span></div>
+            <a class="tp__jump" href="#eu-e6">↑ 大脉络 · 中世纪多中心</a>
+          </div>
+        </div>
+
+        <div class="tp reveal">
+          <div class="tp__n">⑥ <span class="tp__yr">14—15世纪</span></div>
+          <div class="tp__b">
+            <h4>危机与重组</h4>
+            <p>黑死病 + 文艺复兴 + 印刷术 + 拜占庭终结。四件性质完全不同的事在同一个半世纪里叠加。</p>
+            <div class="tags"><span class="tag tag--tech"><i class="mk mk--tech"></i>生产／技术</span><span class="tag tag--idea"><i class="mk mk--idea"></i>思想／宗教</span></div>
+            <a class="tp__jump" href="#eu-e7">↑ 大脉络 · 14世纪危机</a>
+          </div>
+        </div>
+
+        <div class="tp reveal">
+          <div class="tp__n">⑦ <span class="tp__yr">1492 以后</span></div>
+          <div class="tp__b">
+            <h4>海洋扩张</h4>
+            <p>欧洲、非洲、美洲和亚洲被卷入殖民、贸易、奴隶制与物种交换。这是一次全球性的重组，代价并不由欧洲承担。</p>
+            <div class="tags"><span class="tag tag--flow"><i class="mk mk--flow"></i>跨区域交流</span></div>
+            <a class="tp__jump" href="#eu-e8">↑ 大脉络 · 三重转折</a>
+          </div>
+        </div>
+
+        <div class="tp reveal">
+          <div class="tp__n">⑧ <span class="tp__yr">1517 以后</span></div>
+          <div class="tp__b">
+            <h4>宗教改革</h4>
+            <p>西方基督教分裂；信仰、权威、识字与国家权力重新组合。</p>
+            <p class="cav">限定：不能把它直接等同于个人主义、资本主义或民主的起点。这些关系存在争论。</p>
+            <a class="tp__jump" href="#eu-e8">↑ 大脉络 · 三重转折</a>
+          </div>
+        </div>
+
+        <div class="tp reveal">
+          <div class="tp__n">⑨ <span class="tp__yr">16—17世纪</span></div>
+          <div class="tp__b">
+            <h4>科学革命 + 国家建构 + 英国宪政冲突</h4>
+            <p>知识生产、财政军事能力和政治约束方式，三者同时发生变化。它们是并行的，不是谁导致谁。</p>
+            <div class="tags"><span class="tag tag--tech"><i class="mk mk--tech"></i>生产／技术</span><span class="tag tag--inst"><i class="mk mk--inst"></i>制度</span></div>
+            <a class="tp__jump" href="#eu-e10">↑ 大脉络 · 三线并行</a>
+          </div>
+        </div>
+
+        <div class="tp reveal">
+          <div class="tp__n">⑩ <span class="tp__yr">18—19世纪</span></div>
+          <div class="tp__b">
+            <h4>启蒙、革命与工业化</h4>
+            <p class="shift"><em>身份</em><span>臣民</span><b>→</b><span>公民</span></p>
+            <p class="shift"><em>主权</em><span>王朝主权</span><b>→</b><span>人民主权</span></p>
+            <p class="shift"><em>经济</em><span>手工经济</span><b>→</b><span>工业社会</span></p>
+            <a class="tp__jump" href="#eu-e11">↑ 大脉络 · 革命与工业化</a>
+          </div>
+        </div>
+
+        <div class="tp reveal">
+          <div class="tp__n">⑪ <span class="tp__yr">1914—1945</span></div>
+          <div class="tp__b">
+            <h4>两次世界大战与极权主义</h4>
+            <p>帝国崩解、总体战、革命、法西斯主义与大屠杀。这段时间里欧洲摧毁的，是它自己在前一百年建立起来的秩序。</p>
+            <a class="tp__jump" href="#eu-e12">↑ 大脉络 · 断裂</a>
+          </div>
+        </div>
+
+        <div class="tp reveal">
+          <div class="tp__n">⑫ <span class="tp__yr">1945—1991</span></div>
+          <div class="tp__b">
+            <h4>战后重建、欧洲一体化与冷战终结</h4>
+            <p>福利国家 / 人权法治 / 欧洲共同体—欧盟 / 东西欧重新连接。</p>
+            <div class="tags"><span class="tag tag--inst"><i class="mk mk--inst"></i>制度</span><span class="tag tag--flow"><i class="mk mk--flow"></i>跨区域交流</span></div>
+            <a class="tp__jump" href="#eu-e13">↑ 大脉络 · 战后重建</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+    </div>
+
+    <div class="viewfoot">
+      <div class="wrap">
+        <span class="vf-label">接下来</span>
+        <a class="vf-go vf-go--as" href="#v-asia">另一条线：亚洲文明</a>
+        <a class="vf-go" href="#v-compare">把两条线放回一起：对照观察</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="view" id="v-asia" style="--vc:var(--as-1);--accent:var(--as-1)" aria-labelledby="v-asia-t">
+    <div class="viewhead">
+      <div class="wrap">
+        <p class="stage"><b>分述 · 线 B（与线 A 并列）</b></p>
+        <h2 id="v-asia-t">亚洲文明 · 以中华文明为主线</h2>
+        <p>先确认亚洲不是单一文明，再沿中华文明主轴从多元起源走到 2001。这条线与「欧洲文明」并列，两者不构成先后。</p>
+      </div>
+    </div>
+
+    <nav class="subnav" aria-label="亚洲文明 · 以中华文明为主线 · 分节">
+      <div class="wrap">
+        <span class="subnav__label">亚洲文明</span>
+          <a href="#asia">亚洲互动总览</a>
+          <a href="#china">中华大脉络</a>
+          <a href="#china-tp">12 个关键转折点</a>
+      </div>
+    </nav>
+    <div class="viewbody">
+  <section id="asia" style="--accent:var(--as-2)">
+    <div class="wrap">
+      <p class="eyebrow"><span class="num">图三 · 上半</span> 亚洲文明互动总览</p>
+      <h2 class="h">亚洲文明互动总览</h2>
+      <div class="prose">
+        <p class="lede">进入中华文明主线之前，先看清一件事：亚洲不是一个文明。西亚、南亚、东亚、中亚草原与东南亚海洋网络，是若干个各自独立、又长期相互塑造的传统。</p>
+      </div>
+
+      <div class="caution" style="border-left-color:var(--as-2);background:linear-gradient(90deg,color-mix(in srgb,var(--as-2) 10%,transparent),transparent 70%);max-width:64ch">
+        <p><strong>亚洲文明不是单一文明。</strong></p>
+        <p>下面的中华文明主线只是其中一条。保留西亚、南亚、中亚草原、东南亚和海洋网络的互动，是为了避免把「亚洲史」等同于「中国王朝史」。</p>
+      </div>
+
+      <figure class="netfig reveal">
+        <svg viewBox="0 0 900 448" role="img" aria-label="亚洲五大区域传统的互动网络示意图：西亚、中亚草原与绿洲网络、东亚、南亚、东南亚与海洋网络，通过陆路与海路网络相互连接。" preserveAspectRatio="xMidYMid meet">
+          <!-- 连接线（绘制在节点之下，被节点底色遮住） -->
+          <g>
+            <line class="net-link" x1="135" y1="144" x2="453" y2="54"/>
+            <line class="net-link" x1="453" y1="54"  x2="762" y2="144"/>
+            <line class="net-link" x1="135" y1="144" x2="218" y2="336"/>
+            <line class="net-link" x1="218" y1="336" x2="453" y2="54"/>
+            <line class="net-link--sea" x1="135" y1="144" x2="651" y2="340"/>
+            <line class="net-link--sea" x1="218" y1="336" x2="651" y2="340"/>
+            <line class="net-link--sea" x1="651" y1="340" x2="762" y2="144"/>
+          </g>
+          <!-- 节点 -->
+          <g>
+            <rect class="net-node" x="24" y="104" width="222" height="80"/>
+            <text class="net-label" x="40" y="132">西亚</text>
+            <text class="net-sub" x="40" y="152">两河城市、楔形文字</text>
+            <text class="net-sub" x="40" y="170">帝国、犹太教、基督教、伊斯兰</text>
+
+            <rect class="net-node" x="328" y="14" width="250" height="80"/>
+            <text class="net-label" x="344" y="42">中亚草原与绿洲网络</text>
+            <text class="net-sub" x="344" y="62">游牧国家、商队</text>
+            <text class="net-sub" x="344" y="80">丝绸之路</text>
+
+            <rect class="net-node" x="648" y="104" width="228" height="80"/>
+            <text class="net-label" x="664" y="132">东亚</text>
+            <text class="net-sub" x="664" y="152">黄河与长江等多区域</text>
+            <text class="net-sub" x="664" y="170">粟作、稻作、聚落与礼仪</text>
+
+            <rect class="net-node" x="104" y="296" width="228" height="80"/>
+            <text class="net-label" x="120" y="324">南亚</text>
+            <text class="net-sub" x="120" y="344">印度河城市文明、吠陀传统</text>
+            <text class="net-sub" x="120" y="362">佛教、印度教、孔雀与笈多</text>
+
+            <rect class="net-node net-node--sea" x="520" y="300" width="262" height="80"/>
+            <text class="net-label" x="536" y="328">东南亚与海洋网络</text>
+            <text class="net-sub" x="536" y="348">季风贸易、港口</text>
+            <text class="net-sub" x="536" y="366">宗教与移民</text>
+          </g>
+          <!-- 图例 -->
+          <g>
+            <line class="net-link" x1="24" y1="420" x2="60" y2="420"/>
+            <text class="net-key" x="70" y="425">陆路网络：草原、绿洲与商队路线</text>
+            <line class="net-link--sea" x1="330" y1="420" x2="366" y2="420"/>
+            <text class="net-key" x="376" y="425">海路网络：季风贸易与港口</text>
+          </g>
+        </svg>
+        <figcaption>亚洲诸文明始终通过迁徙、战争、贸易、朝贡、宗教与技术传播相互塑造。连线表示长期存在的互动通道，不表示某一时刻的政治从属关系。</figcaption>
+      </figure>
+
+      <div class="tl" style="margin-top:34px">
+        <div class="era era--major reveal">
+          <div class="era__rail"><span class="era__year">长时段</span><span class="era__tag">三大区域传统</span></div>
+          <div class="era__body">
+            <h4>各自起源的三个中心</h4>
+            <div class="branch" style="--n:3">
+              <article class="strand strand--idea">
+                <h5>西亚</h5>
+                <p>两河城市、楔形文字。帝国、犹太教、基督教。后来的伊斯兰文明。</p>
+              </article>
+              <article class="strand strand--idea">
+                <h5>南亚</h5>
+                <p>印度河城市文明。吠陀传统、佛教、印度教。孔雀王朝、笈多时代。</p>
+              </article>
+              <article class="strand strand--tech">
+                <h5>东亚</h5>
+                <p>黄河与长江等多区域。粟作、稻作、聚落与礼仪。</p>
+              </article>
+            </div>
+            <div class="link link--up" style="--n:3"><i></i><i></i><i></i></div>
+            <div class="branch" style="--n:2">
+              <article class="strand strand--flow">
+                <h5>中亚草原与绿洲网络</h5>
+                <p>游牧国家、商队、丝绸之路。它不是三大区域之间的空白，而是自身有政治与经济组织的连接层。</p>
+              </article>
+              <article class="strand strand--flow">
+                <h5>东南亚与海洋网络</h5>
+                <p>季风贸易、港口、宗教与移民。海路与陆路是两套并行的连接系统。</p>
+              </article>
+            </div>
+            <div class="link link--up" style="--n:2"><i></i><i></i></div>
+            <div class="claim">
+              <p>亚洲诸文明始终通过迁徙、战争、贸易、朝贡、宗教与技术传播相互塑造。任何一条主线单独看，都会失真。</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="china" style="--accent:var(--as-1)">
+    <div class="wrap">
+      <p class="eyebrow"><span class="num">图三 · 下半</span> 中华文明发展大脉络</p>
+      <h2 class="h">中华文明发展大脉络</h2>
+      <div class="prose">
+        <p class="lede">以中华文明为主轴，但始终保留并行地区与外部互动。多元起源 → 区域整合，不是一个中心自然扩张的故事。</p>
+      </div>
+
+      <div class="tl">
+
+        <!-- 多元起源 -->
+        <div id="cn-e1" class="era era--major reveal">
+          <div class="era__rail"><span class="era__year">约前10000—前2000</span><span class="era__tag">多元起源</span></div>
+          <div class="era__body">
+            <h4>多个区域传统，同时生长</h4>
+            <div class="branch" style="--n:3">
+              <article class="strand strand--tech">
+                <h5>黄河中下游</h5>
+                <p>粟作与聚落。仰韶 / 龙山等。</p>
+              </article>
+              <article class="strand strand--tech">
+                <h5>长江中下游</h5>
+                <p>稻作与聚落。河姆渡 / 良渚等。</p>
+              </article>
+              <article class="strand strand--tech">
+                <h5>其他区域传统</h5>
+                <p>辽河、成都平原、岭南等。红山、石家河、三星堆前身等。</p>
+              </article>
+            </div>
+            <div class="link link--up" style="--n:3"><i></i><i></i><i></i></div>
+            <div class="branch" style="--n:1">
+              <article class="strand strand--key">
+                <h5>聚落扩大 / 社会分层 / 城邑与礼仪中心</h5>
+              </article>
+            </div>
+            <div class="link link--plain"></div>
+            <div class="branch" style="--n:1">
+              <article class="strand strand--inst">
+                <span class="yr">前二千纪早期</span>
+                <h5>二里头等早期国家中心兴起</h5>
+                <p>二里头与文献「夏」的对应关系仍有争论。</p>
+              </article>
+            </div>
+            <div class="claim">
+              <p>多区域互动，不是单一地点「一枝独秀」。</p>
+              <p>史前中国有多个区域传统，中原成为政治整合中心经历了竞争、吸收和权力扩张，而非自然发生。「多元一体」不能写成自动汇流。</p>
+            </div>
+            <details class="dispute">
+              <summary><span class="dispute__term">夏—二里头</span>：遗址与文献王朝，不能直接划等号</summary>
+              <div class="dispute__body">
+                <p>二里头是早期国家和文明形成的关键遗址，但它是否就是文献中的「夏」，学界没有完全一致的结论。</p>
+                <p>本图把二者分开表述：考古学上的早期国家中心是一回事，传世文献中的王朝序列是另一回事。更稳妥的读法，是以「文化整合」而非简单的王朝接替来理解早期中华文明的形成。</p>
+              </div>
+            </details>
+          </div>
+        </div>
+
+        <!-- 商周 -->
+        <div id="cn-e2" class="era era--major reveal">
+          <div class="era__rail"><span class="era__year">约前1600—前771</span><span class="era__tag">商周</span></div>
+          <div class="era__body">
+            <h4>文字国家、礼制与政治合法性</h4>
+            <div class="branch" style="--n:1">
+              <article class="strand strand--idea">
+                <span class="yr">商 · 约前1600—前1046（具体起点有争议）</span>
+                <h5>青铜礼器 / 城市中心 / 王权 / 祖先祭祀 / 战争</h5>
+                <p>晚商甲骨文是现存最早的成熟汉字体系。文字进入国家运作，是这一段最不可逆的变化。</p>
+              </article>
+            </div>
+            <div class="link link--plain"></div>
+            <div class="branch" style="--n:1">
+              <article class="strand strand--key">
+                <span class="yr">西周 · 前1046—前771</span>
+                <h5>封建（封邦建国） / 宗法 / 礼乐 / 天命</h5>
+                <p>形成影响后世的天下观、亲属秩序与合法性语言。此后两千多年，政权论证自身正当性时反复回到这套语言。</p>
+                <div class="tags"><span class="tag tag--inst"><i class="mk mk--inst"></i>制度</span><span class="tag tag--idea"><i class="mk mk--idea"></i>思想／宗教</span></div>
+              </article>
+            </div>
+          </div>
+        </div>
+
+        <!-- 春秋战国 -->
+        <div id="cn-e3" class="era era--major reveal">
+          <div class="era__rail"><span class="era__year">前770—前221</span><span class="era__tag">东周</span></div>
+          <div class="era__body">
+            <h4>春秋战国：领土国家、官僚化与百家争鸣</h4>
+            <div class="branch" style="--n:2">
+              <article class="strand strand--tech">
+                <h5>物质与制度基础</h5>
+                <p>铁器扩散 / 农业与人口增长 / 兼并战争 / 县制与成文法。</p>
+              </article>
+              <article class="strand strand--idea">
+                <h5>思想竞争</h5>
+                <p>儒家 / 墨家 / 道家 / 法家 / 名家 / 阴阳家等同时在场，相互竞争。</p>
+              </article>
+            </div>
+            <p class="shift"><em>国家形态</em><span>世袭贵族主导</span><b>→</b><span>君主—官僚—编户齐民国家</span></p>
+            <div class="claim">
+              <p>后世中国政治伦理与思想资源库，在这一段基本成形。</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- 秦汉 -->
+        <div id="cn-e4" class="era era--major reveal">
+          <div class="era__rail"><span class="era__year">前221—公元220</span><span class="era__tag">秦汉</span></div>
+          <div class="era__body">
+            <h4>统一帝国的制度模板</h4>
+            <div class="branch" style="--n:2">
+              <article class="strand strand--inst">
+                <span class="yr">秦 · 前221 统一</span>
+                <h5>郡县治理 / 法令与行政标准 / 文字与度量衡整合</h5>
+                <p>秦的短命也显示高强度动员的代价。</p>
+              </article>
+              <article class="strand strand--inst">
+                <span class="yr">汉 · 前202—公元220（中有新朝）</span>
+                <h5>官僚帝国 + 郡国并行后趋中央化 + 察举征辟</h5>
+                <p>儒家经典进入国家教育与政治语言，法律行政传统延续。</p>
+              </article>
+            </div>
+            <div class="link link--up" style="--n:2"><i></i><i></i></div>
+            <div class="branch" style="--n:1">
+              <article class="strand strand--flow">
+                <h5>河西走廊 / 绿洲商路 / 草原互动</h5>
+                <p>统一帝国同时意味着与草原和绿洲世界的长期接触面。</p>
+              </article>
+            </div>
+            <div class="claim">
+              <p>「大一统」成为持久政治理想，但从未消除区域差异。</p>
+            </div>
+            <details class="dispute">
+              <summary><span class="dispute__term">儒表法里</span>：一句口号会遮蔽变化过程</summary>
+              <div class="dispute__body">
+                <p>汉帝国确实把儒家经典逐步纳入国家教育与合法性语言，同时延续秦以来的法律行政制度。</p>
+                <p>但用「儒表法里」这一句概括会遮蔽变化过程：这是一个持续数百年、反复调整的过程，不是一次性的制度设计。本图不把它当作定论。</p>
+              </div>
+            </details>
+          </div>
+        </div>
+
+        <!-- 魏晋南北朝 -->
+        <div id="cn-e5" class="era era--major reveal">
+          <div class="era__rail"><span class="era__year">220—589</span><span class="era__tag">分裂与重组</span></div>
+          <div class="era__body">
+            <h4>魏晋南北朝：长期分裂、人口迁徙、民族与宗教重组</h4>
+            <p>三国 → 两晋 → 南北朝。分裂时期不是空白期，很多长期结构在这里成形。</p>
+            <div class="branch" style="--n:2">
+              <article class="strand strand--inst">
+                <h5>北方政权与族群重组</h5>
+                <p>鲜卑等参与国家建构。</p>
+              </article>
+              <article class="strand strand--tech">
+                <h5>人口南迁与江南开发</h5>
+                <p>南方经济文化中心成长。</p>
+              </article>
+            </div>
+            <div class="link link--up" style="--n:2"><i></i><i></i></div>
+            <div class="branch" style="--n:1">
+              <article class="strand strand--idea">
+                <h5>佛教经中亚、海路传入并本土化</h5>
+                <p>译经、寺院、艺术与哲学推动儒—释—道长期互动。</p>
+                <div class="tags"><span class="tag tag--idea"><i class="mk mk--idea"></i>思想／宗教</span><span class="tag tag--flow"><i class="mk mk--flow"></i>跨区域交流</span></div>
+              </article>
+            </div>
+          </div>
+        </div>
+
+        <!-- 隋唐 -->
+        <div id="cn-e6" class="era era--major reveal">
+          <div class="era__rail"><span class="era__year">581—907</span><span class="era__tag">隋唐</span></div>
+          <div class="era__body">
+            <h4>再统一，与跨欧亚、东亚网络的高峰</h4>
+            <div class="branch" style="--n:2">
+              <article class="strand strand--inst">
+                <span class="yr">隋 · 581—618</span>
+                <h5>统一南北、大运河</h5>
+              </article>
+              <article class="strand strand--inst">
+                <span class="yr">唐 · 618—907</span>
+                <h5>官僚制与科举发展</h5>
+                <p>长安 / 洛阳 / 丝绸之路 / 草原关系。佛教、祆教、景教、伊斯兰同时在场。</p>
+              </article>
+            </div>
+            <div class="link link--up" style="--n:2"><i></i><i></i></div>
+            <div class="branch" style="--n:1">
+              <article class="strand strand--flow">
+                <h5>汉字、律令、佛教、儒学和国家制度影响朝鲜、日本、越南</h5>
+              </article>
+            </div>
+            <div class="claim">
+              <p>东亚文化圈在长期交流与各地再创造中逐步形成，不是唐朝对周边进行单向「文化输出」的结果。</p>
+              <p>朝鲜、日本、越南是主动选择和改造汉字、佛教、儒学与律令制度的一方。</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- 10—13世纪 -->
+        <div id="cn-e7" class="era era--major reveal">
+          <div class="era__rail"><span class="era__year">10—13世纪</span><span class="era__tag">多国并立</span></div>
+          <div class="era__body">
+            <h4>辽、西夏、金、宋并立</h4>
+            <p>四者均参与「中国史」的形成。宋不是这一时期唯一的中心。</p>
+            <div class="branch" style="--n:4">
+              <article class="strand strand--inst">
+                <span class="yr">907—1125</span>
+                <h5>辽</h5>
+              </article>
+              <article class="strand strand--inst">
+                <span class="yr">1038—1227</span>
+                <h5>西夏</h5>
+              </article>
+              <article class="strand strand--inst">
+                <span class="yr">1115—1234</span>
+                <h5>金</h5>
+              </article>
+              <article class="strand strand--key">
+                <span class="yr">960—1279</span>
+                <h5>宋</h5>
+                <p>科举官僚扩大、印刷普及、城市与市场繁荣。</p>
+              </article>
+            </div>
+            <div class="link link--up" style="--n:4"><i></i><i></i><i></i><i></i></div>
+            <div class="branch" style="--n:2">
+              <article class="strand strand--tech">
+                <h5>宋：经济与技术</h5>
+                <p>货币化 / 纸币 / 海贸 / 技术知识。</p>
+              </article>
+              <article class="strand strand--idea">
+                <h5>宋：思想与士人</h5>
+                <p>理学体系化。</p>
+              </article>
+            </div>
+            <p class="shift"><em>政治精英</em><span>门阀贵族政治衰落</span><b>→</b><span>文官与地方士人网络增强</span></p>
+            <details class="dispute">
+              <summary><span class="dispute__term">唐宋之变</span>／<span class="dispute__term">商业革命</span>：有解释力，但仍有争论</summary>
+              <div class="dispute__body">
+                <p>「唐宋之变」「商业革命」是有解释力但仍有争论的概念，本图保留它们作为分析框架，并标注其争论性。</p>
+                <p>它们与「封建主义」「民族国家」一样是史学分析概念，不能当成某一天突然发生的单一事件。使用时还须记住：辽、西夏、金与宋并立，应共同放进 10—13 世纪中国和东亚史，而不是只看宋一家。</p>
+              </div>
+            </details>
+          </div>
+        </div>
+
+        <!-- 蒙古与元 -->
+        <div id="cn-e8" class="era era--major reveal">
+          <div class="era__rail"><span class="era__year">13—14世纪</span><span class="era__tag">欧亚体系</span></div>
+          <div class="era__body">
+            <h4>蒙古帝国与元：更紧密的欧亚体系</h4>
+            <p>13 世纪蒙古诸征服之后，元（1271—1368；1279 灭南宋）建立。</p>
+            <div class="branch" style="--n:2">
+              <article class="strand strand--inst">
+                <h5>作为中国史</h5>
+                <p>元是中国历史上的一个王朝，其制度与疆域直接影响此后的明清。</p>
+              </article>
+              <article class="strand strand--flow">
+                <h5>作为多民族欧亚帝国史</h5>
+                <p>中国处于蒙古帝国诸汗国构成的欧亚网络中，人员、技术、商品、宗教和疾病流动加强。</p>
+              </article>
+            </div>
+            <div class="aside-note">
+              <b>不能只留下「交流」这一面</b>
+              同时存在征服暴力、等级区分和地方差异。把元只写成「欧亚交流的黄金时代」，与把它只写成「异族统治」一样片面。
+            </div>
+            <div class="claim">
+              <p>多民族帝国与跨大陆联系同时加深。元既属于中国史，也是蒙古主导的多民族帝国史。</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- 明 -->
+        <div id="cn-e9" class="era era--major reveal">
+          <div class="era__rail"><span class="era__year">1368—1644</span><span class="era__tag">明</span></div>
+          <div class="era__body">
+            <h4>明与早期全球化：皇权、白银与海洋</h4>
+            <div class="branch" style="--n:3">
+              <article class="strand strand--inst">
+                <h5>皇权与官僚</h5>
+                <p>废中书省丞相 / 皇权强化 / 科举延续 / 地方社会发展。</p>
+              </article>
+              <article class="strand strand--flow">
+                <span class="yr">1405—1433</span>
+                <h5>郑和航行</h5>
+                <p>连接印度洋既有贸易网。这些网络在郑和之前已经存在。</p>
+              </article>
+              <article class="strand strand--flow">
+                <span class="yr">16世纪以后</span>
+                <h5>白银与知识流入</h5>
+                <p>美洲与日本白银大量进入中国。海商、东南亚网络、耶稣会士与知识交流并存。</p>
+              </article>
+            </div>
+            <div class="claim">
+              <p>明代有海禁，也有活跃海贸，不能概括为「闭关」。</p>
+            </div>
+            <details class="dispute">
+              <summary><span class="dispute__term">闭关锁国</span>：海禁政策存在，但不等于封闭</summary>
+              <div class="dispute__body">
+                <p>海禁政策真实存在，但民间海贸、白银流入、东南亚网络与耶稣会交流同样重要。</p>
+                <p>「明朝封闭论」把一项政策等同于整个社会的对外状态。判断一个时代是否封闭，要同时看政策文本、实际贸易量、白银流向和知识传播，不能只看前者。</p>
+              </div>
+            </details>
+          </div>
+        </div>
+
+        <!-- 清 -->
+        <div id="cn-e10" class="era era--major reveal">
+          <div class="era__rail"><span class="era__year">1636 / 1644—1912</span><span class="era__tag">清</span></div>
+          <div class="era__body">
+            <h4>清：多民族帝国扩张与18世纪繁荣</h4>
+            <div class="branch" style="--n:2">
+              <article class="strand strand--inst">
+                <h5>作为中国史</h5>
+                <p>继承并调整明代的皇权—官僚制度，17—18 世纪疆域扩张、人口增长、垦殖与商业发展。</p>
+              </article>
+              <article class="strand strand--flow">
+                <h5>作为多民族欧亚帝国史</h5>
+                <p>满洲统治者运用不同制度治理中原、蒙古、西藏、新疆等区域。同一个政权，对不同区域使用不同的治理逻辑。</p>
+              </article>
+            </div>
+            <div class="link link--up" style="--n:2"><i></i><i></i></div>
+            <div class="branch" style="--n:1">
+              <article class="strand strand--key">
+                <h5>中国现代疆域的主要框架形成</h5>
+                <p>但边疆治理始终多样。</p>
+              </article>
+            </div>
+            <div class="claim">
+              <p>清不是单纯「汉族王朝的延续」，而是多民族欧亚帝国。把元、清放回欧亚史，才能解释疆域、族群和制度的多样性。</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- 19世纪危机 -->
+        <div id="cn-e11" class="era era--major reveal">
+          <div class="era__rail"><span class="era__year">19世纪</span><span class="era__tag">危机</span></div>
+          <div class="era__body">
+            <h4>全球工业资本与帝国主义冲击</h4>
+            <div class="branch" style="--n:2">
+              <article class="strand strand--flow">
+                <h5>外部：列强扩张</h5>
+                <p>工业革命后的列强扩张。鸦片战争（1840—1842）及条约体系。</p>
+              </article>
+              <article class="strand strand--inst">
+                <h5>内部：治理压力</h5>
+                <p>清帝国内部的财政、人口与治理压力。</p>
+              </article>
+            </div>
+            <div class="link link--up" style="--n:2"><i></i><i></i></div>
+            <div class="branch" style="--n:1">
+              <article class="strand strand--key">
+                <h5>太平天国 / 洋务运动 / 甲午战争（1894—1895）/ 戊戌变法 / 清末新政</h5>
+              </article>
+            </div>
+            <div class="claim">
+              <p>不是单一的「西方冲击」，而是内外危机相互放大。</p>
+              <p>1840 不是唯一原因。鸦片战争是标志性转折点，19 世纪危机还来自人口、财政、生态、内战和国家治理压力。</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- 20世纪前半 -->
+        <div id="cn-e12" class="era era--major reveal">
+          <div class="era__rail"><span class="era__year">1911—1949</span><span class="era__tag">帝国解体</span></div>
+          <div class="era__body">
+            <h4>帝国解体、民族国家与革命</h4>
+            <div class="branch" style="--n:1">
+              <article class="strand strand--inst">
+                <span class="yr">1911 → 1912</span>
+                <h5>辛亥革命 → 中华民国</h5>
+                <p>帝制终结，但统一国家、宪政秩序与国民身份仍需重新建构。</p>
+              </article>
+            </div>
+            <div class="link link--plain"></div>
+            <div class="branch" style="--n:1">
+              <article class="strand strand--idea">
+                <span class="yr">1919</span>
+                <h5>五四运动</h5>
+                <p>与新文化、民族主义、党派动员相互交织。</p>
+              </article>
+            </div>
+            <div class="link link--plain"></div>
+            <div class="branch" style="--n:1">
+              <article class="strand strand--key">
+                <h5>军阀政治 / 国民革命 / 抗日战争 / 国共内战</h5>
+              </article>
+            </div>
+          </div>
+        </div>
+
+        <!-- 1949 以后 -->
+        <div id="cn-e13" class="era era--major reveal">
+          <div class="era__rail"><span class="era__year">1949—2001</span><span class="era__tag">国家重建</span></div>
+          <div class="era__body">
+            <h4>国家整合、改革开放与加入全球体系</h4>
+            <div class="branch" style="--n:1">
+              <article class="strand strand--inst">
+                <span class="yr">1949</span>
+                <h5>中华人民共和国成立</h5>
+                <p>国家整合 / 土地制度变革 / 计划经济 / 工业化。</p>
+              </article>
+            </div>
+            <div class="link link--plain"></div>
+            <div class="branch" style="--n:1">
+              <article class="strand strand--tech">
+                <span class="yr">1978 以后</span>
+                <h5>改革开放</h5>
+                <p>市场化 / 城市化 / 全球产业链。</p>
+              </article>
+            </div>
+            <div class="link link--plain"></div>
+            <div class="branch" style="--n:1">
+              <article class="strand strand--flow">
+                <span class="yr">2001</span>
+                <h5>加入 WTO</h5>
+              </article>
+            </div>
+          </div>
+        </div>
+
+        <!-- 当代 -->
+        <div id="cn-e14" class="era era--major reveal">
+          <div class="era__rail"><span class="era__year">当代</span><span class="era__tag">现状</span></div>
+          <div class="era__body">
+            <h4>工业与数字化升级、人口转型、国家—市场关系和全球竞争</h4>
+            <p>四条线索同时展开。与欧洲部分一样，这不是终点，只是这张图目前画到的地方。</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <section id="china-tp" style="--accent:var(--as-1)">
+    <div class="wrap">
+      <p class="eyebrow"><span class="num">图四</span> 中华文明的 12 个关键转折点</p>
+      <h2 class="h">中华文明的 12 个关键转折点</h2>
+      <div class="prose">
+        <p class="lede">与欧洲部分同一套信息结构：时间、变化了什么、限定条件。识别色不同，读法相同。</p>
+      </div>
+
+      <div class="tps">
+
+        <div class="tp reveal">
+          <div class="tp__n">① <span class="tp__yr">约前10000—前2000</span></div>
+          <div class="tp__b">
+            <h4>新石器化</h4>
+            <p>多地农业、定居与复杂社会成长。注意是「多地」，不是一地。</p>
+            <div class="tags"><span class="tag tag--tech"><i class="mk mk--tech"></i>生产／技术</span></div>
+            <a class="tp__jump" href="#cn-e1">↑ 大脉络 · 多元起源</a>
+          </div>
+        </div>
+
+        <div class="tp reveal">
+          <div class="tp__n">② <span class="tp__yr">约前1900—前1046</span></div>
+          <div class="tp__b">
+            <h4>二里头—商</h4>
+            <p>早期国家、青铜礼制与成熟文字。</p>
+            <p class="cav">限定：「夏—二里头」的对应关系仍有争论，不能直接划等号。</p>
+            <a class="tp__jump" href="#cn-e2">↑ 大脉络 · 商周</a>
+          </div>
+        </div>
+
+        <div class="tp reveal">
+          <div class="tp__n">③ <span class="tp__yr">前1046 以后</span></div>
+          <div class="tp__b">
+            <h4>西周</h4>
+            <p>封邦建国 + 宗法礼乐 + 天命。一套同时管住土地、亲属和合法性的语言。</p>
+            <div class="tags"><span class="tag tag--inst"><i class="mk mk--inst"></i>制度</span><span class="tag tag--idea"><i class="mk mk--idea"></i>思想／宗教</span></div>
+            <a class="tp__jump" href="#cn-e2">↑ 大脉络 · 商周</a>
+          </div>
+        </div>
+
+        <div class="tp reveal">
+          <div class="tp__n">④ <span class="tp__yr">前770—前221</span></div>
+          <div class="tp__b">
+            <h4>春秋战国</h4>
+            <p class="shift"><em>国家形态</em><span>世袭贵族主导</span><b>→</b><span>君主—官僚—编户齐民国家</span></p>
+            <p>领土国家、官僚化、成文法与百家争鸣，同时发生。</p>
+            <a class="tp__jump" href="#cn-e3">↑ 大脉络 · 东周</a>
+          </div>
+        </div>
+
+        <div class="tp reveal">
+          <div class="tp__n">⑤ <span class="tp__yr">前221—公元220</span></div>
+          <div class="tp__b">
+            <h4>秦汉</h4>
+            <p>统一帝国、郡县行政与经典—官僚秩序形成。此后两千年的制度模板在这里定型。</p>
+            <p class="cav">限定：「大一统」成为持久政治理想，但从未消除区域差异。</p>
+            <a class="tp__jump" href="#cn-e4">↑ 大脉络 · 秦汉</a>
+          </div>
+        </div>
+
+        <div class="tp reveal">
+          <div class="tp__n">⑥ <span class="tp__yr">220—907</span></div>
+          <div class="tp__b">
+            <h4>魏晋南北朝—隋唐</h4>
+            <p>分裂与再统一、族群重组、佛教本土化、跨欧亚交流。分裂期不是空白期。</p>
+            <div class="tags"><span class="tag tag--idea"><i class="mk mk--idea"></i>思想／宗教</span><span class="tag tag--flow"><i class="mk mk--flow"></i>跨区域交流</span></div>
+            <a class="tp__jump" href="#cn-e5">↑ 大脉络 · 分裂与重组</a>
+          </div>
+        </div>
+
+        <div class="tp reveal">
+          <div class="tp__n">⑦ <span class="tp__yr">10—13世纪</span></div>
+          <div class="tp__b">
+            <h4>转型期</h4>
+            <p>多国并立 + 科举文官扩大 + 印刷、市场、城市和海贸增长。</p>
+            <p class="cav">限定：辽、西夏、金与宋并立，宋不是唯一中心。「唐宋之变」保留为分析框架，仍有争论。</p>
+            <a class="tp__jump" href="#cn-e7">↑ 大脉络 · 多国并立</a>
+          </div>
+        </div>
+
+        <div class="tp reveal">
+          <div class="tp__n">⑧ <span class="tp__yr">13—14世纪</span></div>
+          <div class="tp__b">
+            <h4>蒙古与元</h4>
+            <p>征服与多民族统治；中国深度进入蒙古时代的欧亚网络。</p>
+            <div class="tags"><span class="tag tag--flow"><i class="mk mk--flow"></i>跨区域交流</span><span class="tag tag--inst"><i class="mk mk--inst"></i>制度</span></div>
+            <a class="tp__jump" href="#cn-e8">↑ 大脉络 · 欧亚体系</a>
+          </div>
+        </div>
+
+        <div class="tp reveal">
+          <div class="tp__n">⑨ <span class="tp__yr">14—18世纪</span></div>
+          <div class="tp__b">
+            <h4>明清与早期全球化</h4>
+            <p>皇权—官僚制延续、多民族疆域扩展、白银与海洋贸易。</p>
+            <p class="cav">限定：明代有海禁也有活跃海贸，不能概括为「闭关」；清是多民族欧亚帝国，不是单纯的汉族王朝延续。</p>
+            <a class="tp__jump" href="#cn-e9">↑ 大脉络 · 明与清</a>
+          </div>
+        </div>
+
+        <div class="tp reveal">
+          <div class="tp__n">⑩ <span class="tp__yr">1840年代以后</span></div>
+          <div class="tp__b">
+            <h4>19世纪内外危机</h4>
+            <p>条约体系 + 国内战争 + 自强与制度改革。</p>
+            <p class="cav">限定：不是单一的「西方冲击」。危机同时来自人口、财政、生态、内战和国家治理压力。</p>
+            <a class="tp__jump" href="#cn-e11">↑ 大脉络 · 19世纪危机</a>
+          </div>
+        </div>
+
+        <div class="tp reveal">
+          <div class="tp__n">⑪ <span class="tp__yr">1911 / 1919 / 1949</span></div>
+          <div class="tp__b">
+            <h4>帝国解体 → 民族国家探索 → 革命与国家重建</h4>
+            <p class="shift"><em>三步</em><span>帝国解体</span><b>→</b><span>民族国家探索</span><b>→</b><span>革命与国家重建</span></p>
+            <p>帝制在 1911 年终结，但统一国家、宪政秩序与国民身份的重建，用掉了此后的几十年。</p>
+            <a class="tp__jump" href="#cn-e12">↑ 大脉络 · 帝国解体</a>
+          </div>
+        </div>
+
+        <div class="tp reveal">
+          <div class="tp__n">⑫ <span class="tp__yr">1978 / 2001</span></div>
+          <div class="tp__b">
+            <h4>改革开放 → 市场化与全球化</h4>
+            <p>工业、城市与社会结构巨变。2001 年加入 WTO 之后，中国经济与全球产业链深度绑定。</p>
+            <div class="tags"><span class="tag tag--tech"><i class="mk mk--tech"></i>生产／技术</span><span class="tag tag--flow"><i class="mk mk--flow"></i>跨区域交流</span></div>
+            <a class="tp__jump" href="#cn-e13">↑ 大脉络 · 国家重建</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+    </div>
+
+    <div class="viewfoot">
+      <div class="wrap">
+        <span class="vf-label">接下来</span>
+        <a class="vf-go vf-go--eu" href="#v-europe">另一条线：欧洲文明</a>
+        <a class="vf-go" href="#v-compare">把两条线放回一起：对照观察</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="view" id="v-compare" aria-labelledby="v-compare-t">
+    <div class="viewhead">
+      <div class="wrap">
+        <p class="stage"><b>总合 · 之一</b></p>
+        <h2 id="v-compare-t">对照观察</h2>
+        <p>把两条线上已经出现过的结构并排放一次。不做优劣判断，也不排先后。</p>
+      </div>
+    </div>
+    <div class="viewbody">
+  <section id="compare">
+    <div class="wrap">
+      <div class="cmp reveal">
+        <div class="cmp__row cmp__head">
+          <div>维度</div>
+          <div class="eu">欧洲</div>
+          <div class="as">中国</div>
+        </div>
+        <div class="cmp__row">
+          <div class="cmp__k">权力结构</div>
+          <div class="eu-c"><p>教皇 / 皇帝 / 国王 / 领主 / 城市等多中心并存，长期没有一个中心能吃掉其余部分。</p></div>
+          <div class="as-c"><p>秦汉以后形成郡县—官僚帝国模板，权力向中央汇聚，但从未消除区域差异。</p></div>
+        </div>
+        <div class="cmp__row">
+          <div class="cmp__k">统一形态</div>
+          <div class="eu-c"><p>长期多国竞争。宗教分裂与国家建构叠加成长期战争，1648 之后逐步形成主权国家体系。</p></div>
+          <div class="as-c"><p>统一与分裂循环：秦汉—魏晋南北朝—隋唐—宋辽夏金—元明清。「大一统」是持久的政治理想。</p></div>
+        </div>
+        <div class="cmp__row">
+          <div class="cmp__k">思想秩序</div>
+          <div class="eu-c"><p>拉丁教会提供跨地域的组织与语言，宗教改革后西方基督教分裂，信仰与国家权力重新组合。</p></div>
+          <div class="as-c"><p>儒家经典进入国家教育与政治语言，佛教本土化后形成儒—释—道长期互动，科举把它制度化。</p></div>
+        </div>
+        <div class="cmp__row">
+          <div class="cmp__k">跨区域联系</div>
+          <div class="eu-c"><p>地中海网络、拜占庭与伊斯兰世界的翻译网络，1492 以后转向跨大西洋扩张与全球资源流动。</p></div>
+          <div class="as-c"><p>河西走廊与绿洲商路、草原互动、印度洋海贸，16 世纪以后美洲与日本白银大量流入。</p></div>
+        </div>
+        <div class="cmp__row">
+          <div class="cmp__k">与外部帝国的关系</div>
+          <div class="eu-c"><p>伊斯兰文明既是竞争对手也是知识来源；殖民扩张使欧洲成为全球体系的组织者之一。</p></div>
+          <div class="as-c"><p>元与清同时是中国史与多民族欧亚帝国史，疆域、族群与制度多样性由此而来。</p></div>
+        </div>
+      </div>
+
+      <div class="caution" style="margin-top:26px;max-width:72ch">
+        <p><strong>这是宏观模型，不代表所有地区和时期。</strong></p>
+        <p>表中每一格都是长时段的概括，内部存在大量例外。两栏并排不构成先进／落后或优劣判断，也不表示两条线上的事件可以逐一对应。任何一格要用于具体论证时，都必须回到断代史和一手材料重新核对。</p>
+      </div>
+    </div>
+  </section>
+
+    </div>
+
+    <div class="viewfoot">
+      <div class="wrap">
+        <span class="vf-label">接下来</span>
+        <a class="vf-go" href="#v-books">最少且必要的书单</a>
+        <a class="vf-go" href="#v-notes">核校说明与来源</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="view" id="v-books" aria-labelledby="v-books-t">
+    <div class="viewhead">
+      <div class="wrap">
+        <p class="stage"><b>总合 · 之二</b></p>
+        <h2 id="v-books-t">最少且必要的书单</h2>
+        <p>六本书，两条路径。书单的作用是补足细节，不是制造阅读任务。</p>
+      </div>
+    </div>
+    <div class="viewbody">
+  <section id="books">
+    <div class="wrap">
+      <h3 class="h" style="margin-top:6px;color:var(--eu-1)">欧洲文明：主干 + 解释 + 宗教</h3>
+      <div class="shelf reveal" style="--accent:var(--eu-1)">
+        <article class="bk bk--one" style="--bc:var(--eu-1)">
+          <span class="bk__n">01 · 主干</span>
+          <h4>《欧洲史》</h4>
+          <p class="au">诺曼·戴维斯</p>
+          <dl>
+            <div><dt>用途</dt><dd>建立从古代到 20 世纪的总地图，且较注意中东欧，不把欧洲史缩成英法德三国史。</dd></div>
+            <div><dt>读法</dt><dd>第一遍只追踪六条线：罗马遗产 — 基督教世界 — 多国竞争 — 革命 — 战争 — 一体化。</dd></div>
+          </dl>
+          <span class="bk__badge">若只读一本，选这本</span>
+        </article>
+        <article class="bk" style="--bc:var(--eu-2)">
+          <span class="bk__n">02 · 解释</span>
+          <h4>《欧洲文明史》</h4>
+          <p class="au">基佐</p>
+          <dl>
+            <div><dt>用途</dt><dd>篇幅短，集中解释教会、封建贵族、城市和王权等多种力量如何共同塑造欧洲。</dd></div>
+            <div><dt>提醒</dt><dd class="warn">这是 19 世纪经典，带有进步史观。适合学会提问，不宜当作当代史学的最终答案。</dd></div>
+          </dl>
+        </article>
+        <article class="bk" style="--bc:var(--eu-3)">
+          <span class="bk__n">03 · 宗教</span>
+          <h4>《基督教史：最初的三千年》</h4>
+          <p class="au">迪尔梅德·麦卡洛克</p>
+          <dl>
+            <div><dt>用途</dt><dd>补足欧洲史最容易被中文读者低估的宗教主线，同时覆盖东正教和欧洲以外的基督教史。</dd></div>
+            <div><dt>读法</dt><dd>不必通读。先读古代教会、中世纪西方、宗教改革三部分，遇到具体问题再查。</dd></div>
+          </dl>
+        </article>
+      </div>
+      <p class="pick" style="--accent:var(--eu-1)"><strong>若只读一本：</strong>选《欧洲史》。若目标是继续理解美国，再加读麦卡洛克，并专题补英国宗教改革、英国内战、光荣革命和启蒙运动。</p>
+
+      <h3 class="h" style="margin-top:52px;color:var(--as-1)">亚洲／中华文明：通史 + 文明史 + 思想史</h3>
+      <div class="shelf reveal" style="--accent:var(--as-1)">
+        <article class="bk bk--one" style="--bc:var(--as-1)">
+          <span class="bk__n">01 · 通史</span>
+          <h4>《剑桥插图中国史》</h4>
+          <p class="au">伊沛霞（Patricia Buckley Ebrey）</p>
+          <dl>
+            <div><dt>用途</dt><dd>一卷式学术通史，政治、社会、家庭、宗教、物质文化并重，适合校准朝代骨架。</dd></div>
+            <div><dt>读法</dt><dd>先通读每章开头、地图和图像说明，再回头补制度与社会史细节。</dd></div>
+          </dl>
+          <span class="bk__badge">若只读一本，选这本</span>
+        </article>
+        <article class="bk" style="--bc:var(--as-2)">
+          <span class="bk__n">02 · 文明史</span>
+          <h4>《万古江河：中国历史文化的转折与开展》</h4>
+          <p class="au">许倬云</p>
+          <dl>
+            <div><dt>用途</dt><dd>最贴合本文主题。把中国放进东亚、亚洲多元体系和世界体系，突出文化扩展与历史转折。</dd></div>
+            <div><dt>提醒</dt><dd class="warn">它是大历史解释，不替代断代史和考古专著，应与第一本对读。</dd></div>
+          </dl>
+        </article>
+        <article class="bk" style="--bc:var(--as-3)">
+          <span class="bk__n">03 · 思想史</span>
+          <h4>《中国思想史》（两卷本）</h4>
+          <p class="au">葛兆光</p>
+          <dl>
+            <div><dt>用途</dt><dd>补足儒、释、道与政治秩序、知识世界、民间信仰之间的变化，避免只背思想家名单。</dd></div>
+            <div><dt>读法</dt><dd>围绕两个问题读：谁有权解释秩序？普通人的知识世界如何变化？</dd></div>
+          </dl>
+        </article>
+      </div>
+      <p class="pick" style="--accent:var(--as-1)"><strong>若只读一本：</strong>选《剑桥插图中国史》。若想直接理解这张图的文明互动视角，再加《万古江河》。<strong>严格说，读中国史不能替代亚洲史</strong>；要继续扩展时，应分别补一部印度史、一部伊斯兰文明史和一部中亚／草原史。</p>
+
+      <h3 class="h" style="margin-top:52px">最短阅读顺序</h3>
+      <p class="prose" style="color:var(--ink-2)">先读图，建立问题，再进入文本。</p>
+      <div class="order reveal">
+        <div class="ord ord--eu">
+          <h4>欧洲路径</h4>
+          <ol>
+            <li><b>《欧洲史》</b><span>建立总地图</span></li>
+            <li><b>《欧洲文明史》</b><span>理解多种力量如何共同起作用</span></li>
+            <li><b>《基督教史》</b><span>按题查阅，不通读</span></li>
+          </ol>
+        </div>
+        <div class="ord ord--as">
+          <h4>中国路径</h4>
+          <ol>
+            <li><b>《剑桥插图中国史》</b><span>校准朝代骨架</span></li>
+            <li><b>《万古江河》</b><span>取得文明互动视角</span></li>
+            <li><b>《中国思想史》</b><span>按时代选读</span></li>
+          </ol>
+        </div>
+      </div>
+      <div class="ask">
+        <b>每读一个时代，都追问三件事</b>
+        <ol>
+          <li>生产与交换怎样变化？</li>
+          <li>权力怎样组织？</li>
+          <li>人们怎样证明秩序合理？</li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+    </div>
+
+    <div class="viewfoot">
+      <div class="wrap">
+        <span class="vf-label">接下来</span>
+        <a class="vf-go" href="#v-notes">核校说明与来源</a>
+        <a class="vf-go" href="#v-intro">回到导读</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="view" id="v-notes" aria-labelledby="v-notes-t">
+    <div class="viewhead">
+      <div class="wrap">
+        <p class="stage"><b>总合 · 之三</b></p>
+        <h2 id="v-notes-t">核校说明与来源</h2>
+        <p>这一节记录原图被改动的地方，以及改动依据。它比图本身更重要：它标出了这些图不能被拿来说明什么。</p>
+      </div>
+    </div>
+    <div class="viewbody">
+  <section id="notes">
+    <div class="wrap">
+      <div class="revs reveal">
+        <div class="rev rev--eu">
+          <h4>欧洲图的主要修订</h4>
+          <ol>
+            <li><b>补入拜占庭。</b>476 年只是西部帝国终结，东罗马帝国延续至 1453 年；不能写成「罗马文明整体在 476 年消失」。</li>
+            <li><b>修正基督教化。</b>313 年主要是容许基督教合法存在；380 年以后才可概括为尼西亚基督教成为帝国正统信仰。</li>
+            <li><b>补入伊斯兰文明。</b>欧洲的古典知识复兴和地中海发展不能脱离拜占庭、伊斯兰世界及翻译网络。</li>
+            <li><b>弱化单线因果。</b>不能把「新教」直接等同于「个人主义、资本主义或民主」；这些关系存在争论，并受城市、商业、战争、法律和国家能力等多因素影响。</li>
+            <li><b>修正 1648 的表述。</b>威斯特伐利亚和约是宗教战争、帝国秩序和国家主权史上的重要节点，但现代国家和民族认同是更长时段的产物。</li>
+            <li><b>补入黑死病、殖民与奴隶制。</b>欧洲现代化不仅是思想内部演进，也与人口冲击、跨洋扩张和全球资源流动相连。</li>
+          </ol>
+        </div>
+        <div class="rev rev--as">
+          <h4>亚洲图的主要修订</h4>
+          <ol>
+            <li><b>夏与二里头分开表述。</b>二里头是早期国家和文明形成的关键遗址，但它是否就是文献中的「夏」，学界没有完全一致的结论。</li>
+            <li><b>「多元一体」不写成自动汇流。</b>史前中国有多个区域传统，中原成为政治整合中心经历了竞争、吸收和权力扩张，而非自然发生。</li>
+            <li><b>不把「儒表法里」当定论。</b>汉帝国确实把儒家经典逐步纳入国家教育与合法性语言，同时延续秦以来的法律行政制度；用一句口号概括会遮蔽变化过程。</li>
+            <li><b>宋代不是唯一中心。</b>辽、西夏、金与宋并立，应共同放进 10—13 世纪中国和东亚史；「唐宋之变」「商业革命」保留为分析框架并标注争论性。</li>
+            <li><b>东亚文化圈是互动结果。</b>朝鲜、日本、越南主动选择和改造汉字、佛教、儒学与律令制度，不是中国单向输出。</li>
+            <li><b>元、清放回欧亚史。</b>二者既属于中国史，也是蒙古、满洲主导的多民族帝国史；这样才能解释疆域、族群和制度多样性。</li>
+            <li><b>修正「明朝封闭论」。</b>海禁政策真实存在，但民间海贸、白银流入、东南亚网络与耶稣会交流同样重要。</li>
+            <li><b>1840 不是唯一原因。</b>鸦片战争是标志性转折点，19 世纪危机还来自人口、财政、生态、内战和国家治理压力。</li>
+          </ol>
+        </div>
+      </div>
+
+      <h3 class="h" style="margin-top:52px">五个争议概念，集中说明</h3>
+      <p class="prose" style="color:var(--ink-2)">这五个概念在正文中都可就地展开，这里集中放一份，便于查阅。</p>
+
+      <details class="dispute">
+        <summary><span class="dispute__term">夏—二里头</span>：遗址与文献王朝，不能直接划等号</summary>
+        <div class="dispute__body">
+          <p>二里头是早期国家和文明形成的关键遗址，但它是否就是文献中的「夏」，学界没有完全一致的结论。考古学上的早期国家中心是一回事，传世文献中的王朝序列是另一回事。更稳妥的读法，是以「文化整合」而非简单的王朝接替来理解早期中华文明的形成。</p>
+        </div>
+      </details>
+      <details class="dispute">
+        <summary><span class="dispute__term">封建主义</span>：史学分析概念，不是统一制度</summary>
+        <div class="dispute__body">
+          <p>「封建主义」与「民族国家」「唐宋之变」「商业革命」一样，都是史学分析概念，不能当成某一天突然发生的单一事件。它在不同地区、不同时期差别很大，与同期并存的教会网络、城市和王权始终处在竞争关系中。</p>
+        </div>
+      </details>
+      <details class="dispute">
+        <summary><span class="dispute__term">1648</span>：重要节点，不是民族国家的诞生日</summary>
+        <div class="dispute__body">
+          <p>威斯特伐利亚和约是宗教战争、帝国秩序和国家主权史上的重要节点，但现代国家和民族认同是更长时段的产物。把 1648 写成「民族国家诞生之年」，会遮蔽此前数百年的王权集中、财政—军事竞争与法律传统，也会遮蔽此后两百年的国家建构过程。</p>
+        </div>
+      </details>
+      <details class="dispute">
+        <summary><span class="dispute__term">唐宋之变</span>：有解释力的分析框架，仍有争论</summary>
+        <div class="dispute__body">
+          <p>「唐宋之变」「商业革命」是有解释力但仍有争论的概念，本图保留它们作为分析框架并标注争论性。使用时须记住：辽、西夏、金与宋并立，10—13 世纪的变化不能只归到宋一家。</p>
+        </div>
+      </details>
+      <details class="dispute">
+        <summary><span class="dispute__term">闭关锁国</span>：海禁政策存在，但不等于封闭</summary>
+        <div class="dispute__body">
+          <p>海禁政策真实存在，但民间海贸、白银流入、东南亚网络与耶稣会交流同样重要。判断一个时代是否封闭，要同时看政策文本、实际贸易量、白银流向和知识传播，不能只看前者。</p>
+        </div>
+      </details>
+
+      <h3 class="h" style="margin-top:52px">参考来源</h3>
+      <p class="prose" style="color:var(--ink-2)">以下资料用于核对年代、概念边界和原图中容易过度概括之处。链接在新标签页打开。</p>
+      <ul class="srcs">
+        <li>
+          <a href="https://www.metmuseum.org/de/essays/the-roman-empire-27-b-c-393-a-d" target="_blank" rel="noopener noreferrer">The Roman Empire (27 B.C.–393 A.D.) — Metropolitan Museum of Art</a>
+          <p data-url="https://www.metmuseum.org/de/essays/the-roman-empire-27-b-c-393-a-d">西罗马 476 年终结、东罗马延续至 1453 年等基本脉络。<span class="host">metmuseum.org</span></p>
+        </li>
+        <li>
+          <a href="https://www.metmuseum.org/-/media/files/learn/for-educators/publications-for-educators/renaissance.pdf" target="_blank" rel="noopener noreferrer">The Art of Renaissance Europe — Metropolitan Museum of Art</a>
+          <p data-url="https://www.metmuseum.org/-/media/files/learn/for-educators/publications-for-educators/renaissance.pdf">黑死病、印刷革命、君士坦丁堡陷落及大航海节点。<span class="host">metmuseum.org · PDF</span></p>
+        </li>
+        <li>
+          <a href="https://www.history.ox.ac.uk/node/4590731" target="_blank" rel="noopener noreferrer">European Reformations c. 1480–1600 — University of Oxford</a>
+          <p data-url="https://www.history.ox.ac.uk/node/4590731">宗教改革是多地区、多层面的长期变化，不只是「天主教对新教」的二元冲突。<span class="host">history.ox.ac.uk</span></p>
+        </li>
+        <li>
+          <a href="https://www.cambridge.org/core/journals/american-political-science-review/article/tilly-goes-to-church-the-religious-and-medieval-roots-of-european-state-fragmentation/4EEE3598EF17E46DF0050C375C9FDD45" target="_blank" rel="noopener noreferrer">Tilly Goes to Church — American Political Science Review / Cambridge Core</a>
+          <p data-url="https://www.cambridge.org/core/journals/american-political-science-review/article/tilly-goes-to-church-the-religious-and-medieval-roots-of-european-state-fragmentation/4EEE3598EF17E46DF0050C375C9FDD45">欧洲国家形成的多因素解释，以及对「1648 瞬间创造现代国家」叙事的修正。<span class="host">cambridge.org</span></p>
+        </li>
+        <li>
+          <a href="https://european-union.europa.eu/principles-countries-history/history-eu/1945-59_en" target="_blank" rel="noopener noreferrer">History of the European Union, 1945–59 — European Union</a>
+          <p data-url="https://european-union.europa.eu/principles-countries-history/history-eu/1945-59_en">战后欧洲合作、煤钢共同体和罗马条约时间线。<span class="host">european-union.europa.eu</span></p>
+        </li>
+        <li>
+          <a href="https://www.cambridge.org/core/books/archaeology-of-china/formation-of-early-states-in-the-central-plain-erlitou-and-erligang-190018001250-bc/8B9A921893AC4596D0C93EC3FFCD5516" target="_blank" rel="noopener noreferrer">The Archaeology of China: Formation of Early States — Cambridge University Press</a>
+          <p data-url="https://www.cambridge.org/core/books/archaeology-of-china/formation-of-early-states-in-the-central-plain-erlitou-and-erligang-190018001250-bc/8B9A921893AC4596D0C93EC3FFCD5516">二里头、早期国家形成与王朝史对应问题。<span class="host">cambridge.org</span></p>
+        </li>
+        <li>
+          <a href="https://www.cambridge.org/core/journals/journal-of-asian-studies/article/abs/erlitou-and-the-formation-of-chinese-civilization-toward-a-new-paradigm/B7AFD45C4F40157E1C4FB2E671ED7F1E" target="_blank" rel="noopener noreferrer">Erlitou and the Formation of Chinese Civilization — Journal of Asian Studies / Cambridge Core</a>
+          <p data-url="https://www.cambridge.org/core/journals/journal-of-asian-studies/article/abs/erlitou-and-the-formation-of-chinese-civilization-toward-a-new-paradigm/B7AFD45C4F40157E1C4FB2E671ED7F1E">以「文化整合」而非简单王朝序列理解早期中华文明。<span class="host">cambridge.org</span></p>
+        </li>
+        <li>
+          <a href="https://www.cambridge.org/highereducation/books/the-cambridge-illustrated-history-of-china/B8415BCABB0218ABC80F4EFEEA9F5B2B/the-origins-of-chinese-civilization-neolithic-period-to-the-western-zhou-dynasty/5A2E540D87058AA86468A2FEBAB47DBE" target="_blank" rel="noopener noreferrer">The Cambridge Illustrated History of China: Origins — Cambridge University Press</a>
+          <p data-url="https://www.cambridge.org/highereducation/books/the-cambridge-illustrated-history-of-china/B8415BCABB0218ABC80F4EFEEA9F5B2B/the-origins-of-chinese-civilization-neolithic-period-to-the-western-zhou-dynasty/5A2E540D87058AA86468A2FEBAB47DBE">中华文明多线起源、考古与传统叙事的差异。<span class="host">cambridge.org</span></p>
+        </li>
+        <li>
+          <a href="https://afe.easia.columbia.edu/mongols/pop/menu/class_timeline.htm" target="_blank" rel="noopener noreferrer">A Timeline of Chinese History — Columbia University, Asia for Educators</a>
+          <p data-url="https://afe.easia.columbia.edu/mongols/pop/menu/class_timeline.htm">王朝年代、统一与分裂、北方政权互动的教学时间线。<span class="host">afe.easia.columbia.edu</span></p>
+        </li>
+        <li>
+          <a href="https://www.cambridge.org/core/elements/political-economy-of-chinas-imperial-examination-system/3DA0EC88AE5901AEE641FD5686C7F8B8" target="_blank" rel="noopener noreferrer">The Political Economy of China’s Imperial Examination System — Cambridge Core</a>
+          <p data-url="https://www.cambridge.org/core/elements/political-economy-of-chinas-imperial-examination-system/3DA0EC88AE5901AEE641FD5686C7F8B8">科举的渐进形成及宋代制度化，不把它写成隋代一次性「发明」。<span class="host">cambridge.org</span></p>
+        </li>
+      </ul>
+
+      <div class="foot">
+        <p>本页由 <span class="mono">04-Library/欧洲与亚洲文明发展脉络及关键转折点.md</span> 生成，内容以该 Markdown 为事实与结构依据。四张 ASCII 图分别转为：欧洲主时间轴、欧洲转折卡片、亚洲互动网络、中华文明主时间轴。</p>
+        <p>页面保留了原文中的「多中心」与「并行线」，以避免视觉设计重新制造单线进步史观。所有强结论均保留了原文的限定词、争议说明和反证提示。</p>
+        <a class="totop" href="#v-notes">↑ 回到本节顶部</a>
+      </div>
+    </div>
+  </section>
+
+    </div>
+
+    <div class="viewfoot">
+      <div class="wrap">
+        <span class="vf-label">回到</span>
+        <a class="vf-go" href="#v-intro">导读与阅读说明</a>
+        <a class="vf-go vf-go--eu" href="#v-europe">欧洲文明</a>
+        <a class="vf-go vf-go--as" href="#v-asia">亚洲文明</a>
+      </div>
+    </div>
+  </section>
+  </div>
+</Layout>
+
+<script is:inline>
+  (function () {
+    'use strict';
+    var page = document.querySelector('.visual-page');
+    if (!page) { return; }
+    var views = [].slice.call(page.querySelectorAll('.view'));
+    var navLinks = [].slice.call(page.querySelectorAll('.partbar a[href^="#"]'));
+    var reduce = false;
+    try { reduce = !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches); } catch (e) {}
+    var raf = window.requestAnimationFrame || function (f) { return setTimeout(f, 16); };
+    var io = null, current = null, ticking = false;
+
+    function byId(h) {
+      if (!h) { return null; }
+      h = String(h).replace(/^#/, '');
+      if (!h) { return null; }
+      try { return document.getElementById(h); } catch (e) { return null; }
+    }
+    function viewOf(el) {
+      while (el && el.nodeType === 1) {
+        if (el.classList && el.classList.contains('view')) { return el; }
+        el = el.parentNode;
+      }
+      return null;
+    }
+    function resolve(href) {
+      var el = byId(href);
+      if (!el) { return null; }
+      if (el.classList && el.classList.contains('view')) { return { view: el, target: null }; }
+      var v = viewOf(el);
+      return v ? { view: v, target: el } : null;
+    }
+
+    /* 入场动效；reduced-motion 或无 IO 时内容默认完全可见 */
+    try {
+      if (!reduce && 'IntersectionObserver' in window) {
+        page.classList.add('is-anim');
+        io = new IntersectionObserver(function (es) {
+          for (var i = 0; i < es.length; i++) {
+            if (es[i].isIntersecting) { es[i].target.classList.add('is-in'); io.unobserve(es[i].target); }
+          }
+        }, { rootMargin: '0px 0px -6% 0px', threshold: 0.02 });
+        var rv = page.querySelectorAll('.reveal');
+        for (var i = 0; i < rv.length; i++) { io.observe(rv[i]); }
+      }
+    } catch (e) { page.classList.remove('is-anim'); }
+
+    function primeReveals(view) {
+      if (!io) { return; }
+      raf(function () {
+        var h = window.innerHeight || 800;
+        var rv = view.querySelectorAll('.reveal');
+        for (var i = 0; i < rv.length; i++) {
+          if (rv[i].getBoundingClientRect().top < h * 1.05) {
+            rv[i].classList.add('is-in');
+            io.unobserve(rv[i]);
+          }
+        }
+      });
+    }
+
+    function markNav(view) {
+      for (var i = 0; i < navLinks.length; i++) {
+        var r = resolve(navLinks[i].getAttribute('href'));
+        if (r && r.view === view) { navLinks[i].setAttribute('aria-current', 'page'); }
+        else { navLinks[i].removeAttribute('aria-current'); }
+      }
+      var cur = page.querySelector('.partbar a[aria-current="page"]');
+      var row = page.querySelector('.partbar__row');
+      if (cur && row && row.scrollWidth > row.clientWidth) {
+        row.scrollLeft = cur.offsetLeft - row.clientWidth / 2 + cur.offsetWidth / 2;
+      }
+    }
+
+    /* 分区偏移量：站点导航栏 + 分区条，实测后写回 CSS 变量 */
+    function syncOffsets() {
+      var hdr = document.querySelector('.site-header');
+      var bar = page.querySelector('.partbar');
+      if (hdr) { page.style.setProperty('--hdr', Math.round(hdr.getBoundingClientRect().height) + 'px'); }
+      if (bar) { page.style.setProperty('--partbar-h', Math.round(bar.getBoundingClientRect().height) + 'px'); }
+    }
+
+    function topOfPage() {
+      var bar = page.querySelector('.partbar');
+      var y = bar ? bar.getBoundingClientRect().top + window.pageYOffset : 0;
+      var hdr = document.querySelector('.site-header');
+      var off = hdr ? hdr.getBoundingClientRect().height : 0;
+      window.scrollTo(0, Math.max(0, y - off - 4));
+    }
+
+    function activate(view, target, push) {
+      if (!view) { return false; }
+      var switched = current !== view;
+      if (switched) {
+        for (var i = 0; i < views.length; i++) {
+          if (views[i] === view) { views[i].classList.add('is-active'); }
+          else { views[i].classList.remove('is-active'); }
+        }
+        current = view;
+        markNav(view);
+        primeReveals(view);
+      }
+      if (target && target !== view) { target.scrollIntoView(); }
+      else { topOfPage(); }
+      if (switched && push) {
+        var head = view.querySelector('h1, h2');
+        if (head) {
+          try { head.setAttribute('tabindex', '-1'); head.focus({ preventScroll: true }); } catch (e) {}
+        }
+      }
+      if (push) {
+        var hash = '#' + ((target && target.id) || view.id);
+        try { if (location.hash !== hash) { history.pushState(null, '', hash); } } catch (e) {}
+      }
+      updateSub();
+      return true;
+    }
+
+    document.addEventListener('click', function (ev) {
+      if (ev.defaultPrevented || ev.button !== 0) { return; }
+      if (ev.metaKey || ev.ctrlKey || ev.shiftKey || ev.altKey) { return; }
+      var a = ev.target;
+      while (a && a.nodeType === 1 && a.tagName !== 'A') { a = a.parentNode; }
+      if (!a || a.nodeType !== 1 || a.tagName !== 'A') { return; }
+      if (!page.contains(a)) { return; }
+      var href = a.getAttribute('href');
+      if (!href || href.charAt(0) !== '#' || href.length < 2) { return; }
+      var r = resolve(href);
+      if (!r) { return; }
+      ev.preventDefault();
+      activate(r.view, r.target, true);
+    }, false);
+
+    window.addEventListener('popstate', function () {
+      var r = resolve(location.hash);
+      if (r) { activate(r.view, r.target, false); }
+      else if (views.length) { activate(views[0], null, false); }
+    });
+
+    function updateSub() {
+      ticking = false;
+      if (!current) { return; }
+      var sub = current.querySelector('.subnav');
+      if (!sub) { return; }
+      var secs = current.querySelectorAll('.viewbody > section[id]');
+      if (!secs.length) { return; }
+      var cur = secs[0].id;
+      for (var i = 0; i < secs.length; i++) {
+        if (secs[i].getBoundingClientRect().top <= 150) { cur = secs[i].id; }
+      }
+      var links = sub.querySelectorAll('a[href^="#"]');
+      for (var j = 0; j < links.length; j++) {
+        if (links[j].getAttribute('href') === '#' + cur) { links[j].setAttribute('aria-current', 'true'); }
+        else { links[j].removeAttribute('aria-current'); }
+      }
+    }
+    function onScroll() { if (ticking) { return; } ticking = true; raf(updateSub); }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', function () { syncOffsets(); onScroll(); });
+
+    try {
+      if (!views.length) { throw new Error('no views'); }
+      syncOffsets();
+      var r0 = resolve(location.hash);
+      if (!r0) { activate(views[0], null, false); }
+      else { activate(r0.view, r0.target, false); }
+      if (!r0 || !r0.target) {
+        var toTop = function () { syncOffsets(); topOfPage(); };
+        raf(toTop);
+        window.addEventListener('load', toTop);
+        setTimeout(toTop, 60);
+      }
+    } catch (e) {
+      page.classList.remove('is-routed');
+      for (var k = 0; k < views.length; k++) { views[k].classList.add('is-active'); }
+    }
+
+    /* 打印时展开全部注释 */
+    try {
+      var reopened = [];
+      var openAll = function () {
+        reopened = [];
+        var d = page.querySelectorAll('details');
+        for (var i = 0; i < d.length; i++) { if (!d[i].open) { d[i].open = true; reopened.push(d[i]); } }
+      };
+      var restoreAll = function () {
+        for (var i = 0; i < reopened.length; i++) { reopened[i].open = false; }
+        reopened = [];
+      };
+      window.addEventListener('beforeprint', openAll);
+      window.addEventListener('afterprint', restoreAll);
+    } catch (e) {}
+  })();
+</script>
+
+<style>
+  :global(main) { background: var(--bg); }
+
+  /* ============================================================
+     令牌层：全部接到 global.css，浅色/暗色随站点主题按钮自动切换。
+     只有「两条文明线」的识别色是本页专属，需显式给出浅暗两套。
+     ============================================================ */
+  .visual-page {
+    --v-font: 'TsangerJinKai02', 'STKaiti', 'KaiTi', -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Hiragino Sans GB', sans-serif;
+    --v-mono: 'JetBrains Mono', 'SF Mono', Menlo, Monaco, Consolas, monospace;
+    --v-r-lg: 14px;
+    --v-r-md: 10px;
+    --v-r-sm: 7px;
+
+    /* 原页面的排版令牌 → 站点字体 */
+    --serif: var(--v-font);
+    --sans:  var(--v-font);
+    --mono:  var(--v-mono);
+
+    /* 原页面的纸墨令牌 → 站点色板 */
+    --paper:   var(--bg);
+    --panel:   var(--surface);
+    --paper-2: color-mix(in srgb, var(--accent) 8%, transparent);
+    --paper-3: color-mix(in srgb, var(--accent) 14%, transparent);
+    --ink:     var(--text);
+    --ink-2:   var(--text-soft);
+    --ink-3:   var(--text-dim);
+    --rule:    var(--border-soft);
+    --rule-2:  var(--border);
+    --rule-3:  color-mix(in srgb, var(--text) 34%, transparent);
+    --v-accent: var(--accent);
+    --v-accent-soft: color-mix(in srgb, var(--accent) 8%, transparent);
+    --paper-blur: var(--bg);
+    --shadow-lift: var(--shadow-card-hover);
+
+    /* 欧洲：深蓝 / 酒红 / 旧金 —— 浅色 */
+    --eu-1: #3E6C99; --eu-2: #A34A4A; --eu-3: #B08838;
+    /* 亚洲：朱砂 / 黛青 / 玉石绿 —— 浅色 */
+    --as-1: #C15F3C; --as-2: #4A7386; --as-3: #5B8468;
+    /* 四类因素 —— 浅色 */
+    --f-inst: #4E7191; --f-idea: #96762F; --f-tech: #5C7A50; --f-flow: #9A5560;
+
+    --g: 16px;
+    --maxw: 100%;
+    --hdr: 62px;
+    --partbar-h: 50px;
+
+    width: min(1100px, calc(100% - 32px));
+    margin: 0 auto;
+    padding: 0 0 3rem;
+    font-family: var(--v-font);
+    font-size: 16.5px;
+    line-height: 1.74;
+    color: var(--ink);
+  }
+
+  :global([data-theme='dark']) .visual-page {
+    --eu-1: #7FA8D4; --eu-2: #D98A8A; --eu-3: #D6B063;
+    --as-1: #E07A4F; --as-2: #82AABF; --as-3: #87B699;
+    --f-inst: #84A4C4; --f-idea: #C9A765; --f-tech: #93B187; --f-flow: #C88C97;
+    --paper-2: color-mix(in srgb, var(--accent) 15%, transparent);
+    --paper-3: color-mix(in srgb, var(--accent) 22%, transparent);
+    --v-accent-soft: color-mix(in srgb, var(--accent) 13%, transparent);
+    --rule-3: color-mix(in srgb, var(--text) 38%, transparent);
+  }
+
+  /* 内层 .wrap 交给 .visual-page 控宽 */
+  .visual-page .wrap { max-width: 100%; padding-left: 0; padding-right: 0; }
+
+  /* meta 一律等宽，与全站一致 */
+  .visual-page .eyebrow,
+  .visual-page .viewhead .stage b,
+  .visual-page .era__tag,
+  .visual-page .tag,
+  .visual-page .ms-tag,
+  .visual-page .subnav__label,
+  .visual-page .vf-label,
+  .visual-page .bk__n,
+  .visual-page .bk dt,
+  .visual-page .hero__kicker,
+  .visual-page .strand .yr,
+  .visual-page .shift em,
+  .visual-page .claim::before,
+  .visual-page .srcs .host { font-family: var(--v-mono); }
+
+  /* 楷体行高与字距：标题要透气，不能用负字距 */
+  .visual-page h1,
+  .visual-page h2,
+  .visual-page h3,
+  .visual-page h4,
+  .visual-page h5 { letter-spacing: 0; line-height: 1.34; }
+  .visual-page .hero h1 { line-height: 1.18; }
+
+  /* 圆角向站点看齐：柔化但不做成 SaaS 卡片墙 */
+  .visual-page .strand,
+  .visual-page .lg,
+  .visual-page .bk,
+  .visual-page .rev,
+  .visual-page .ord,
+  .visual-page .gate,
+  .visual-page .cmp,
+  .visual-page .netfig,
+  .visual-page .ms-node,
+  .visual-page .ms-row a,
+  .visual-page details.dispute,
+  .visual-page .aside-note,
+  .visual-page .ask { border-radius: var(--v-r-md); }
+  .visual-page .shift span,
+  .visual-page .bk__badge,
+  .visual-page .vf-go { border-radius: var(--v-r-sm); }
+  .visual-page .caution,
+  .visual-page .claim,
+  .visual-page .pick { border-radius: 0 var(--v-r-sm) var(--v-r-sm) 0; }
+
+  /* ============================================================
+     分区条：站内页不再放整高侧栏，改为跟随站点导航的横向切换条。
+     两条并列的线用虚线框成一组，保留「并列而非先后」的语义。
+     ============================================================ */
+  .partbar {
+    position: sticky;
+    top: var(--hdr);
+    z-index: 9;
+    margin: 0 0 4px;
+    padding: 7px 0;
+    background: color-mix(in srgb, var(--bg) 92%, transparent);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--rule);
+  }
+  .partbar__row {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    overflow-x: auto;
+    scrollbar-width: thin;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 2px;
+  }
+  .partbar__row::-webkit-scrollbar { height: 3px; }
+  .partbar__row::-webkit-scrollbar-thumb { background: var(--rule-2); border-radius: 3px; }
+  .partbar__tag {
+    flex: none;
+    font-family: var(--v-mono);
+    font-size: 10.5px;
+    letter-spacing: 0.14em;
+    color: var(--ink-3);
+    white-space: nowrap;
+  }
+  .partbar__sep { flex: none; width: 1px; height: 16px; background: var(--rule); }
+  .partbar__pair {
+    flex: none;
+    display: inline-flex;
+    gap: 4px;
+    padding: 3px;
+    border: 1px dashed var(--rule-2);
+    border-radius: 999px;
+  }
+  .partbar a {
+    flex: none;
+    display: block;
+    white-space: nowrap;
+    font-size: 13.5px;
+    line-height: 1.4;
+    text-decoration: none;
+    color: var(--ink-2);
+    padding: 6px 13px;
+    border: 1px solid transparent;
+    border-radius: 999px;
+    transition: color 0.16s ease, background 0.16s ease, border-color 0.16s ease;
+  }
+  .partbar a:hover { color: var(--ink); border-color: var(--rule-2); }
+  .partbar a[aria-current='page'] {
+    color: var(--surface);
+    background: var(--v-accent);
+    border-color: var(--v-accent);
+  }
+  .partbar a.is-eu { color: var(--eu-1); }
+  .partbar a.is-as { color: var(--as-1); }
+  .partbar a.is-eu[aria-current='page'] { background: var(--eu-1); border-color: var(--eu-1); color: var(--bg); }
+  .partbar a.is-as[aria-current='page'] { background: var(--as-1); border-color: var(--as-1); color: var(--bg); }
+
+  /* 锚点定位要让开站点导航 + 分区条 */
+  .visual-page .viewbody > section[id],
+  .visual-page .era[id] { scroll-margin-top: calc(var(--hdr) + var(--partbar-h) + 14px); }
+
+  /* 站内页不再固定 subnav（分区条已常驻），避免两条粘性栏叠加 */
+  .visual-page .subnav { position: static; background: transparent; backdrop-filter: none; }
+
+  /* 站内页去掉首屏网格底纹：站点本身是干净的，这层纹理会变成一块灰斑 */
+  .visual-page .hero::before { display: none; }
+  .visual-page .hero { padding-top: clamp(24px, 4vw, 44px); }
+
+  /* 卡片投影向站点看齐（极轻，不做厚重投影） */
+  .visual-page .strand,
+  .visual-page .lg,
+  .visual-page .bk,
+  .visual-page .rev,
+  .visual-page .ord,
+  .visual-page .cmp,
+  .visual-page .netfig,
+  .visual-page .gate { box-shadow: var(--shadow-card); }
+
+  @media (max-width: 700px) {
+    .visual-page { --hdr: 56px; font-size: 16px; }
+    .partbar__tag { display: none; }
+    .partbar__sep { display: none; }
+  }
+
+
+  /* ======== 以下为原信息图样式（令牌已接到 global.css） ======== */
+
+/* ============================================================
+   欧洲与亚洲文明发展脉络及关键转折点
+   单文件静态页 / 无外部依赖 / 离线可用
+   设计语言：纸本图鉴 + 测绘刻度尺
+   ============================================================ */
+
+*,*::before,*::after{box-sizing:border-box}
+
+img,svg{max-width:100%}
+
+
+/* —— 排版基元 —— */
+h1,h2,h3,h4,h5{font-weight:600;line-height:1.3;margin:0;letter-spacing:.005em}
+
+p{margin:0 0 .9em}
+
+p:last-child{margin-bottom:0}
+
+a{color:var(--eu-1);text-underline-offset:.22em;text-decoration-thickness:.5px;text-decoration-color:var(--rule-2)}
+
+a:hover{text-decoration-color:currentColor}
+
+:focus-visible{outline:2px solid var(--v-accent);outline-offset:3px;border-radius:1px}
+
+.mono{font-family:var(--mono);font-variant-numeric:tabular-nums;letter-spacing:.02em}
+
+.sans{font-family:var(--sans)}
+
+.sr{position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+
+
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 clamp(18px,5vw,56px)}
+
+.prose{max-width:66ch}
+
+main{padding-bottom:90px}
+
+
+/* ============================================================
+   章节
+   ============================================================ */
+/* 分区视图：无 JS 时全部展开，退化为一张长滚动页 */
+.view{display:block}
+
+.visual-page.is-routed .view{display:none}
+
+.visual-page.is-routed .view.is-active{display:block}
+
+
+.viewbody>section[id]{scroll-margin-top:70px;padding:clamp(40px,6vw,72px) 0 8px}
+
+.viewbody>section+section{border-top:1px solid var(--rule)}
+
+.viewbody>section[id]:first-child{padding-top:clamp(26px,3.4vw,40px)}
+
+
+.eyebrow{
+  font-family:var(--sans);font-size:11.5px;letter-spacing:.2em;color:var(--ink-3);
+  margin:0 0 14px;display:flex;align-items:center;gap:10px
+}
+
+.eyebrow::before{content:"";width:22px;height:1px;background:var(--v-accent);flex:none}
+
+.eyebrow .num{font-family:var(--mono);color:var(--v-accent);letter-spacing:.08em}
+
+
+h2.h{font-size:clamp(26px,4.2vw,40px);letter-spacing:0;margin:0 0 .5em}
+
+h3.h{font-size:clamp(19px,2.4vw,24px);margin:0 0 .55em}
+
+.lede{font-size:clamp(16.5px,1.6vw,18.5px);color:var(--ink-2);max-width:60ch}
+
+
+/* ============================================================
+   首屏
+   ============================================================ */
+.hero{padding:clamp(52px,9vw,110px) 0 clamp(40px,6vw,70px);position:relative;overflow:hidden}
+
+.hero::before{
+  content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;opacity:.42;
+  background-image:linear-gradient(var(--rule) 1px,transparent 1px),linear-gradient(90deg,var(--rule) 1px,transparent 1px);
+  background-size:100% 64px,64px 100%;
+  -webkit-mask-image:radial-gradient(78% 62% at 88% 8%,#000 0%,transparent 72%);
+  mask-image:radial-gradient(78% 62% at 88% 8%,#000 0%,transparent 72%);
+}
+
+.hero__kicker{font-family:var(--sans);font-size:12px;letter-spacing:.24em;color:var(--ink-3);margin:0 0 22px}
+
+.hero h1{font-size:clamp(34px,7.4vw,72px);line-height:1.12;letter-spacing:0;margin:0 0 .3em;max-width:15ch}
+
+.hero h1 em{font-style:normal;color:var(--eu-1)}
+
+.hero h1 i{font-style:normal;color:var(--as-1)}
+
+.hero__sub{font-size:clamp(17px,2.2vw,22px);color:var(--ink-2);max-width:44ch;margin:0 0 28px;line-height:1.6}
+
+.hero__meta{display:flex;flex-wrap:wrap;gap:8px 26px;font-family:var(--mono);font-size:12px;color:var(--ink-3);margin:0 0 34px}
+
+
+.caution{
+  border-left:2px solid var(--eu-3);background:linear-gradient(90deg,color-mix(in srgb,var(--eu-3) 9%,transparent),transparent 70%);
+  padding:16px 20px;max-width:60ch;margin:0 0 34px
+}
+
+.caution strong{color:var(--eu-3);font-weight:600}
+
+.caution p{font-size:16px;color:var(--ink-2)}
+
+
+.gates{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(min(100%,270px),1fr));max-width:760px}
+
+.gate{
+  display:block;text-decoration:none;color:inherit;background:var(--panel);
+  border:1px solid var(--rule);border-top:3px solid var(--gc);padding:20px 22px 22px;
+  transition:transform .22s cubic-bezier(.2,.7,.2,1),box-shadow .22s ease,border-color .22s ease;position:relative
+}
+
+.gate:hover{transform:translateY(-3px);box-shadow:var(--shadow-lift);border-color:var(--rule-2);border-top-color:var(--gc)}
+@media (prefers-reduced-motion: reduce){
+.gate,.gate:hover{transition:none;transform:none}
+}
+
+.gate .g-n{font-family:var(--mono);font-size:11px;letter-spacing:.14em;color:var(--gc)}
+
+.gate h3{font-size:22px;margin:6px 0 8px}
+
+.gate p{font-size:14.5px;color:var(--ink-3);line-height:1.7;font-family:var(--sans)}
+
+.gate .g-go{font-family:var(--sans);font-size:12.5px;color:var(--gc);letter-spacing:.06em;margin-top:12px;display:block}
+
+.gate--eu{--gc:var(--eu-1)}
+
+.gate--as{--gc:var(--as-1)}
+
+
+/* ============================================================
+   图例
+   ============================================================ */
+.legend-grid{display:grid;gap:var(--g);grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));margin:26px 0 0}
+
+.lg{border:1px solid var(--rule);background:var(--panel);padding:15px 17px}
+
+.lg h4{font-family:var(--sans);font-size:14.5px;margin:0 0 6px;display:flex;align-items:center;gap:9px}
+
+.lg p{font-size:14px;color:var(--ink-3);font-family:var(--sans);line-height:1.65;margin:0}
+
+
+/* 四类因素的形状标记 */
+.mk{width:12px;height:12px;flex:none;display:inline-block;background:var(--f)}
+
+.mk--inst{--f:var(--f-inst)}
+
+.mk--idea{--f:var(--f-idea);background:none;border:2px solid var(--f);border-radius:50%}
+
+.mk--tech{--f:var(--f-tech);clip-path:polygon(50% 0,100% 100%,0 100%)}
+
+.mk--flow{--f:var(--f-flow);background:none;border-top:3px solid var(--f);border-bottom:3px solid var(--f);height:11px}
+
+
+.tag{
+  display:inline-flex;align-items:center;gap:6px;font-family:var(--sans);font-size:11.5px;
+  color:var(--f);letter-spacing:.04em;white-space:nowrap
+}
+
+.tag .mk{width:9px;height:9px}
+
+.tag--idea .mk{border-width:1.5px}
+
+.tag--flow .mk{border-top-width:2px;border-bottom-width:2px;height:8px}
+
+.tags{display:flex;flex-wrap:wrap;gap:5px 14px;margin:8px 0 0}
+
+
+.sym{display:grid;gap:10px;margin:22px 0 0;max-width:66ch}
+
+.sym div{display:grid;grid-template-columns:8.5rem minmax(0,1fr);gap:14px;font-size:15px;align-items:baseline;font-family:var(--sans);line-height:1.7}
+
+.sym dt,.sym b{font-family:var(--mono);font-size:13px;color:var(--ink);font-weight:400}
+
+.sym span{color:var(--ink-3)}
+@media (max-width:560px){
+.sym div{grid-template-columns:1fr;gap:2px}
+}
+
+
+/* ============================================================
+   年代刻度时间轴
+   ============================================================ */
+.tl{margin:34px 0 0}
+
+.era{display:grid;grid-template-columns:6.6rem minmax(0,1fr);column-gap:clamp(14px,2.6vw,32px)}
+
+.era__rail{position:relative;text-align:right;padding-top:2px;min-width:0}
+
+.era__year{font-family:var(--mono);font-size:12.5px;color:var(--ink-2);letter-spacing:.01em;display:block;line-height:1.5}
+
+.era__tag{font-family:var(--sans);font-size:11px;color:var(--ink-3);display:block;margin-top:3px;letter-spacing:.06em}
+
+.era__rail::after{
+  content:"";position:absolute;right:calc(-1 * clamp(14px,2.6vw,32px));top:.72em;
+  width:clamp(14px,2.6vw,32px);height:1px;background:var(--rule)
+}
+
+.era__body{
+  position:relative;border-left:1px solid var(--rule-2);
+  padding:0 0 30px clamp(18px,2.8vw,38px);min-width:0
+}
+
+/* 脊线上的次刻度 */
+.era__body::after{
+  content:"";position:absolute;left:0;top:0;bottom:0;width:4px;pointer-events:none;
+  background-image:repeating-linear-gradient(to bottom,var(--rule) 0 1px,transparent 1px 22px)
+}
+
+/* 主节点 */
+.era__body::before{
+  content:"";position:absolute;left:-5px;top:.55em;width:9px;height:9px;
+  background:var(--paper);border:1.5px solid var(--v-accent);z-index:2
+}
+
+.era--major>.era__body::before{background:var(--v-accent)}
+
+.era:last-child>.era__body{padding-bottom:6px}
+
+.era h4{font-size:19px;margin:0 0 .35em;letter-spacing:0}
+
+.era>.era__body>p{font-size:16px;color:var(--ink-2);max-width:58ch}
+@media (max-width:719px){
+
+  .era{grid-template-columns:minmax(0,1fr)}
+
+  .era__rail{text-align:left;padding:0 0 6px 18px;display:flex;flex-wrap:wrap;gap:2px 12px;align-items:baseline}
+
+  .era__rail::after{display:none}
+
+  .era__year{font-size:12px}
+
+  .era__tag{margin-top:0}
+
+  .era__body{padding-left:18px}
+
+  .era__rail{margin-left:0}
+}
+
+
+/* —— 分支组 —— */
+.branch{display:grid;gap:var(--g);grid-template-columns:repeat(var(--n,2),minmax(0,1fr));margin:14px 0}
+
+.strand{
+  background:var(--panel);border:1px solid var(--rule);border-top:2px solid var(--sc,var(--rule-3));
+  padding:13px 15px 14px;min-width:0
+}
+
+.strand h5{font-family:var(--sans);font-size:14.5px;margin:0 0 5px;line-height:1.45;color:var(--ink)}
+
+.strand .yr{font-family:var(--mono);font-size:11.5px;color:var(--ink-3);display:block;margin:0 0 5px}
+
+.strand p{font-size:14.5px;line-height:1.72;color:var(--ink-2);font-family:var(--sans);margin:0}
+
+.strand p+p{margin-top:.5em}
+
+.strand--inst{--sc:var(--f-inst)}
+
+.strand--idea{--sc:var(--f-idea)}
+
+.strand--tech{--sc:var(--f-tech)}
+
+.strand--flow{--sc:var(--f-flow)}
+
+.strand--key{--sc:var(--v-accent);background:var(--paper-2)}
+
+
+/* —— 直角肘接连接线 —— */
+.link{position:relative;display:grid;gap:var(--g);grid-template-columns:repeat(var(--n,2),minmax(0,1fr));height:26px;margin:0}
+
+.link i{display:block;justify-self:center;width:1px;background:var(--rule-2);height:50%}
+
+.link--down i{align-self:end}
+
+.link--up i{align-self:start}
+
+.link::before{
+  content:"";position:absolute;top:50%;height:1px;background:var(--rule-2);
+  left:calc((100% - (var(--n) - 1) * var(--g)) / var(--n) / 2);
+  right:calc((100% - (var(--n) - 1) * var(--g)) / var(--n) / 2)
+}
+
+.link::after{content:"";position:absolute;left:50%;width:1px;background:var(--rule-2)}
+
+.link--down::after{top:0;height:50%}
+
+.link--up::after{top:50%;height:50%}
+
+.link--plain{height:22px}
+
+.link--plain i,.link--plain::before{display:none}
+
+.link--plain::after{top:0;height:100%}
+@media (max-width:719px){
+
+  .branch{grid-template-columns:minmax(0,1fr)}
+
+  .link{grid-template-columns:1fr;height:20px}
+
+  .link i,.link::before{display:none}
+
+  .link::after{top:0;height:100%}
+}
+
+
+/* —— 结论 / 判断标记（源文中的 ★） —— */
+.claim{
+  display:block;border-left:2px solid var(--v-accent);background:var(--v-accent-soft);
+  padding:12px 16px 13px;margin:14px 0;font-size:15.5px;line-height:1.72
+}
+
+.claim::before{
+  content:"判断";display:block;font-family:var(--sans);font-size:10.5px;
+  letter-spacing:.16em;color:var(--v-accent);white-space:nowrap;margin:0 0 5px
+}
+
+.claim p{margin:0;color:var(--ink-2)}
+
+.claim p+p{margin-top:.5em}
+
+/* 宽屏改为侧栏标签：首列必须定宽，auto 会被最长段落撑爆 */
+@media (min-width:720px){
+  .claim{display:grid;grid-template-columns:2.7rem minmax(0,1fr);column-gap:14px;align-items:start}
+  .claim::before{margin:0;padding-top:.42em}
+  .claim p{grid-column:2}
+}
+
+
+/* —— 旁注（伊斯兰文明等横向影响） —— */
+.aside-note{
+  border:1px dashed var(--rule-2);background:transparent;padding:13px 16px;margin:14px 0;
+  font-family:var(--sans);font-size:14.5px;line-height:1.72;color:var(--ink-2)
+}
+
+.aside-note b{font-family:var(--sans);font-weight:600;color:var(--ink);display:block;font-size:14px;margin-bottom:3px}
+
+
+/* —— 争议概念可展开注释 —— */
+details.dispute{border:1px solid var(--rule);background:var(--panel);margin:14px 0;max-width:64ch}
+
+/* 块级 + 绝对定位标记：文字可自然换行，窄屏不会被挤成竖排 */
+details.dispute>summary{
+  cursor:pointer;list-style:none;position:relative;
+  padding:11px 52px 11px 40px;font-family:var(--sans);font-size:14px;
+  color:var(--ink-2);line-height:1.6
+}
+
+details.dispute>summary::-webkit-details-marker{display:none}
+
+details.dispute>summary::before{
+  content:"?";position:absolute;left:14px;top:12px;
+  font-family:var(--mono);font-size:11px;width:17px;height:17px;
+  border:1px solid var(--rule-3);color:var(--ink-3);display:grid;place-items:center;border-radius:50%
+}
+
+details.dispute>summary::after{
+  content:"展开";position:absolute;right:14px;top:13px;
+  font-size:11.5px;color:var(--ink-3);letter-spacing:.08em
+}
+
+details.dispute[open]>summary::after{content:"收起"}
+
+details.dispute[open]>summary{border-bottom:1px solid var(--rule);color:var(--ink)}
+
+details.dispute>summary:hover{background:var(--paper-2)}
+
+.dispute__body{padding:13px 15px 15px;font-size:15px;line-height:1.78;color:var(--ink-2)}
+
+.dispute__body p{margin:0 0 .7em}
+
+.dispute__body p:last-child{margin:0}
+
+.dispute__term{font-family:var(--mono);font-size:13px;color:var(--ink);border-bottom:1px dotted var(--rule-3);white-space:nowrap}
+
+
+/* ============================================================
+   12 个关键转折点
+   ============================================================ */
+.tps{margin:32px 0 0}
+
+.tp{display:grid;grid-template-columns:4.6rem minmax(0,1fr);column-gap:clamp(12px,2.2vw,26px)}
+
+.tp__n{
+  font-family:var(--serif);font-size:clamp(26px,3.4vw,34px);line-height:1;color:var(--v-accent);
+  text-align:right;padding-top:1px;font-variant-numeric:lining-nums;letter-spacing:0
+}
+
+.tp__yr{display:block;font-family:var(--mono);font-size:11px;color:var(--ink-3);margin-top:7px;line-height:1.45;letter-spacing:0}
+
+.tp__b{
+  position:relative;border-left:1px solid var(--rule-2);
+  padding:0 0 26px clamp(18px,2.6vw,34px);min-width:0
+}
+
+.tp__b::before{content:"";position:absolute;left:-4px;top:.5em;width:7px;height:7px;background:var(--v-accent)}
+
+.tp:last-child .tp__b{border-left-color:transparent;padding-bottom:4px}
+
+.tp h4{font-size:19.5px;margin:0 0 .3em}
+
+.tp>.tp__b>p{font-size:16px;color:var(--ink-2);max-width:58ch;margin:0 0 .6em}
+
+.tp .cav{font-size:14.5px;color:var(--ink-3);font-family:var(--sans);line-height:1.7}
+
+
+/* 前后变化链 */
+.shift{display:flex;flex-wrap:wrap;align-items:center;gap:7px;margin:10px 0 12px !important;max-width:none !important}
+
+.shift span{
+  font-family:var(--sans);font-size:13.5px;line-height:1.5;padding:5px 11px;
+  border:1px solid var(--rule-2);background:var(--panel);color:var(--ink-2);overflow-wrap:anywhere
+}
+
+.shift span:last-of-type{border-color:var(--v-accent);color:var(--ink);background:var(--paper-2)}
+
+.shift b{font-family:var(--mono);font-size:14px;color:var(--rule-3);font-weight:400;flex:none}
+
+.shift em{font-style:normal;font-family:var(--sans);font-size:11.5px;letter-spacing:.14em;color:var(--ink-3);flex:none;margin-right:2px}
+@media (max-width:559px){
+
+  .tp{grid-template-columns:3.1rem minmax(0,1fr)}
+
+  .tp__n{font-size:24px}
+
+  .tp__b{padding-left:14px}
+}
+
+
+/* ============================================================
+   亚洲互动网络
+   ============================================================ */
+.netfig{margin:28px 0 6px;border:1px solid var(--rule);background:var(--panel);padding:8px 8px 4px;display:none}
+@media (min-width:760px){
+.netfig{display:block}
+}
+
+.netfig svg{display:block;width:100%;height:auto}
+
+.netfig figcaption{font-family:var(--sans);font-size:12.5px;color:var(--ink-3);padding:8px 10px 8px;line-height:1.7;border-top:1px solid var(--rule);margin-top:4px}
+
+.net-node{fill:var(--panel);stroke:var(--as-2);stroke-width:1.4}
+
+.net-node--sea{stroke:var(--as-3)}
+
+.net-label{font-family:"PingFang SC","Hiragino Sans GB",sans-serif;font-size:15px;fill:var(--ink)}
+
+.net-sub{font-family:"PingFang SC","Hiragino Sans GB",sans-serif;font-size:12px;fill:var(--ink-3)}
+
+.net-link{stroke:var(--rule-3);stroke-width:1.1;fill:none}
+
+.net-link--sea{stroke:var(--as-3);stroke-dasharray:5 4;stroke-width:1.1}
+
+.net-key{font-family:"PingFang SC","Hiragino Sans GB",sans-serif;font-size:12px;fill:var(--ink-3)}
+
+
+/* ============================================================
+   对照观察
+   ============================================================ */
+.cmp{margin:30px 0 0;border:1px solid var(--rule);background:var(--panel)}
+
+.cmp__row{display:grid;grid-template-columns:9.5rem minmax(0,1fr) minmax(0,1fr)}
+
+.cmp__row+.cmp__row{border-top:1px solid var(--rule)}
+
+.cmp__row>*{padding:15px 18px;min-width:0}
+
+.cmp__row>*+*{border-left:1px solid var(--rule)}
+
+.cmp__head{background:var(--paper-2);font-family:var(--sans)}
+
+.cmp__head>*{font-size:13px;letter-spacing:.1em;color:var(--ink-2)}
+
+.cmp__head .eu{color:var(--eu-1);font-weight:600}
+
+.cmp__head .as{color:var(--as-1);font-weight:600}
+
+.cmp__k{font-family:var(--sans);font-size:13.5px;color:var(--ink-3);letter-spacing:.04em}
+
+.cmp p{font-size:15px;line-height:1.75;color:var(--ink-2);font-family:var(--sans);margin:0}
+
+.cmp .eu-c{box-shadow:inset 3px 0 0 -1px color-mix(in srgb,var(--eu-1) 55%,transparent)}
+
+.cmp .as-c{box-shadow:inset 3px 0 0 -1px color-mix(in srgb,var(--as-1) 55%,transparent)}
+@media (max-width:719px){
+
+  .cmp__row{grid-template-columns:minmax(0,1fr)}
+
+  .cmp__row>*+*{border-left:0;border-top:1px solid var(--rule)}
+
+  .cmp__head{display:none}
+
+  .cmp__k{background:var(--paper-2);font-weight:600;color:var(--ink);padding-top:12px;padding-bottom:12px}
+
+  .cmp .eu-c::before{content:"欧洲";display:block;font-family:var(--sans);font-size:11px;letter-spacing:.14em;color:var(--eu-1);margin-bottom:5px}
+
+  .cmp .as-c::before{content:"中国";display:block;font-family:var(--sans);font-size:11px;letter-spacing:.14em;color:var(--as-1);margin-bottom:5px}
+}
+
+
+/* ============================================================
+   书单
+   ============================================================ */
+.shelf{display:grid;gap:var(--g);grid-template-columns:repeat(auto-fit,minmax(min(100%,290px),1fr));margin:24px 0 0}
+
+.bk{border:1px solid var(--rule);background:var(--panel);padding:18px 19px 20px;display:flex;flex-direction:column;min-width:0}
+
+.bk__n{font-family:var(--mono);font-size:11px;letter-spacing:.14em;color:var(--bc,var(--v-accent))}
+
+.bk h4{font-size:18px;margin:7px 0 3px;line-height:1.4}
+
+.bk .au{font-family:var(--sans);font-size:12.5px;color:var(--ink-3);margin:0 0 12px}
+
+.bk dl{margin:0;display:grid;gap:9px}
+
+.bk dt{font-family:var(--sans);font-size:11px;letter-spacing:.14em;color:var(--ink-3);margin-bottom:2px}
+
+.bk dd{margin:0;font-family:var(--sans);font-size:14px;line-height:1.72;color:var(--ink-2)}
+
+.bk dd.warn{color:var(--eu-2)}
+
+.bk--one{background:var(--paper-2);border-color:var(--bc)}
+
+.bk__badge{
+  align-self:flex-start;margin-top:14px;font-family:var(--sans);font-size:11px;letter-spacing:.12em;
+  color:var(--bc);border:1px solid var(--bc);padding:3px 8px
+}
+
+.pick{border-left:2px solid var(--v-accent);padding:13px 18px;margin:20px 0 0;font-size:15.5px;color:var(--ink-2);background:var(--v-accent-soft);max-width:70ch}
+
+
+.order{display:grid;gap:var(--g);grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));margin:24px 0 0}
+
+.ord{border:1px solid var(--rule);background:var(--panel);padding:16px 18px 18px;border-top:2px solid var(--oc)}
+
+.ord h4{font-family:var(--sans);font-size:14px;letter-spacing:.08em;color:var(--oc);margin:0 0 12px}
+
+.ord ol{margin:0;padding:0;list-style:none;counter-reset:o}
+
+.ord li{
+  counter-increment:o;position:relative;padding:0 0 14px 30px;font-family:var(--sans);font-size:14.5px;
+  line-height:1.6;color:var(--ink-2)
+}
+
+.ord li::before{
+  content:counter(o);position:absolute;left:0;top:1px;font-family:var(--mono);font-size:11px;
+  width:19px;height:19px;border:1px solid var(--rule-2);display:grid;place-items:center;color:var(--ink-3);background:var(--paper)
+}
+
+.ord li::after{content:"";position:absolute;left:9px;top:21px;bottom:2px;width:1px;background:var(--rule)}
+
+.ord li:last-child{padding-bottom:0}
+
+.ord li:last-child::after{display:none}
+
+.ord li b{display:block;color:var(--ink);font-weight:600}
+
+.ord li span{font-size:13px;color:var(--ink-3)}
+
+.ord--eu{--oc:var(--eu-1)}
+
+.ord--as{--oc:var(--as-1)}
+
+.ask{margin:22px 0 0;border:1px dashed var(--rule-2);padding:15px 18px;max-width:70ch}
+
+.ask b{font-family:var(--sans);font-size:11.5px;letter-spacing:.14em;color:var(--ink-3);display:block;margin-bottom:8px}
+
+.ask ol{margin:0;padding-left:1.3em;font-size:15.5px;color:var(--ink-2)}
+
+.ask li{margin-bottom:3px}
+
+
+/* ============================================================
+   核校说明 / 参考来源
+   ============================================================ */
+.revs{display:grid;gap:var(--g);grid-template-columns:repeat(auto-fit,minmax(min(100%,330px),1fr));margin:26px 0 0}
+
+.rev{border:1px solid var(--rule);background:var(--panel);border-top:2px solid var(--rc);padding:18px 20px 20px}
+
+.rev h4{font-family:var(--sans);font-size:14px;letter-spacing:.08em;color:var(--rc);margin:0 0 12px}
+
+.rev ol{margin:0;padding-left:1.5em;font-size:14.8px;line-height:1.75;color:var(--ink-2);font-family:var(--sans)}
+
+.rev li{margin-bottom:9px}
+
+.rev li:last-child{margin-bottom:0}
+
+.rev li b{color:var(--ink);font-weight:600}
+
+.rev--eu{--rc:var(--eu-1)}
+
+.rev--as{--rc:var(--as-1)}
+
+
+.srcs{margin:24px 0 0;list-style:none;padding:0;display:grid;gap:0;border-top:1px solid var(--rule)}
+
+.srcs li{border-bottom:1px solid var(--rule);padding:14px 0}
+
+.srcs a{display:block;font-size:16px;line-height:1.55;color:var(--ink);text-decoration:none;font-family:var(--sans);font-weight:600}
+
+.srcs a::after{content:"↗";font-size:12px;color:var(--ink-3);margin-left:7px;vertical-align:2px}
+
+.srcs a:hover{color:var(--eu-1)}
+
+.srcs a:hover::after{color:var(--eu-1)}
+
+.srcs p{font-size:14.5px;color:var(--ink-3);margin:4px 0 0;font-family:var(--sans);line-height:1.7;max-width:76ch}
+
+.srcs .host{font-family:var(--mono);font-size:11px;color:var(--rule-3);display:block;margin-top:5px;overflow-wrap:anywhere}
+
+
+/* ============================================================
+   页脚
+   ============================================================ */
+.foot{border-top:1px solid var(--rule);margin-top:60px;padding:34px 0 0}
+
+.foot p{font-family:var(--sans);font-size:13.5px;color:var(--ink-3);line-height:1.8;max-width:70ch}
+
+.totop{
+  display:inline-block;margin-top:18px;font-family:var(--sans);font-size:12.5px;letter-spacing:.1em;
+  color:var(--ink-2);text-decoration:none;border:1px solid var(--rule-2);padding:7px 14px
+}
+
+.totop:hover{border-color:var(--ink-2)}
+
+
+/* ============================================================
+   入场动效（JS 关闭或 reduced-motion 时内容默认完全可见）
+   ============================================================ */
+.visual-page.is-anim .reveal{opacity:0;transform:translateY(12px)}
+
+.visual-page.is-anim .reveal.is-in{
+  opacity:1;transform:none;
+  transition:opacity .55s ease,transform .55s cubic-bezier(.2,.7,.2,1)
+}
+
+.visual-page.is-anim .era__body::before{transform:scale(.4);opacity:0}
+
+.visual-page.is-anim .reveal.is-in .era__body::before,
+.visual-page.is-anim .era.is-in>.era__body::before{transform:none;opacity:1;transition:transform .45s cubic-bezier(.2,.7,.2,1) .12s,opacity .3s ease .12s}
+
+/* —— 转折点 → 大脉络 的互相定位 —— */
+.era[id]{scroll-margin-top:80px}
+
+.tp__jump{
+  display:inline-block;margin-top:4px;font-family:var(--sans);font-size:12px;letter-spacing:.05em;
+  color:var(--ink-3);text-decoration:none;border-bottom:1px solid var(--rule-2);padding-bottom:1px
+}
+
+.tp__jump:hover{color:var(--v-accent);border-bottom-color:var(--v-accent)}
+
+.era[id]:target>.era__body{background:linear-gradient(90deg,var(--v-accent-soft),transparent 55%)}
+
+/* ============================================================
+   分区视图：头部、分节导航、页脚
+   ============================================================ */
+.viewhead{padding:clamp(26px,4.2vw,50px) 0 clamp(16px,2.2vw,24px)}
+
+.viewhead .stage{margin:0 0 15px}
+
+.viewhead .stage b{
+  display:inline-block;font-family:var(--sans);font-weight:600;font-size:10.5px;
+  letter-spacing:.16em;color:var(--vc,var(--ink-3));border:1px solid currentColor;padding:3px 9px
+}
+
+.viewhead h2{font-size:clamp(27px,4.6vw,42px);letter-spacing:0;margin:0 0 .34em;color:var(--vc,var(--ink))}
+
+.viewhead>.wrap>p:last-child{font-size:clamp(15.5px,1.5vw,17.5px);color:var(--ink-2);max-width:58ch;margin:0;line-height:1.75}
+
+
+.subnav{border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);background:var(--paper)}
+
+.subnav .wrap{display:flex;align-items:center;gap:6px;flex-wrap:wrap;padding-top:8px;padding-bottom:8px}
+
+.subnav__label{
+  font-family:var(--sans);font-size:10.5px;letter-spacing:.16em;color:var(--vc,var(--ink-3));
+  margin-right:8px;white-space:nowrap
+}
+@media (max-width:479px){
+.subnav__label{display:none}
+}
+
+.subnav a{
+  font-family:var(--sans);font-size:13px;text-decoration:none;color:var(--ink-3);
+  padding:5px 11px;border:1px solid transparent;white-space:nowrap
+}
+
+.subnav a:hover{color:var(--ink);border-color:var(--rule)}
+
+.subnav a[aria-current="true"]{color:var(--ink);border-color:var(--rule-2);background:var(--paper-2)}
+
+
+.viewfoot{border-top:1px solid var(--rule);margin-top:clamp(40px,6vw,64px);padding:24px 0 0}
+
+.viewfoot .wrap{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+
+.vf-label{font-family:var(--sans);font-size:10.5px;letter-spacing:.16em;color:var(--ink-3);margin-right:4px;white-space:nowrap}
+
+.vf-go{
+  font-family:var(--sans);font-size:14px;text-decoration:none;color:var(--ink-2);
+  border:1px solid var(--rule-2);padding:8px 15px;transition:border-color .16s ease,color .16s ease
+}
+
+.vf-go:hover{border-color:var(--ink-2);color:var(--ink)}
+
+.vf-go--eu{color:var(--eu-1);border-color:color-mix(in srgb,var(--eu-1) 38%,var(--rule))}
+
+.vf-go--as{color:var(--as-1);border-color:color-mix(in srgb,var(--as-1) 38%,var(--rule))}
+
+
+/* ============================================================
+   首屏的总分总结构图
+   ============================================================ */
+.mapstruct{max-width:820px;margin:20px 0 0}
+
+.ms-tag{
+  display:block;font-family:var(--sans);font-size:10.5px;letter-spacing:.18em;
+  color:var(--ink-3);margin:0 0 9px
+}
+
+.ms-node{
+  border:1px solid var(--rule);border-left:2px solid var(--v-accent);background:var(--panel);
+  padding:13px 16px;font-family:var(--sans);font-size:15px;color:var(--ink);
+  display:flex;align-items:baseline;gap:12px;flex-wrap:wrap
+}
+
+.ms-node em{
+  font-style:normal;font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;
+  color:var(--v-accent);margin-left:auto
+}
+
+.ms-row{display:grid;gap:var(--g);grid-template-columns:repeat(3,minmax(0,1fr))}
+
+.ms-row a{
+  display:block;border:1px solid var(--rule);background:var(--panel);padding:12px 14px 13px;
+  text-decoration:none;min-width:0;transition:border-color .16s ease,background .16s ease
+}
+
+.ms-row a:hover{border-color:var(--rule-3);background:var(--paper-2)}
+
+.ms-row a b{display:block;font-family:var(--sans);font-size:14.5px;font-weight:600;color:var(--ink)}
+
+.ms-row a span{display:block;font-family:var(--sans);font-size:12px;color:var(--ink-3);margin-top:3px;line-height:1.5}
+
+/* 两个入口必须等重、左右并置：不用 auto-fit，避免窄屏时一上一下被读成先后 */
+.gates{grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--g);max-width:820px}
+@media (max-width:719px){
+
+  .ms-row{grid-template-columns:minmax(0,1fr)}
+
+  .gates{grid-template-columns:minmax(0,1fr)}
+}
+</style>
