@@ -11,6 +11,12 @@ export interface VisualMeta {
 
 export const VISUALS: VisualMeta[] = [
   {
+    slug: 'ai-from-chat-to-personal-agent',
+    title: '从会聊天，到能替你做事',
+    description: '面向零基础听众：从 LLM 到 Claude Code、Skill、OpenClaw、Muse 与 Hark，理解 Chat、Agent、外部连接和定时任务的使用边界。',
+    date: '2026-10-09',
+  },
+  {
     slug: 'civilization-map',
     title: '欧洲与亚洲文明发展脉络及关键转折点',
     description: '两条并列的文明线：欧洲从三条源流到一体化，亚洲以中华文明为主线从多元起源到 2001。含 24 个关键转折点、对照观察、最少书单与核校说明。',

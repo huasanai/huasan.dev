@@ -1,0 +1,333 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const title = '从会聊天，到能替你做事';
+const description = '面向 AI 初学者的对谈分享：理解 LLM、Claude Code、Skill、OpenClaw、Muse 与 Hark，并区分 Chat、Agent、外部连接和定时任务的使用边界。';
+---
+
+<Layout title={title} description={description}>
+  <div class="visual-page" id="top">
+<div class="hero">
+        <p class="eyebrow">UNDERSTAND AI · FIND YOUR OWN USE CASE</p>
+        <h1>从会聊天，<br>到<span>能替你做事</span></h1>
+        <p class="lead">理解 AI 的四个关键点：怎么理解任务，怎么执行任务，怎么用你的工作方法，以及怎么长期替你工作。</p>
+        <p class="meta">画伞 · 面向零基础听众 · 产品资料核对于 2026 年 10 月 9 日</p>
+      </div>
+      <nav class="map" aria-label="分享主线">
+        <a href="#llm"><span class="mono">01 / LLM</span><b>理解与生成</b><small>会说，为何仍然会错？</small></a>
+        <a href="#agent"><span class="mono">02 / CLAUDE CODE</span><b>行动与反馈</b><small>从回答，到完成任务</small></a>
+        <a href="#skill"><span class="mono">03 / SKILL</span><b>方法与标准</b><small>把业务经验沉淀下来</small></a>
+        <a href="#personal"><span class="mono">04 / PERSONAL AGENT</span><b>持续为你工作</b><small>OpenClaw · Muse · Hark</small></a>
+      </nav>
+      <div class="layout">
+        <aside class="toc" aria-label="目录">
+          <p class="mono">CONTENTS</p>
+          <a href="#llm">01　理解 LLM</a>
+          <a href="#agent">02　Claude Code</a>
+          <a href="#skill">03　业务 Skill</a>
+          <a href="#personal">04　Personal Agent</a>
+          <a href="#new-tools">　　Muse 与 Hark</a>
+          <a href="#choice">　　按任务选工具</a>
+          <a href="#boundaries">05　任务与能力边界</a>
+          <a href="#questions">06　现场答疑</a>
+        </aside>
+        <article>
+          <section class="section" id="llm">
+            <span class="section-number">01 / LLM</span>
+            <h2>为什么它很会说，却仍然会错？</h2>
+            <p class="section-intro">理解这些原理以后，遇到新工具，你就能判断它适合自己的哪个业务环节。</p>
+            <p>理解今天常见的生成式大模型，可以从三个阶段开始：预训练，通过预测后续 token、减少预测误差，学习语言和各种模式；后训练，进一步学习遵循指令、解决任务；使用时，根据当前上下文生成回答。</p>
+            <p class="citation">背景研究：<a href="https://arxiv.org/abs/2203.02155" target="_blank" rel="noopener noreferrer">Training language models to follow instructions</a>。</p>
+            <blockquote><p>生成一个合理的回答，<br>不等于查到一个真实的事实。</p></blockquote>
+            <p>你给的背景、资料和要求，会影响它的回答。需要最新事实，就让它查询来源；需要精确计算，就让程序计算。</p>
+          </section>
+          <section class="section" id="agent">
+            <span class="section-number">02 / CLAUDE CODE</span>
+            <h2>给 AI 工具，再让它根据结果继续做</h2>
+            <p>Claude Code 是我理解 AI 的一个重要分水岭。以前我更多是在问：“这件事怎么做？”后来我发现，可以直接说：“帮我把这件事做完。”</p>
+            <p>它能够读取文件、修改内容、运行命令，再根据返回结果决定下一步。官方把这个过程概括成收集上下文、采取行动、验证结果的循环。<a class="citation" href="https://code.claude.com/docs/en/how-claude-code-works" target="_blank" rel="noopener noreferrer">工作原理 ↗</a></p>
+            <blockquote><p>LLM 负责不确定性决策，<br>Bash 负责确定性执行。</p><span class="caption">“确定性执行”指按明确命令和程序规则执行，不意味着结果必然正确。</span></blockquote>
+            <p>比如“整理这批学员作业，找出常见问题”，目标里有很多模糊判断，由模型理解和拆解；读取文件、统计数量、生成文档，则交给工具执行。</p>
+            <ul>
+              <li><strong>CLI</strong>：通过文字命令操作工具的接口。</li>
+              <li><strong>Shell</strong>：解释和执行命令的程序。</li>
+              <li><strong>Bash</strong>：一种 Shell。</li>
+            </ul>
+            <p>Bash 是很有用的工具入口，但 Agent 也可以直接使用 API、文件工具或浏览器。<a class="citation" href="https://www.gnu.org/software/bash/manual/html_node/What-is-a-shell_003f.html" target="_blank" rel="noopener noreferrer">GNU Shell 定义 ↗</a></p>
+            <div class="flow" aria-label="Agent 反馈循环">
+              <div class="step"><small class="mono">1</small>理解目标</div>
+              <div class="step"><small class="mono">2</small>调用工具</div>
+              <div class="step"><small class="mono">3</small>读取结果</div>
+              <div class="step"><small class="mono">4 → 1</small>调整下一步</div>
+            </div>
+            <p>真正关键的是这个循环。工具会按命令执行，但命令也可能错。所以用 AI 时，我更看重它拿出了什么验证证据。</p>
+            <blockquote><p>不要只要求 AI 少犯错，<br>还要让错误能被发现。</p></blockquote>
+            <p class="note">Claude Code 是我的个人分水岭，不是 Agent 的发明者。它在 2025 年 2 月 24 日以研究预览形式推出；此前的 ReAct 等研究已经探索推理与行动的循环。<a href="https://www.anthropic.com/news/claude-3-7-sonnet" target="_blank" rel="noopener noreferrer">发布公告</a> · <a href="https://arxiv.org/abs/2210.03629" target="_blank" rel="noopener noreferrer">ReAct 论文</a></p>
+          </section>
+          <section class="section" id="skill">
+            <span class="section-number">03 / SKILL</span>
+            <h2>把“这类事怎么做好”沉淀下来</h2>
+            <p>Agent 会用工具以后，还需要知道你的业务怎么做。同样是整理作业，老师关心知识误区，运营关心提交率，班主任关心哪些学员需要跟进。</p>
+            <p>这些判断标准，就是业务 know-how。把它写成流程、配上样例和检查标准，就可以沉淀成 Skill：让 Agent 下次遇到同类任务，按这套方法工作。</p>
+            <p>例如，一个课程制作 Skill 可以规定：</p>
+            <p><strong>学习目标 → 学员基础 → 核心概念 → 演示案例 → 练习 → 验收。</strong></p>
+            <p>其中最有价值的，往往是你的判断：什么例子适合小白，什么错误说明学员没理解，怎样才算学会。</p>
+            <div class="file-list" aria-label="工作指引、Skill 与参考资料的职责">
+              <div class="file-row"><span class="mono">CLAUDE.md / AGENTS.md</span><p>长期工作规则：项目背景、通用规范、常用命令、必要资料入口。</p></div>
+              <div class="file-row"><span class="mono">SKILL.md</span><p>某类任务的方法：核心流程、判断条件、验收标准及资源入口。</p></div>
+              <div class="file-row"><span class="mono">references / scripts / assets</span><p>详细业务资料、可执行程序、模板和样例。</p></div>
+            </div>
+            <p><code>name</code> 标识能力，<code>description</code> 说明做什么、何时使用。前两种工作指引不要求这些 Skill 元数据；关键规则可以写得具体，SKILL.md 也不能只剩指针。</p>
+            <p><strong>先知道有哪些能力，再读选中的方法，需要时补充细节。</strong>这就是按需加载。<a class="citation" href="https://agentskills.io/specification" target="_blank" rel="noopener noreferrer">Agent Skills 规范 ↗</a></p>
+            <p class="note">Skill 通过提供指令和资源影响执行，不等于重新训练模型。工作指引要精简，较长资料按需读取；Claude Code 的 <code>@文件路径</code> 导入会加载被引用的内容，不会自动节省上下文。<a href="https://code.claude.com/docs/en/memory#import-additional-files" target="_blank" rel="noopener noreferrer">文件导入说明</a></p>
+            <blockquote><p>工具提供行动能力，<br>Skill 沉淀做事方法。</p></blockquote>
+          </section>
+          <section class="section" id="personal">
+            <span class="section-number">04 / PERSONAL AGENT</span>
+            <h2>从做一次，到持续帮你工作</h2>
+            <p>OpenClaw 带给我的另一个启发，是 Agent 可以有一个持续在线的工作环境。</p>
+            <p>它的 Gateway 长期运行，连接消息入口；记忆保存到外部文件；配置好的调度机制可以在指定时间唤起任务。<a class="citation" href="https://docs.openclaw.ai/concepts/architecture" target="_blank" rel="noopener noreferrer">运行架构</a> · <a class="citation" href="https://docs.openclaw.ai/concepts/memory" target="_blank" rel="noopener noreferrer">记忆机制</a> · <a class="citation" href="https://docs.openclaw.ai/heartbeat" target="_blank" rel="noopener noreferrer">调度机制</a></p>
+            <p>因此，“加一台服务器”只讲到了硬件。更关键的是：<strong>运行环境持续存在，任务状态能保存，任务可以被消息或时间触发。</strong></p>
+            <p>例如，每周整理新交的作业，按课程标准分析，生成一份待你审核的反馈。</p>
+            <p>持续在线也不等于模型一直在思考；很多时候，是系统等待触发，再调用模型。</p>
+            <p>我会把 Personal Agent 理解为：在这些能力上，进一步围绕一个人的偏好、资料、账户和长期任务组织服务。OpenClaw 已经包含其中不少能力；其他产品也可以独立实现类似机制，并不一定建立在 OpenClaw 上。</p>
+            <h3 id="new-tools">Muse 与 Hark：这类工具有什么新鲜感？</h3>
+            <p>它们把个人记忆、账户连接和执行能力，包装成普通人能直接使用的产品。你用自然语言交代事情，产品负责组织后面的步骤。</p>
+            <div class="product-grid">
+              <div class="product">
+                <h3>Muse</h3>
+                <p class="position">Meta 的个人 AI Agent</p>
+                <ul>
+                  <li><strong>消息式入口：</strong>通过 Muse 应用、网页或 WhatsApp 交代任务。</li>
+                  <li><strong>后台执行：</strong>在专属云端虚拟机与浏览器中推进邮件、旅行安排等任务，关闭应用后仍可继续。</li>
+                  <li><strong>个人记忆：</strong>记住偏好与长期目标，支持主动建议。</li>
+                  <li><strong>控制与确认：</strong>用户选择连接哪些账户；官方说明发送邮件、购买等敏感行动需要确认，并提供行动记录。</li>
+                </ul>
+                <p class="status">Meta 于 2026 年 9 月 8 日发布；官方介绍为美国市场逐步开放。AI 眼镜入口仍属后续计划，不能当作已全面可用的功能。<br><a href="https://about.fb.com/news/2026/09/introducing-muse-personal-ai-agent/" target="_blank" rel="noopener noreferrer">Meta 官方介绍 ↗</a></p>
+              </div>
+              <div class="product">
+                <h3>Hark</h3>
+                <p class="position">把事情组织成可执行的行动</p>
+                <ul>
+                  <li><strong>持续对话与记忆：</strong>在同一对话中交流，用 Projects 组织旅行规划等较大的任务。</li>
+                  <li><strong>Handoff 执行：</strong>在个人专属电脑与完整浏览器中做调研、下单、制作网页或幻灯片。</li>
+                  <li><strong>Action Buttons：</strong>根据待办建议行动，点击后启动执行。</li>
+                  <li><strong>自定义 Panels：</strong>用自然语言创建个人面板或小应用，查看连接服务的数据。</li>
+                </ul>
+                <p class="status">官网列出网页、iOS、Android 入口，并说明需要批准的操作会征求用户同意；具体可用性以账户和服务支持为准。<br><a href="https://hark.com/" target="_blank" rel="noopener noreferrer">Hark 官方介绍 ↗</a></p>
+              </div>
+            </div>
+            <p class="note">这里介绍的是官方披露的功能，不是我们实测后的成功率。Muse 指 Meta 的个人 Agent 产品，Muse Spark 是模型名称。上面的差异是帮助理解产品侧重点，不代表谁更强。</p>
+            <p>从这些例子里，我看到的方向是：<strong>AI 开始把“理解你、记得你、能行动”放进同一个产品里。</strong>但能不能帮你，最终还要放回你的真实任务中检验。</p>
+            <h3 id="choice">有兴趣了解新工具，没必要每个都追</h3>
+            <blockquote><p>没必要追新工具。<br>找适合自己的，把事情做成就行。</p></blockquote>
+            <p>如果你常用的工具已经能把工作做好，就继续用。只有新工具解决了一个实际卡点——比如需要后台运行、连接某个账户、少掉几次手工操作——才值得试。</p>
+            <div class="criteria" aria-label="选择工具的四个问题">
+              <p><b>任务</b>它能完成我的具体工作吗？</p>
+              <p><b>连接</b>我的资料和账户能接进去吗？</p>
+              <p><b>检查</b>我能看见过程、核对结果吗？</p>
+              <p><b>成本</b>省下的时间值得学习和付费吗？</p>
+            </div>
+            <p>遇到任何新产品，还可以继续问：它记得什么？什么时候会行动？哪些动作需要我确认？用一件真实任务试过，比看十个演示更能判断是否适合自己。</p>
+          </section>
+          <section class="section" id="boundaries">
+            <span class="section-number">05 / 使用场景与能力边界</span>
+            <h2>这件事，到底需要哪些能力？</h2>
+            <p>Chat、Agent、Skill、API／MCP、在线运行环境，解决的是不同问题。它们可以组合，但不用每次全部配齐。</p>
+            <blockquote><p>先看任务缺什么，<br>再补对应的能力。</p></blockquote>
+            <table class="boundary-table">
+              <thead><tr><th scope="col">方式或组件</th><th scope="col">什么时候用</th><th scope="col">它的边界</th></tr></thead>
+              <tbody>
+                <tr><td>Chat 对话</td><td data-label="什么时候用">材料已提供，主要需要解释、讨论、翻译、改写、设计课程大纲或诊断论证。</td><td data-label="它的边界">纯 LLM 不能直接读取未提供的文件、查实时数据或操作账户。聊天产品若有搜索、计算工具，可在原界面使用。</td></tr>
+                <tr><td>脚本／固定工作流</td><td data-label="什么时候用">步骤和规则已确定：批量改文件名、计算完课率、定时导出报表。</td><td data-label="它的边界">按预设流程执行，难以独立处理开放式例外。可以只在需要理解文字的某一步调用 LLM。</td></tr>
+                <tr><td>Agent</td><td data-label="什么时候用">需要把任务实际推进完，且下一步要根据结果决定：查文件、修改、运行、检查、出错后调整。</td><td data-label="它的边界">只能使用现有工具和授权范围内的资料。多步骤、任务很大或要求准确，都不自动意味着必须用 Agent。</td></tr>
+                <tr><td>Skill</td><td data-label="什么时候用">某类任务需要特定做法，或同一业务反复执行，需要复用流程、口径、模板和验收标准。</td><td data-label="它的边界">提供“怎么做”的方法；不会自动安装工具、授予权限或让任务按时启动。一次性任务可直接说明要求。</td></tr>
+                <tr><td>API／MCP 等连接</td><td data-label="什么时候用">所需数据或动作在外部系统：读取飞书作业、查询订单、写入 CRM、发送邮件，而现有工具还不能访问。</td><td data-label="它的边界">连接能力与权限分开：有工具，还要有合法凭证、操作范围和资源访问权；能读不等于能写。</td></tr>
+                <tr><td>调度与在线运行环境</td><td data-label="什么时候用">希望人在场外仍能执行：明早运行、每周生成、收到新作业触发、持续监测并提醒。</td><td data-label="它的边界">需要可靠的触发、执行、状态保存和通知。可用托管服务或按需运行，不必自己租一台 24 小时开机的服务器。</td></tr>
+              </tbody>
+            </table>
+            <p class="citation">流程固定时优先考虑工作流，需要模型根据环境反馈决定下一步时才增加 Agent 的自主性。依据：<a href="https://www.anthropic.com/engineering/building-effective-agents" target="_blank" rel="noopener noreferrer">Anthropic：Building effective agents</a>。</p>
+            <h3>Chat 是界面，Agent 是工作方式</h3>
+            <p>在聊天框里，产品也可能调用搜索、代码或浏览器；这并不要求你切换到一个名字里带 Agent 的软件。关键是：它是否能调用所需工具、观察结果，并继续推进。</p>
+            <p>“帮我润色这段招生文案”通常对话就够了。“把文件夹里的二十份作业按标准分析，生成每人反馈，再检查遗漏”，更适合具备文件处理工具的 Agent。若只是计算一份表的准确合计，计算工具就可能够用。</p>
+            <h3>Skill 管方法，API／MCP 管连接，权限管能做什么</h3>
+            <p>API 是某个系统提供的程序接口；MCP 是向 AI 应用提供工具和资料的标准协议，常见 MCP 服务会把已有 API 包装成可发现、可调用的工具。现成连接能满足任务时，无须重复搭建。</p>
+            <p><strong>接入 MCP 不等于获得权限。</strong>是否能操作，还取决于登录或授权凭证、读写范围、具体文档或数据的访问权，以及执行环境允许的动作。写一句“你可以访问飞书”，不能代替真正的授权。</p>
+            <p>有合适的官方 API 或连接时优先用；也可以通过已登录且获授权的浏览器操作，但界面变化、登录失效等可能影响执行。MCP 本身也能连接本地文件工具，并不限于外部账户。</p>
+            <p class="citation"><a href="https://modelcontextprotocol.io/docs/learn/architecture" target="_blank" rel="noopener noreferrer">MCP 架构</a> · <a href="https://modelcontextprotocol.io/specification/2025-11-25/basic/authorization" target="_blank" rel="noopener noreferrer">授权机制</a>。</p>
+            <h3>定时任务需要运行条件，不必有“自己的服务器”</h3>
+            <p>产品已经提供云端定时执行，就可以直接使用；自己搭建时，可用持续在线的本地机器、云服务器，或由云端调度器按时启动一次任务。</p>
+            <p>OpenClaw 的调度发生在 Gateway 进程中，因此 Gateway 要运行，计划才会触发。模型不必一直思考。如果任务要访问本地电脑独有的文件或软件，这台电脑仍要在执行时在线且可访问。</p>
+            <p><strong>每天汇总固定数字</strong>，可能只需要定时脚本；<strong>每天分析新反馈、发现异常并决定进一步查什么</strong>，才可能需要定时唤起 Agent。运行失败时的重试、重复执行的处理和通知，也要有安排。</p>
+            <p class="citation">依据：<a href="https://docs.openclaw.ai/automation/cron-jobs/how-it-works" target="_blank" rel="noopener noreferrer">OpenClaw 调度运行机制</a>。</p>
+            <h3>用同一个业务，看清需要补什么</h3>
+            <div class="scenario">
+              <p><strong>“帮我设计一套作业评价标准。”</strong><br>先在 Chat 中讨论，把标准想清楚。</p>
+              <p><strong>“按标准分析我上传的三份作业。”</strong><br>聊天产品能读附件、任务规模可控，就可以继续在原界面做。</p>
+              <p><strong>“处理整个文件夹，并生成每人反馈文件。”</strong><br>用有文件读写、执行和检查能力的 Agent；固定处理环节可交给脚本。</p>
+              <p><strong>“以后每期都按同一口径分析。”</strong><br>把评价流程、边界情况与验收标准沉淀成 Skill。</p>
+              <p><strong>“直接从飞书读取，并写回对应记录。”</strong><br>先确认已有连接；缺少时接 API／MCP 等工具，并配置所需读写权限。</p>
+              <p><strong>“每周一自动完成，结束后通知我。”</strong><br>增加调度和可用的执行环境；无需为了这件事让模型整周运行。</p>
+            </div>
+            <p>选工具前问五个问题：<strong>只是讨论，还是要执行？流程固定，还是要临场判断？方法能否复用？资料和操作能否访问？我不在时是否也要运行？</strong></p>
+            <p>任务的上限，不只取决于模型聪不聪明，也取决于资料是否拿得到、工具是否支持、权限是否足够、结果能否验证、运行环境是否可用。</p>
+          </section>
+          <section class="section" id="questions">
+            <span class="section-number">06 / 现场答疑</span>
+            <h2>小白最关心的几个问题</h2>
+            <div class="qa">
+              <h3>“AI 创造容易，修改难”，怎么办？</h3>
+              <p>修改要理解已有内容，还要保留你满意的部分。把原稿、修改位置、保留要求和验收标准一起给它。</p>
+              <p>比如：“只改第二段，保留案例和结论，控制在两百字内，列出改动。”涉及代码或复杂作品，先保存版本，再做小步修改，每步检查。</p>
+            </div>
+            <div class="qa">
+              <h3>怎么确认 AI 给的数据是真的？</h3>
+              <p>把事实、计算和判断分开：事实查原始来源与日期，计算用程序，判断说明依据。</p>
+              <p>让它指出每个关键数字来自哪里，并抽查。引用、搜索、测试都能增加证据，但没有一种单独保证全部正确。</p>
+            </div>
+            <div class="qa">
+              <h3>怎么用 AI 辅助教学、做课程？</h3>
+              <p>先确定“学员学完能做什么”，再让 AI 辅助设计讲解、例子、练习和反馈。</p>
+              <p>让它模拟零基础学员，指出跳步和术语；让它生成常见误解，帮助设计练习。老师审核事实、难度和答案，再用真实学员表现检查教学效果。</p>
+              <p><strong>课程质量，要看学员能不能完成任务。</strong></p>
+            </div>
+            <div class="qa">
+              <h3>不会编程，也能用 Agent 吗？</h3>
+              <p>可以先从整理资料、批量处理文件、生成报告开始。界面可以是聊天框，也可以是桌面应用。懂一点文件、数据和验证方法，会更容易判断它有没有做对。</p>
+            </div>
+            <div class="qa">
+              <h3>我的业务，从哪里开始？</h3>
+              <p>挑一件反复发生、输入拿得到、结果容易检查的任务。先共同做成一次，再整理方法，重复验证，最后考虑定时运行。</p>
+            </div>
+          </section>
+          <div class="closing">
+            <p class="eyebrow">把话题交回现场</p>
+            <h2>你每周都要重复做，<br>又能判断好坏的那件事是什么？</h2>
+            <p class="quiet">从这件事出发，判断需要哪些资料、工具、方法和验证。先解决一个真实问题。</p>
+          </div>
+          <details>
+            <summary>资料与核对依据</summary>
+            <p>产品信息核对日期：2026 年 10 月 9 日。产品会继续变化；本页的四部分是教学框架，不是严格的技术定义或产品演化史。</p>
+            <ol>
+              <li><a href="https://arxiv.org/abs/2203.02155" target="_blank" rel="noopener noreferrer">语言模型后训练：InstructGPT 论文</a></li>
+              <li><a href="https://code.claude.com/docs/en/how-claude-code-works" target="_blank" rel="noopener noreferrer">Claude Code 的工作循环与工具</a></li>
+              <li><a href="https://agentskills.io/specification" target="_blank" rel="noopener noreferrer">Agent Skills 格式与渐进式加载</a></li>
+              <li><a href="https://code.claude.com/docs/en/memory" target="_blank" rel="noopener noreferrer">CLAUDE.md 的职责与加载</a> · <a href="https://learn.chatgpt.com/docs/agent-configuration/agents-md" target="_blank" rel="noopener noreferrer">Codex AGENTS.md</a></li>
+              <li><a href="https://docs.openclaw.ai/concepts/architecture" target="_blank" rel="noopener noreferrer">OpenClaw 的持续运行架构</a></li>
+              <li><a href="https://about.fb.com/news/2026/09/introducing-muse-personal-ai-agent/" target="_blank" rel="noopener noreferrer">Meta Muse 的功能与可用状态</a></li>
+              <li><a href="https://hark.com/" target="_blank" rel="noopener noreferrer">Hark 的功能介绍</a></li>
+            </ol>
+          </details>
+        </article>
+      </div>
+  </div>
+</Layout>
+
+<style>
+
+    .visual-page {
+      --v-bg: var(--bg);
+      --v-surface: var(--surface);
+      --v-border: var(--border);
+      --v-border-soft: var(--border-soft);
+      --v-text: var(--text);
+      --v-text-soft: var(--text-soft);
+      --v-text-dim: var(--text-dim);
+      --v-accent: var(--accent);
+      --v-orange: var(--hero-accent);
+      --v-shadow: var(--shadow-card);
+    }
+    :global([data-theme='dark']) .visual-page { --v-orange: #FF8B5C; }
+    :global(main) { background: var(--bg); }
+    * { box-sizing:border-box; }
+    :global(html) { scroll-behavior:smooth; scroll-padding-top:110px; }
+    .visual-page { margin:0; background:var(--v-bg); color:var(--v-text); font-family:'TsangerJinKai02','STKaiti','KaiTi','PingFang SC',sans-serif; font-size:19px; line-height:1.85; }
+    a { color:var(--v-accent); text-underline-offset:4px; }
+    a:hover { text-decoration-thickness:2px; }
+    a:focus-visible,button:focus-visible { outline:2px solid var(--v-accent); outline-offset:5px; }
+    button { cursor:pointer; font:inherit; }
+    p { margin:0 0 1em; }
+    strong { font-weight:700; }
+    h1,h2,h3 { font-weight:600; letter-spacing:0; line-height:1.4; margin:0; }
+    h1 { font-size:clamp(36px,4.8vw,60px); max-width:850px; }
+    h2 { font-size:31px; margin-bottom:22px; }
+    h3 { font-size:23px; margin:27px 0 13px; }
+    ul,ol { padding-left:1.35em; margin:0 0 1em; }
+    li { padding-left:4px; margin:8px 0; }
+    code,.mono,.eyebrow,.section-number { font-family:'JetBrains Mono','SF Mono',Menlo,Consolas,monospace; }
+    code { font-size:.76em; padding:3px 6px; background:color-mix(in srgb,var(--v-orange) 8%,transparent); border-radius:4px; overflow-wrap:anywhere; }
+    .visual-page { width:min(1100px,calc(100% - 64px)); margin:auto; }
+    .topbar { display:flex; align-items:center; justify-content:space-between; gap:20px; padding:24px 0; border-bottom:1px solid var(--v-border); }
+    .brand { font-size:23px; text-decoration:none; color:var(--v-text); }
+    .brand small { font-size:14px; color:var(--v-text-soft); margin-left:15px; }
+    .theme-toggle { background:var(--v-surface); border:1px solid var(--v-border); border-radius:8px; color:var(--v-text); font-size:14px; padding:7px 12px; }
+    .hero { padding:65px 0 43px; }
+    .eyebrow { font-size:12px; letter-spacing:1px; color:var(--v-accent); margin-bottom:18px; }
+    .hero h1 span { color:var(--v-accent); }
+    .lead { margin-top:25px; max-width:760px; color:var(--v-text-soft); font-size:21px; }
+    .meta { color:var(--v-text-dim); font-size:13px; margin-top:23px; }
+    .map { display:grid; grid-template-columns:repeat(4,1fr); border:1px solid var(--v-border); border-radius:12px; background:var(--v-surface); box-shadow:var(--v-shadow); margin:0 0 55px; overflow:hidden; }
+    .map a { text-decoration:none; color:var(--v-text); padding:22px; border-right:1px solid var(--v-border-soft); }
+    .map a:last-child { border-right:0; }
+    .map a:hover { background:color-mix(in srgb,var(--v-orange) 7%,transparent); }
+    .map .mono { color:var(--v-accent); font-size:11px; display:block; margin-bottom:7px; }
+    .map b { font-size:22px; font-weight:600; display:block; }
+    .map small { font-size:14px; color:var(--v-text-soft); }
+    .layout { display:grid; grid-template-columns:180px minmax(0,1fr); gap:52px; align-items:start; }
+    .toc { position:sticky; top:100px; font-size:15px; }
+    .toc p { font-size:12px; color:var(--v-text-dim); margin-bottom:14px; }
+    .toc a { display:block; text-decoration:none; color:var(--v-text-soft); margin:13px 0; padding-left:12px; border-left:2px solid var(--v-border); line-height:1.6; }
+    .toc a:hover { color:var(--v-accent); border-left-color:var(--v-accent); }
+    article { min-width:0; }
+    .section { padding-bottom:45px; margin-bottom:40px; border-bottom:1px solid var(--v-border); }
+    .section-number { display:block; color:var(--v-accent); font-size:12px; margin-bottom:10px; }
+    .section-intro { font-size:21px; }
+    .quiet { color:var(--v-text-soft); }
+    .citation { font-size:14px; color:var(--v-text-dim); line-height:1.7; }
+    blockquote { margin:25px 0; padding:18px 22px; border-left:3px solid var(--v-accent); background:color-mix(in srgb,var(--v-orange) 8%,transparent); font-size:24px; line-height:1.65; }
+    blockquote p { margin:0; }
+    .caption { display:block; font-size:16px; margin-top:10px; color:var(--v-text-soft); }
+    .flow { display:grid; grid-template-columns:repeat(4,1fr); gap:8px; margin:26px 0 13px; }
+    .step { border:1px solid var(--v-border-soft); border-radius:8px; padding:14px 10px; text-align:center; background:var(--v-surface); font-size:17px; }
+    .step small { display:block; font-size:11px; color:var(--v-accent); margin-bottom:4px; }
+    .file-list { margin:24px 0; border:1px solid var(--v-border-soft); border-radius:10px; overflow:hidden; background:var(--v-surface); }
+    .file-row { display:grid; grid-template-columns:220px minmax(0,1fr); gap:16px; padding:18px 20px; border-bottom:1px solid var(--v-border-soft); }
+    .file-row:last-child { border-bottom:0; }
+    .file-row .mono { font-size:14px; align-self:center; overflow-wrap:anywhere; }
+    .file-row p { margin:0; font-size:17px; }
+    .product-grid { display:grid; grid-template-columns:1fr 1fr; gap:18px; margin:26px 0; }
+    .product { background:var(--v-surface); border:1px solid var(--v-border-soft); border-radius:12px; padding:25px; box-shadow:var(--v-shadow); min-width:0; }
+    .product h3 { margin:0 0 8px; font-size:29px; }
+    .product .position { color:var(--v-accent); font-size:17px; margin-bottom:19px; }
+    .product ul { font-size:17px; }
+    .product .status { font-size:14px; line-height:1.7; color:var(--v-text-soft); border-top:1px solid var(--v-border-soft); padding-top:13px; margin:17px 0 0; }
+    .note { font-size:15px; color:var(--v-text-soft); border-left:2px solid var(--v-border); padding-left:15px; line-height:1.8; }
+    .criteria { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin:22px 0; }
+    .criteria p { margin:0; padding:13px 16px; background:var(--v-surface); border:1px solid var(--v-border-soft); border-radius:8px; font-size:17px; }
+    .criteria b { color:var(--v-accent); margin-right:7px; }
+    .boundary-table { width:100%; border-collapse:collapse; font-size:16px; margin:24px 0; background:var(--v-surface); }
+    .boundary-table th,.boundary-table td { padding:15px 14px; border:1px solid var(--v-border-soft); text-align:left; vertical-align:top; }
+    .boundary-table th { font-size:14px; color:var(--v-accent); font-weight:600; }
+    .boundary-table td:first-child { width:19%; font-weight:600; }
+    .boundary-table td:nth-child(2) { width:39%; }
+    .boundary-table td:nth-child(3) { width:42%; }
+    .scenario { border-left:3px solid var(--v-accent); padding:6px 0 6px 22px; margin:24px 0; }
+    .scenario p:last-child { margin-bottom:0; }
+    .qa { padding:22px 0; border-bottom:1px solid var(--v-border-soft); }
+    .qa:last-child { border-bottom:0; padding-bottom:0; }
+    .qa h3 { margin:0 0 12px; font-size:23px; }
+    .qa p:last-child { margin-bottom:0; }
+    .closing { padding:29px; background:var(--v-surface); border:1px solid var(--v-border); border-radius:12px; margin:30px 0 48px; }
+    .closing h2 { font-size:27px; margin-bottom:13px; }
+    .closing p:last-child { margin-bottom:0; }
+    details { margin:0 0 40px; font-size:15px; color:var(--v-text-soft); }
+    summary { cursor:pointer; color:var(--v-accent); padding:8px 0; }
+    details ol { padding-top:15px; }
+    footer { border-top:1px solid var(--v-border); padding:22px 0 36px; color:var(--v-text-dim); font-size:13px; display:flex; justify-content:space-between; gap:20px; }
+    @media(max-width:900px) { .layout { grid-template-columns:1fr; gap:0; } .toc { display:none; } .hero { padding-top:45px; } }
+    @media(max-width:600px) { .visual-page { font-size:18px; } .visual-page { width:calc(100% - 36px); } .topbar { padding:17px 0; } .brand small { display:none; } .hero { padding:37px 0 29px; } .lead { font-size:19px; } h1 { font-size:37px; } h2 { font-size:27px; } .map { grid-template-columns:1fr 1fr; margin-bottom:36px; } .map a { padding:16px; } .map a:nth-child(2) { border-right:0; } .map a:nth-child(-n+2) { border-bottom:1px solid var(--v-border-soft); } .map b { font-size:20px; } .map small { font-size:12px; } .section { margin-bottom:30px; padding-bottom:30px; } blockquote { font-size:22px; padding:16px; } .flow { grid-template-columns:1fr 1fr; } .file-row { grid-template-columns:1fr; gap:6px; padding:16px; } .product-grid,.criteria { grid-template-columns:1fr; } .product { padding:22px; } .closing { padding:22px; } footer { display:block; } footer span { display:block; } }
+    @media(prefers-reduced-motion:reduce) { :global(html) { scroll-behavior:auto; } }
+    @media(max-width:600px) { .boundary-table,.boundary-table tbody,.boundary-table tr,.boundary-table td { display:block; width:100% !important; } .boundary-table thead { display:none; } .boundary-table tr { margin-bottom:16px; border:1px solid var(--v-border-soft); border-radius:8px; overflow:hidden; } .boundary-table td { border:0; padding:10px 15px; } .boundary-table td:first-child { color:var(--v-accent); font-size:20px; padding-top:16px; } .boundary-table td:last-child { padding-bottom:16px; } .boundary-table td[data-label]::before { content:attr(data-label); display:block; color:var(--v-text-soft); font-size:13px; margin-bottom:3px; } }
+    @media print { .visual-page { --v-bg:#fff; --v-surface:#fff; --v-text:#222; --v-text-soft:#444; --v-text-dim:#555; --v-accent:#9e492b; --v-orange:#c15f3c; --v-border:#ccc; --v-border-soft:#ddd; } .visual-page { font-size:12pt; } .visual-page { width:100%; } .theme-toggle,.toc { display:none; } .layout { display:block; } .hero { padding:20px 0; } h1 { font-size:30pt; } .map { margin-bottom:25px; } .section { margin-bottom:22px; padding-bottom:20px; } .product,.qa,.file-row,.closing { break-inside:avoid; } a { color:inherit; } details { display:none; } }
+
+</style>
